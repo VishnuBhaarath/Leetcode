@@ -8,7 +8,8 @@ public:
         sort(position.begin(),position.end());
         int n=position.size();
         int prev=position[n-1];
-        vector<int> v;
+       
+        int m=0;
         int t=0;
         int cnt=0;
         int sum=0;
@@ -42,7 +43,7 @@ public:
                 }
                 else{
                     t=0;
-                    v.push_back(cnt);
+                    m+=1;
                     sum+=cnt;
                     cnt=0;
                 }
@@ -50,11 +51,11 @@ public:
         
         }
         if(cnt!=0){
-            v.push_back(cnt);
+           m+=1;
             sum+=cnt;
         }
      
-        int ans=n-sum+v.size();
+        int ans=n-sum+m;
         return ans;
     }
 };
