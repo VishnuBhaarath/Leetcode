@@ -1,14 +1,22 @@
 class Solution {
 public:
     int countElements(vector<int>& nums) {
-        sort(nums.begin(),nums.end());
-        int n=nums.size();
+        int min=nums[0];
+        int max=nums[0];
+        for(int i=0;i<nums.size();i++){
+            if(nums[i]<min){
+                min=nums[i];
+            }
+            if(nums[i]>max){
+                max=nums[i];
+            }
+        }
         int cnt=0;
-        for(int i=1;i<n-1;i++){
-            if(nums[i]>nums[0] && nums[i]<nums[n-1]){
+        for(int i=0;i<nums.size();i++){
+            if(nums[i]==min || nums[i]==max){
                 cnt+=1;
             }
         }
-        return cnt;
+        return nums.size()-cnt;
     }
 };
