@@ -34,7 +34,7 @@ public:
             if(i==s.size()){
                 
                 if(s.size()>(2*b.size())){
-                    if(cnt>10){
+                    if(cnt>=2){
                     break;}
                 }
                 cnt+=1;
