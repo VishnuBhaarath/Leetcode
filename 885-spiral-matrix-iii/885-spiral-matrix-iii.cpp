@@ -11,9 +11,7 @@ public:
             int j=0;
           
             while(j<c){
-                cout<<rStart;
-                cout<<" ";
-                cout<<cStart;
+              
                 if((rStart<rows && cStart<cols) &&(rStart>=0 && cStart>=0)){
                     ans.push_back({rStart,cStart});
                 }
