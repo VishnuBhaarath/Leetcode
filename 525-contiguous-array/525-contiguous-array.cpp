@@ -11,20 +11,20 @@ public:
             else{
                 sum+=1;
             }
-            presum.push_back(sum);
+          nums[i]=sum;
         }
         
         map<int,int> umap;
         for(int i=n-1;i>=0;i--){
-            umap[presum[i]]=i+1;
+            umap[nums[i]]=i+1;
         }
         int ans=0;
         for(int i=n-1;i>=0;i--){
-            if(presum[i]==0){
+            if(nums[i]==0){
                 ans=max(ans,i+1);
             }
             else{
-                int idx=umap[presum[i]];
+                int idx=umap[nums[i]];
                 if(idx!=0){
                     ans=max(ans,i+1-idx);
                 }
