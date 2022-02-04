@@ -22,6 +22,7 @@ public:
         for(int i=n-1;i>=0;i--){
             if(nums[i]==0){
                 ans=max(ans,i+1);
+                return ans;
             }
             else{
                 int idx=umap[nums[i]];
