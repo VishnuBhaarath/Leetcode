@@ -20,18 +20,15 @@ public:
             sort(nums.begin(),nums.end());
         }
         else{
-        cout<<idx;
-        cout<<" ";
-        cout<<prev;
+      
         int val=prev;
         
-        cout<<"\n";
+    
         for(int i=0;i<v.size();i++){
             if(v[i]>nums[idx]){
                 val=min(val,v[i]);
             }
-            cout<<v[i];
-            cout<<" ";
+           
         }
         v.push_back(nums[idx]);
         sort(v.begin(),v.end());
@@ -53,8 +50,6 @@ public:
                 }
             }
         }
-       
-        cout<<"\n";
-        cout<<val;}
+       }
     }
 };
