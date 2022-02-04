@@ -1,55 +1,34 @@
 class Solution {
 public:
     void nextPermutation(vector<int>& nums) {
+       
         int n=nums.size();
-        int prev=nums[n-1];
-        vector<int> v;
-        v.push_back(prev);
         int idx=-1;
         for(int i=n-2;i>=0;i--){
-            if(nums[i]<prev){
+            if(nums[i]<nums[i+1]){
                 idx=i;
                 break;
             }
-            else{
-                prev=nums[i];
-                v.push_back(nums[i]);
-            }
         }
         if(idx==-1){
-            sort(nums.begin(),nums.end());
+            reverse(nums.begin(),nums.end());
         }
         else{
-      
-        int val=prev;
-        
-    
-        for(int i=0;i<v.size();i++){
-            if(v[i]>nums[idx]){
-                val=min(val,v[i]);
-            }
-           
+          int prev=nums[idx+1];
+            int idx1=idx+1;
+          for(int i=idx+1;i<n;i++){
+              if(nums[i]>nums[idx]){
+                  if(nums[i]<=prev){
+                      prev=nums[i];
+                      idx1=i;
+                  }
+                
+              }
+             
+          }  
+            swap(nums[idx],nums[idx1]);
+            
+            reverse(nums.begin()+idx+1,nums.end());
         }
-        v.push_back(nums[idx]);
-        sort(v.begin(),v.end());
-        nums[idx]=val;
-        int j=idx+1;
-        int t=0;
-        for(int i=0;i<v.size();i++){
-            if(v[i]!=val){
-                nums[j]=v[i];
-                j+=1;
-            }
-            else{
-                if(t==0){
-                    t=1;
-                }
-                else{
-                    nums[j]=v[i];
-                    j+=1;
-                }
-            }
-        }
-       }
     }
 };
