@@ -53,8 +53,7 @@ public:
                }
             }
         }
-        cout<<"\n";
-        cout<<ans;
+      
         return ans;
     }
 };
