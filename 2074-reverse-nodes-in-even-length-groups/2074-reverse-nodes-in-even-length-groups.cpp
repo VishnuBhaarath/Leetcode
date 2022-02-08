@@ -115,7 +115,7 @@ public:
             curr=forward;
         }
               
-                cout<<"\n";
+       
                 temp2->next=prev;
             }
             
