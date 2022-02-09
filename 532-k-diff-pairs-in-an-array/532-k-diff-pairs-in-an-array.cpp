@@ -16,7 +16,9 @@ public:
             }
             return cnt;
         }
+      
         for(int i=0;i<nums.size();i++){
+         
             if(umap[nums[i]-k]!=0){
                 int a=nums[i];
                 int b=nums[i]-k;
@@ -26,6 +28,10 @@ public:
                 }
                 if(umap1[p]==0){
                     umap1[p]+=1;
+                    cout<<p.first;
+                    cout<<" ";
+                    cout<<p.second;
+                    cout<<"\n";
                     cnt+=1;
                 }
             }
@@ -38,6 +44,11 @@ public:
                         p={b,a};
                     }
                     if(umap1[p]==0){
+                        umap1[p]+=1;
+                    cout<<p.first;
+                    cout<<" ";
+                    cout<<p.second;
+                    cout<<"\n";
                         umap1[p]+=1;
                         cnt+=1;
                     }
