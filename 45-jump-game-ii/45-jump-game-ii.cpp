@@ -12,16 +12,10 @@ public:
         int steps=1;
         int idx1=-1;
         for(int i=1;i<nums.size();i++){
-            cout<<idx;
-            cout<<" ";
-            cout<<nums[i];
-            cout<<"   ";
+           
             if(i<idx){
                 idx1=max(idx1,(i+nums[i]));
-                cout<<idx1;
-                cout<<" ";
-                cout<<steps;
-                cout<<" ";
+               
                 if(idx1>=(n-1)){
                     return steps+1;
                 }
@@ -39,7 +33,7 @@ public:
                 idx=idx1;
                 steps+=1;
             }
-            cout<<"\n";
+            
         }
         return steps;
     }
