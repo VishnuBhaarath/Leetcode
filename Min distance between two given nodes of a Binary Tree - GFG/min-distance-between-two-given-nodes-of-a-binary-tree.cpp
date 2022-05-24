@@ -122,11 +122,13 @@ class Solution{
         if(root->data==a){
             if(val1==0){
             val1=i;}
+            return;
             
         }
         if(root->data==b){
             if(val2==0){
             val2=i;}
+            return;
         }
         traversal(root->left,a,b,i+1);
         traversal(root->right,a,b,i+1);
