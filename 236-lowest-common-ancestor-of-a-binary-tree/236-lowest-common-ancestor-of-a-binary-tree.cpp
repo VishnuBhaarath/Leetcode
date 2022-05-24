@@ -22,11 +22,11 @@ public:
         if(lh!=NULL && rh!=NULL){
             return root;
         }
-        else if(lh!=NULL){
-            return lh;
-        }
         else if(rh!=NULL){
             return rh;
+        }
+        else if(lh!=NULL){
+            return lh;
         }
         return NULL;
     }
