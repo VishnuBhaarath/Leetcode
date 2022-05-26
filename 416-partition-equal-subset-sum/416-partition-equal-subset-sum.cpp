@@ -10,11 +10,11 @@ public:
             return false;
         }
         int val=sum/2;
-        vector<int> v(sum+1,0);
+        vector<int> v(val+1,0);
         vector<vector<int>> dp(n+1,v);
-       
         for(int i=0;i<n;i++){
-            dp[i+1][nums[i]]=1;
+            if(nums[i]<dp[0].size()){
+            dp[i+1][nums[i]]=1;}
             if(nums[i]==val){
                 return true;
             }
@@ -22,7 +22,8 @@ public:
                 
                 if(dp[i][j]==1){
                     dp[i+1][j]=1;
-                    dp[i+1][j+nums[i]]=1;
+                    if((j+nums[i])<dp[0].size()){
+                    dp[i+1][j+nums[i]]=1;}
                     if((j+nums[i])==val){
                         return true;
                     }
