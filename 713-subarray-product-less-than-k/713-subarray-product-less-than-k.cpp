@@ -10,15 +10,11 @@ public:
             if((prod*nums[i])<k){
                 prod=prod*nums[i];
                 i+=1;
-               
-            }
+              }
             else{
-                int m=(i-j);
                
-                if(m>0){
+                cnt+=(i-j);
                
-                cnt+=m;
-               }
                 if(i!=j){
                 prod=prod/nums[j];
                 j+=1;}
