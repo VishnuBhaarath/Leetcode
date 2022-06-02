@@ -23,11 +23,9 @@ public:
                             int tp1=st.top();
                             w=i-tp1-1;
                         }
-                        cout<<heights[tp];
+                       
                         int area=heights[tp]*w;
-                        cout<<" ";
-                        cout<<area;
-                        cout<<"\n";
+                        
                         ans=max(ans,area);
                         if(st.empty()){
                             break;
