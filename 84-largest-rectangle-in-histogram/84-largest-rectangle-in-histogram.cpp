@@ -8,10 +8,8 @@ public:
                st.push(i);
             }
             else{
-                if(heights[i]>=heights[st.top()]){
-                    st.push(i);
-                }
-                else{
+               
+              
                     while(heights[i]<heights[st.top()]){
                         int tp=st.top();
                         st.pop();
@@ -33,7 +31,7 @@ public:
                         
                     }
                     st.push(i);
-                }
+                
             }
         }
         int n=heights.size();
