@@ -9,7 +9,7 @@ public:
         traversal(graph,v,0,dest);
         return ans;
     }
-    void traversal(vector<vector<int>> graph,vector<int> v,int i,int dest){
+    void traversal(vector<vector<int>> &graph,vector<int> v,int i,int dest){
         if(i==dest){
             ans.push_back(v);
             return;
