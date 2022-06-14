@@ -12,8 +12,7 @@ public:
         vector<int> v(sum+1,0);
         vector<vector<int>>dp(n+1,v);
         for(int i=1;i<dp.size();i++){
-        
-            for(int j=1;j<dp[0].size();j++){
+          for(int j=1;j<dp[0].size();j++){
                 
                 if(j>=nums[i-1]){
                 
