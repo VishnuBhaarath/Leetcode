@@ -1,6 +1,7 @@
 class Solution {
 public:
     vector<vector<int>> ans;
+    map<vector<int>,int>umap1;
     vector<vector<int>> permute(vector<int>& nums) {
         for(int i=0;i<nums.size();i++){
             map<int,int> umap;
@@ -16,7 +17,9 @@ public:
        
          
         if(v.size()==nums.size()){
+            if(umap1[v]==0){
             ans.push_back(v);
+            umap1[v]+=1;}
             return;
         }
   
