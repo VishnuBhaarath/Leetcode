@@ -15,6 +15,9 @@ public:
                 else{
                     ans=min(ans,val);
                 }
+                if(ans==2){
+                    return ans;
+                }
                 umap[cards[i]]=i+1;
             }
         }
