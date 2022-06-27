@@ -1,7 +1,7 @@
 class Solution {
 public:
     int countHousePlacements(int n) {
-       
+        vector<long long int> dp(n+1,0);
         long long int mod=1000000007;
         if(n==1){
             return 4;
@@ -9,27 +9,23 @@ public:
         if(n==2){
             return 9;
         }
-      
-        long long int prev1=1;
-        long long int prev=2;
-        for(int i=3;i<=n;i++){
-          
-            long long int curr=prev1+prev+1;
-            prev1=prev;
-            prev=curr;
-            prev1=prev1%mod;
-            prev=prev%mod;
+        dp[1]=1;
+        dp[2]=2;
+        int prev1=1;
+        int prev=2;
+        for(int i=3;i<dp.size();i++){
+            dp[i]=dp[i-1]+dp[i-2]+1;
+            dp[i]%=mod;
         }
-        long long int curr=prev;
-        curr=curr%mod;
        
+        long long int temp=dp[n]%mod;
         
-        long long int val=curr*curr;
+        long long int val=temp*temp;
         val=val%mod;
-        val+=curr;
+        val+=temp;
         val=val%mod;
-        val+=curr;
-        val=val%mod;
+        val+=temp;
+        val=val%mod;;
         val+=1;
         return val%mod;
     }
