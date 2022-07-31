@@ -2,7 +2,9 @@ class Solution {
 public:
     int maximumGroups(vector<int>& grades) {
         vector<long long int> presum;
+        sort(grades.begin(),grades.end());
         presum.push_back(grades[0]);
+    
         for(int i=1;i<grades.size();i++){
             presum.push_back(presum[presum.size()-1]+grades[i]);
         }
