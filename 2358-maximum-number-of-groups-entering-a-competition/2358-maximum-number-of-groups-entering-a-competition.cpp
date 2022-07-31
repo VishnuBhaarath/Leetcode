@@ -11,7 +11,7 @@ public:
         int i=0;
         int cnt=1;
         int j=2;
-        int prev=presum[i];
+        int prev=grades[i];
         while(j<presum.size()){
             int curr=presum[j]-presum[i];
             cnt+=1;
@@ -22,7 +22,7 @@ public:
             cout<<" ";
             cout<<cnt;
             cout<<"\n";
-            if((j+k+1)>=presum.size()){
+            if((j+k+1)>=grades.size()){
                 return cnt;
             }
             int temp=j;
