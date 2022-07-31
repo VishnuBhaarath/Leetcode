@@ -2,7 +2,7 @@ class Solution {
 public:
     int maximumGroups(vector<int>& grades) {
         vector<long long int> presum;
-        sort(grades.begin(),grades.end());
+       
         presum.push_back(grades[0]);
     
         for(int i=1;i<grades.size();i++){
@@ -16,12 +16,7 @@ public:
             int curr=presum[j]-presum[i];
             cnt+=1;
             int k=j-i;
-            cout<<j;
-            cout<<" ";
-            cout<<i;
-            cout<<" ";
-            cout<<cnt;
-            cout<<"\n";
+           
             if((j+k+1)>=grades.size()){
                 return cnt;
             }
