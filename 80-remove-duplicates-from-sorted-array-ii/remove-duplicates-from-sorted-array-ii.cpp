@@ -11,18 +11,14 @@ public:
                 cnt+=1;
             }
             else{
-                if(cnt>2){
+                if(cnt>=2){
                   nums[i+2]=nums[j];
                   i=i+2;
                   j+=1;
                   cnt=1;
                 }
                 else{
-                    if(cnt==2){
-                       nums[i+2]=nums[j];
-                       i+=2;
-                       j+=1;
-                    }
+                   
                     if(cnt==1){
                         nums[i+1]=nums[j];
                         i+=1;
