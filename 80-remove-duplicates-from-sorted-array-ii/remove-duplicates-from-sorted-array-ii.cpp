@@ -9,6 +9,7 @@ public:
                 nums[i+1]=nums[j];
                 j+=1;
                 cnt+=1;
+               
             }
             else{
                 if(cnt>=2){
@@ -18,12 +19,10 @@ public:
                   cnt=1;
                 }
                 else{
-                   
-                    if(cnt==1){
-                        nums[i+1]=nums[j];
+                    nums[i+1]=nums[j];
                         i+=1;
                         j+=1;
-                    }
+                    
                   cnt=1;
                 }
                
