@@ -24,7 +24,7 @@ public:
                     ans=max(ans,dp[i][j]);
                 }}
             }
-            cout<<"\n";
+           
         }
         return ans*ans;
     }
