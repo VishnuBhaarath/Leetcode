@@ -16,7 +16,7 @@ public:
                 sum-=nums[i];
                 i+=1;}
                 else{
-                    return cnt;
+                    return 0;
                 }
             }
             cnt+=(j-i)+1;
@@ -27,9 +27,7 @@ public:
     }
     int numSubarraysWithSum(vector<int>& nums, int goal) {
         int sum1=func1(nums,goal);
-        int sum2=0;
-        if(goal>0){
-        sum2=func1(nums,goal-1);}
+        int sum2=func1(nums,goal-1);
         
         return sum1-sum2;
 
