@@ -15,8 +15,13 @@ public:
                 cnt+=1;
             }
             else{
-                start=max(start,points[i][0]);
-                end=min(end,points[i][1]);
+                if(points[i][0]>start){
+                    start=points[i][0];
+                }
+                if(points[i][1]<end){
+                    end=points[i][1];
+                }
+            
             }
         }
  
