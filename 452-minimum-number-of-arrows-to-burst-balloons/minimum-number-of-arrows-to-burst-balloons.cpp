@@ -9,7 +9,7 @@ public:
         int cnt=0;
         for(int i=1;i<points.size();i++){
             if(points[i][0]>end){
-                dp.push_back({start,end});
+             
                 start=points[i][0];
                 end=points[i][1];
                 cnt+=1;
