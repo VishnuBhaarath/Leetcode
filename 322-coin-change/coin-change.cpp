@@ -1,34 +1,25 @@
 class Solution {
 public:
     int coinChange(vector<int>& coins, int amount) {
-
-        int n=coins.size();
-        sort(coins.begin(),coins.end());
+        vector<int> v (amount+1,-1);
         if(amount==0){
             return 0;
         }
-        vector<int> v(amount+1,0);
-        for(int i=0;i<coins.size();i++){
-            if(coins[i]>amount){
-                break;
-            }
-            v[coins[i]]=1;
-            for(int j=0;j<v.size();j++){
-                if(v[j]!=0){
-                    if((j+coins[i])<=amount){
-                    if(v[j+coins[i]]==0){
-                        v[j+coins[i]]=v[j]+1;
-                    }
-                    else{
-                        v[j+coins[i]]=min(v[j+coins[i]],v[j]+1);
+        for(int i=1;i<=amount;i++){
+            for(int j=0;j<coins.size();j++){
+                if(coins[j]<=amount){
+                v[coins[j]]=1;
+                if(v[i]!=-1){
+                    if(i+coins[j]<=amount){
+                    v[i+coins[j]]=min(v[i]+1,v[i+coins[j]]);
+                    if(v[i+coins[j]]==-1){
+                        v[i+coins[j]]=v[i]+1;
                     }}
                 }
             }
+            }
         }
-       
-        if(v[amount]==0){
-            return -1;
-        }
+        
         return v[amount];
     }
 };
