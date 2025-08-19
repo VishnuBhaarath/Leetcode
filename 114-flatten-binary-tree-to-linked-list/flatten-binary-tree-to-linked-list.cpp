@@ -32,7 +32,7 @@ public:
            root->left=NULL;
            root=root->right;
         }
-        cout<<"\n";
+       
         
     }
 };
