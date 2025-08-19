@@ -17,19 +17,17 @@ public:
             return;
         }
         v.push_back(root1);
-        cout<<v.size();
-        cout<<" ";
+        
         traversal(root->left,root1->left);
         traversal(root->right,root1->right);
     }
     void flatten(TreeNode* root) {
         TreeNode* root1=root;
         traversal(root,root1);
-        cout<<v.size();
-        cout<<" ";
+       
         for(int i=1;i<v.size();i++){
           
-           cout<<" ";
+       
            root->right=v[i];
            root->left=NULL;
            root=root->right;
