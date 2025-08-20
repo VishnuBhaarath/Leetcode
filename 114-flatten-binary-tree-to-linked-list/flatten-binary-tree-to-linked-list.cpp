@@ -32,10 +32,7 @@ public:
                     root->right=temp;
                     root=root->right;
                 }
-                else{
-                    curr->right=NULL;
-                    root=root->right;
-                }
+               
             }
         }
         
