@@ -15,8 +15,7 @@ public:
         TreeNode * prev= NULL;
         while(root!=NULL){
             if(root->left==NULL){
-                cout<<root->val;
-                cout<<" ";
+               
                 root=root->right;
             }
             else{
@@ -27,8 +26,7 @@ public:
                 }
                 if(curr->right==NULL){
                     curr->right=root->right;
-                    cout<<root->val;
-                    cout<<" ";
+                   
                     TreeNode* temp=root->left;
                     root->left=NULL;
                     root->right=temp;
