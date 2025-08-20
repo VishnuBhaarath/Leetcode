@@ -11,17 +11,35 @@
  */
 class Solution {
 public:
-   TreeNode* prev = NULL;
-
-
     void flatten(TreeNode* root) {
-        if (root == NULL) return;
-
-    flatten(root->right);
-    flatten(root->left);
-
-    root->right = prev;
-    root->left = NULL;
-    prev = root;
+        TreeNode * prev= NULL;
+        while(root!=NULL){
+            if(root->left==NULL){
+                cout<<root->val;
+                cout<<" ";
+                root=root->right;
+            }
+            else{
+                TreeNode* curr=root;
+                curr=curr->left;
+                while(curr->right!=NULL && curr->right!=root->right){
+                    curr=curr->right;
+                }
+                if(curr->right==NULL){
+                    curr->right=root->right;
+                    cout<<root->val;
+                    cout<<" ";
+                    TreeNode* temp=root->left;
+                    root->left=NULL;
+                    root->right=temp;
+                    root=root->right;
+                }
+                else{
+                    curr->right=NULL;
+                    root=root->right;
+                }
+            }
+        }
+        
     }
 };
