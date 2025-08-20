@@ -11,28 +11,17 @@
  */
 class Solution {
 public:
-    vector<TreeNode*> v;
-    void traversal(TreeNode* root, TreeNode* root1){
-        if(root1==NULL){
-            return;
-        }
-        v.push_back(root1);
-        
-        traversal(root->left,root1->left);
-        traversal(root->right,root1->right);
-    }
+   TreeNode* prev = NULL;
+
+
     void flatten(TreeNode* root) {
-        TreeNode* root1=root;
-        traversal(root,root1);
-       
-        for(int i=1;i<v.size();i++){
-          
-       
-           root->right=v[i];
-           root->left=NULL;
-           root=root->right;
-        }
-       
-        
+        if (root == NULL) return;
+
+    flatten(root->right);
+    flatten(root->left);
+
+    root->right = prev;
+    root->left = NULL;
+    prev = root;
     }
 };
