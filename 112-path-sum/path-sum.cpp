@@ -28,7 +28,8 @@ public:
     else if(root->right!=NULL){
         return traversal(root->right,sum+root->right->val,targetSum);
     }
-    return true;
+   
+   return false;
    }
     bool hasPathSum(TreeNode* root, int targetSum) {
         if(root==NULL){
