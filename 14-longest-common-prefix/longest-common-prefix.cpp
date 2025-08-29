@@ -1,9 +1,7 @@
 class Solution {
 public:
     string longestCommonPrefix(vector<string>& strs) {
-        if(strs.size()==1){
-            return strs[0];
-        }
+       
         string word=strs[0];
         int j=1;
         while(j<strs.size()){
