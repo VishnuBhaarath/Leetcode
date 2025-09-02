@@ -29,15 +29,9 @@ public:
             umap[sum]+=1;
             i+=1;
         }
-         for(auto x: umap){
-            cout<<x.first;
-            cout<<" ";
-            cout<<x.second;
-            cout<<"\n";
-        }
+         
         i=j-1;
-        cout<<ans;
-        cout<<"\n";
+      
         sum=0;
  
         while(i>=0){
@@ -66,10 +60,7 @@ public:
          }
          
          i-=1;
-         cout<<sum;
-         cout<<" ";
-         cout<<ans;
-         cout<<"\n";
+       
         }
 
        
