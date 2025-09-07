@@ -2,17 +2,19 @@ class Solution {
 public:
     bool isAnagram(string s, string t) {
         map<char,int> umap;
+        vector<int>  v(26,0);
         if(s.size()!=t.size()){
             return false;
         }
         for(int i=0;i<t.size();i++){
-            umap[t[i]]+=1;
+           
+            v[t[i]-'a']+=1;
         }
         for(int i=0;i<s.size();i++){
-            if(umap[s[i]]==0){
+            if(v[s[i]-'a']==0){
                 return false;
             }
-            umap[s[i]]-=1;
+            v[s[i]-'a']-=1;
         }
         return true;
     }
