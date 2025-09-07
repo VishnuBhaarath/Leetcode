@@ -9,15 +9,32 @@
 class Solution {
 public:
     bool hasCycle(ListNode *head) {
-        map<ListNode*,int> umap;
-        umap[head]+=1;
-        while(head!=NULL){
-            head=head->next;
-            if(umap[head]!=0){
-                return true;
-            }
-            umap[head]+=1;
-        }
+       ListNode * slow=head;
+       if(head==NULL){
         return false;
+       }
+       if(head->next==NULL){
+        return false;
+       }
+       ListNode * fast=head->next;
+       while(fast!=NULL){
+        if(fast==slow){
+            return true;
+        }
+        if(fast->next==NULL){
+            return false;
+        }
+        else{
+            fast=fast->next;
+            if(fast->next==NULL){
+                return false;
+            }
+            else{
+                fast=fast->next;
+            }
+        }
+        slow=slow->next;
+       }
+       return false;
     }
 };
