@@ -11,41 +11,32 @@
 class Solution {
 public:
     ListNode* reverseBetween(ListNode* head, int left, int right) {
-         if (!head || left == right) return head;
+              // Step 1: Edge case
+        if (!head || left == right) return head;
 
-        ListNode* prev = nullptr;
-        ListNode* curr = head;
+        // Create a dummy node
+        ListNode* dummy = new ListNode(0);
+        dummy->next = head;
 
-        // Move `curr` to the `left`th node
-        for (int i = 1; i < left; ++i) {
-            prev = curr;
-            curr = curr->next;
+        // Step 2: Reach node at position `left`
+        ListNode* prev = dummy;
+        for (int i = 1; i < left; i++) {
+            prev = prev->next;
         }
 
-        // `prev` is node before sublist
-        // `curr` is the first node in sublist
-        ListNode* sublistPrev = prev;
-        ListNode* sublistTail = curr;
+        // `start` is the first node to reverse
+        ListNode* start = prev->next;
+        // `then` is the node after start
+        ListNode* then = start->next;
 
-        // Reverse the sublist
-        ListNode* next = nullptr;
-        for (int i = 0; i <= right - left; ++i) {
-            next = curr->next;
-            curr->next = prev;
-            prev = curr;
-            curr = next;
+        // Step 3: Reverse nodes from `left` to `right`
+        for (int i = 0; i < right - left; i++) {
+            start->next = then->next;
+            then->next = prev->next;
+            prev->next = then;
+            then = start->next;
         }
 
-        // Reconnect reversed sublist
-        if (sublistPrev) {
-            sublistPrev->next = prev;
-        } else {
-            // If `left == 1`, we reversed from the head
-            head = prev;
-        }
-
-        sublistTail->next = curr;
-
-        return head;
+        return dummy->next;
     }
 };
