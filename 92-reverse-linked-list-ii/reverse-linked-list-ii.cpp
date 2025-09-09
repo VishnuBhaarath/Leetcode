@@ -11,32 +11,49 @@
 class Solution {
 public:
     ListNode* reverseBetween(ListNode* head, int left, int right) {
-              // Step 1: Edge case
-        if (!head || left == right) return head;
-
-        // Create a dummy node
-        ListNode* dummy = new ListNode(0);
-        dummy->next = head;
-
-        // Step 2: Reach node at position `left`
-        ListNode* prev = dummy;
-        for (int i = 1; i < left; i++) {
-            prev = prev->next;
+        if(left==right){
+            return head;
         }
+        if(left==1){
+           ListNode* prev=NULL;
+           ListNode* curr=head;
+            for(int i=0;i<=(right-left);i++){
+                ListNode* front=curr->next;
+                curr->next=prev;
+                prev=curr;
+                curr=front;
+            }
+            head->next=curr;
+            return prev;
 
-        // `start` is the first node to reverse
-        ListNode* start = prev->next;
-        // `then` is the node after start
-        ListNode* then = start->next;
-
-        // Step 3: Reverse nodes from `left` to `right`
-        for (int i = 0; i < right - left; i++) {
-            start->next = then->next;
-            then->next = prev->next;
-            prev->next = then;
-            then = start->next;
         }
-
-        return dummy->next;
+        else{
+            ListNode* prev=head;
+            int cnt=1;
+            for(int i=1;i<(left-1);i++){
+                prev=prev->next;
+            }
+            ListNode* start=prev;
+            ListNode* end=start->next;
+            ListNode* curr=prev->next;
+            prev=NULL;
+            for(int i=0;i<=(right-left);i++){
+                ListNode* front=curr->next;
+                curr->next=prev;
+                prev=curr;
+                curr=front;
+            }
+           
+            if(curr!=NULL){
+                cout<<curr->val;
+            }
+            cout<<" ";
+            if(prev!=NULL){
+                cout<<prev->val;
+            }
+            start->next=prev;
+            end->next=curr;
+        }
+        return head;
     }
 };
