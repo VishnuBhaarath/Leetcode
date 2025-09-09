@@ -13,26 +13,14 @@ public:
     ListNode* reverseList(ListNode* head,int k){
         ListNode* curr=head;
         ListNode* prev =NULL;
-        while(head!=NULL){
-            cout<<head->val;
-            head=head->next;
-            cout<<" ";
-        }
-        cout<<"\n";
+       
         for(int i=0;i<k;i++){
             ListNode* front=curr->next;
             curr->next=prev;
             prev=curr;
             curr=front;
         }
-        ListNode * prev1=prev;
-        while(prev1!=NULL){
-            cout<<prev1->val;
-            cout<<" ";
-            prev1=prev1->next;
-        }
-       
-        cout<<"\n";
+      
         return prev;
     }
     ListNode* reverseKGroup(ListNode* head, int k) {
@@ -48,28 +36,19 @@ public:
         int cnt=1;
         while(curr!=NULL){
           if(cnt==k){
-            if(start!=NULL){
-                cout<<start->val;
-                cout<<"\n";
-             }
+            
              
            ListNode * temp=curr->next;
           temp1=start;
           
            prev= reverseList(start,k);
-           if(prev!=NULL){
-            cout<<"prev";
-            cout<<prev->val;
-            cout<<"\n";
-           }
+          
            if(head1==NULL){
             head1=prev;
            }
            else{
              if(temp2!=NULL){
-                cout<<"temp2";
-                cout<<temp2->val;
-                cout<<"\n";
+                
                 temp2->next=prev;
              }
            }
@@ -88,16 +67,9 @@ public:
           if(curr!=NULL){
           cnt+=1;}
         }
-        cout<<"cnt";
-        cout<<cnt;
-        cout<<"\n";
+       
         if(cnt<k && cnt>0){
-            cout<<"out";
-            cout<<"\n";
-            cout<<temp1->val;
-            cout<<" ";
-            cout<<start->val;
-            cout<<" ";
+            
             temp1->next=start;
             
         }
