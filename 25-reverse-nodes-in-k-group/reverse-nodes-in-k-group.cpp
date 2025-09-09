@@ -29,8 +29,8 @@ public:
         }
         ListNode* curr=head;
         ListNode* start=head;
-        ListNode * head1=NULL;
-         ListNode* temp2=NULL;
+        head=NULL;
+        ListNode* temp2=NULL;
           ListNode* prev=NULL;
           ListNode* temp1=NULL;
         int cnt=1;
@@ -43,8 +43,8 @@ public:
           
            prev= reverseList(start,k);
           
-           if(head1==NULL){
-            head1=prev;
+           if(head==NULL){
+            head=prev;
            }
            else{
              if(temp2!=NULL){
@@ -73,6 +73,6 @@ public:
             temp1->next=start;
             
         }
-        return head1;
+        return head;
     }
 };
