@@ -35,7 +35,7 @@ public:
                 fast=head;
             }
         }
-        cout<<fast->val;
+     
         if(fast->next==NULL){
             fast->next=curr;
             head=slow->next;
