@@ -11,26 +11,23 @@
  */
 class Solution {
 public:
-    TreeNode* prev=NULL;
-    void flatten(TreeNode* root) {
-        if(root==NULL){
+    vector<TreeNode*> v;
+    void traversal(TreeNode* root){
+         if(root==NULL){
             return;
+         }
+       
+         v.push_back(root);
+         traversal(root->left);
+         traversal(root->right);
+    }
+    void flatten(TreeNode* root) {
+        traversal(root);
+        for(int i=1;i<v.size();i++){
+          root->left=NULL;
+          root->right=v[i];
+          root=root->right;
+         
         }
-        flatten(root->right);
-        flatten(root->left);
-      
-        
-          if(prev!=NULL){
-            cout<<prev->val;
-            root->right=prev;
-            root->left=NULL;
-            cout<<" ";
-        }
-        prev=root;
-       
-
-       
-       
-      
     }
 };
