@@ -38,12 +38,7 @@ long long int previousPowerOfTwo(long long int n) {
             }
            
         }
-        for(long long int i=left+1;i<=right;i++){
-           
-
-            ans=ans&i;
-
-        }
+       
         return ans;
     }
 };
