@@ -38,12 +38,7 @@ public:
             
         }
     
-        int num=1090;
-        num=num&16384;
-        num=num&33;
-        num=num&217313281;
-        cout<<num;
-        cout<<"\n";
+       
 
         return ans;
     }
