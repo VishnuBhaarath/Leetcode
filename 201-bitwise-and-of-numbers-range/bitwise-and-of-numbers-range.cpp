@@ -23,6 +23,21 @@ long long int previousPowerOfTwo(long long int n) {
             return 0;
         }
         long long int ans=left;
+        long long int sum=0;
+        for(int i=31;i>=0;i--){
+            cout<<i;
+            cout<<" ";
+            cout<<(left&(1<<i));
+            cout<<" ";
+            cout<<(right&(1<<i));
+            if((left&(1<<i))==(right&(1<<i))){
+                sum+=(left&(1<<i));
+            }
+            else{
+                return sum;
+            }
+           
+        }
         for(long long int i=left+1;i<=right;i++){
            
 
