@@ -1,38 +1,53 @@
 class Solution {
 public:
     int minSubArrayLen(int target, vector<int>& nums) {
-        int i=-1;
-        int sum=0;
+        int i=0;
         int j=0;
-        int n=nums.size();
-        int ans=-1;
-        while(j<n){
-            sum+=nums[j];
-            if(sum>=target){
-                int len=(j-i);
-               
-                if(ans==-1){
-                    ans=len;
+        long long int sum=0;
+        long long int ans=0;
+        while(i<nums.size()){
+             sum+=nums[i];
+               cout<<i;
+                cout<<" ";
+                cout<<j;
+                cout<<" ";
+                cout<<sum;
+                cout<<"\n";
+                long long int lt=i-j+1;
+                if(sum>=target){
+                if(ans==0){
+                    ans=lt;
                 }
                 else{
-                    ans=min(ans,len);
+                    ans=min(ans,lt);
                 }
-                
+                }
                 while(sum>=target){
-                    i+=1;
-                    sum-=nums[i];
+                    sum-=nums[j];
+                    j+=1;
                     if(sum>=target){
-                    len=(j-i);
-                    ans=min(ans,len);
-                    
+                    lt=i-j+1;
+                    ans=min(ans,lt);}
+                    if(j==i){
+                        break;
                     }
-
                 }
-            }
-             j+=1;
+
+            
+            i+=1;
         }
-        
-        ans=max(ans,0);
+        while(sum>=target){
+            sum-=nums[j];
+            j+=1;
+             if(sum>=target){
+                    long long int lt=i-j+1;
+                    ans=min(ans,lt);}
+            if(j==nums.size()){
+                break;
+            }        
+        }
+
         return ans;
+
     }
 };
