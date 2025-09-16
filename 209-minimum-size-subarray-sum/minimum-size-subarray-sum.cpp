@@ -7,12 +7,7 @@ public:
         long long int ans=0;
         while(i<nums.size()){
              sum+=nums[i];
-               cout<<i;
-                cout<<" ";
-                cout<<j;
-                cout<<" ";
-                cout<<sum;
-                cout<<"\n";
+             
                 long long int lt=i-j+1;
                 if(sum>=target){
                 if(ans==0){
