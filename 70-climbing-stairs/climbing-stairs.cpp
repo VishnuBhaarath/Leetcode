@@ -1,28 +1,27 @@
 class Solution {
 public:
+    int func(int n,vector<int>& dp){
+      if(n==1){
+        dp[n]=1;
+        return 1;
+      }
+      if(n==2){
+        dp[n]=2;
+        return 2;
+      }
+      if(n==0){
+        dp[n]=0;
+        return 0;
+      }
+      if(dp[n]!=-1){
+        return dp[n];
+      }
+      return dp[n]=func(n-1,dp)+func(n-2,dp);
+    }
     int climbStairs(int n) {
-        
-        if(n==1){
-          
-            return 1;
-        }
-        if(n==2){
-            return 2;
-        }
-     
-        int prev2=1;
-        int prev1=2;
-        int curr=0;
-       for(int i=3;i<=n;i++){
-           
-            curr=prev1+prev2;
-            prev2=prev1;
-            prev1=curr;
+       vector<int> dp(n+1,-1);
 
-        }
-       
-
-        return curr;
+       return func(n,dp);
 
     }
 };
