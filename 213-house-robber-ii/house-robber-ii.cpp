@@ -16,11 +16,7 @@ public:
         }
         }
         int ans=dp[n-1];
-        for(int i=0;i<dp.size();i++){
-            cout<<dp[i];
-            cout<<" ";
-        }
-        cout<<"\n";
+       
         dp[0]=nums[0];
         dp[1]=max(dp[0],nums[1]);
         for(int i=2;i<(n-1);i++){
@@ -28,11 +24,7 @@ public:
             int val2=dp[i-1];
             dp[i]=max(val1,val2);
         }
-        for(int i=0;i<dp.size();i++){
-            cout<<dp[i];
-            cout<<" ";
-        }
-        cout<<"\n";
+        
         ans=max(ans,dp[n-2]);
         return ans;
     }
