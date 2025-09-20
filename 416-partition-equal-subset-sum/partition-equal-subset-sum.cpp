@@ -12,10 +12,15 @@ public:
     if(dp[i][sum1]!=-1){
         return dp[i][sum1];
     }
+    if(dp[i][sum2]!=-1){
+        return dp[i][sum2];
+    }
     int set1=func(i+1,sum1+nums[i],sum2,nums,dp);
     int set2=func(i+1,sum1,sum2+nums[i],nums,dp);
+    dp[i][sum1]=set1||set2;
+    dp[i][sum2]=set1||set2;
    
-    return dp[i][sum1]=set1 || set2;
+    return set1 || set2;
    }
     bool canPartition(vector<int>& nums) {
          int n=nums.size();
