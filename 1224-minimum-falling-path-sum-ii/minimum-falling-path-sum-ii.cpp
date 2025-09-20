@@ -3,8 +3,7 @@ public:
     int minFallingPathSum(vector<vector<int>>& grid) {
         int ans=0;
         int n=grid.size();
-        cout<<n;
-        cout<<"\n";
+      
         for(int i=0;i<grid.size();i++){
             for(int j=0;j<grid[i].size();j++){
                 if(i>0){
@@ -27,13 +26,7 @@ public:
             }
             
         }
-        for(int i=0;i<grid.size();i++){
-            for(int j=0;j<grid.size();j++){
-                cout<<grid[i][j];
-                cout<<" ";
-            }
-            cout<<"\n";
-        }
+        
         return ans;
     }
 };
