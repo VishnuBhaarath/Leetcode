@@ -3,8 +3,10 @@ public:
     int minFallingPathSum(vector<vector<int>>& matrix) {
         int n=matrix.size();
         int m=matrix[0].size();
-        for(int i=1;i<matrix.size();i++){
+        int ans=matrix[0][0];
+        for(int i=0;i<matrix.size();i++){
             for(int j=0;j<matrix[0].size();j++){
+                if(i>0){
                  int val=matrix[i-1][j];
                  if(j+1<matrix[0].size()){
                     val=min(val,matrix[i-1][j+1]);
@@ -13,18 +15,22 @@ public:
                     val=min(val,matrix[i-1][j-1]);
                  }
                  matrix[i][j]=matrix[i][j]+val;
-                 cout<<matrix[i][j];
-                 cout<<" ";
+                 }
+                 if(i==n-1){
+                    if(j==0){
+                        ans=matrix[i][j];
+                    }
+                    else{
+                        ans=min(ans,matrix[i][j]);
+                    }
+                 }
+               
                  
             }
-            cout<<"\n";
+           
         }
 
-        int ans=matrix[n-1][0];
-        for(int j=1;j<m;j++){
-            ans=min(ans,matrix[n-1][j]);
-        }
-             return ans;
+          return ans;
         
        
     }
