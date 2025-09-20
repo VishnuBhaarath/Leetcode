@@ -4,12 +4,8 @@ public:
         int n=grid.size();
         int m=grid[0].size();
         vector<vector<int>> dp(n,vector<int>(m,0));
-        cout<<n;
-        cout<<" ";
-        cout<<m;
-        cout<<" ";
+    
 
-        cout<<grid[n-1][m-1];
         if(grid[n-1][m-1]==1){
             return 0;
         }
@@ -35,15 +31,7 @@ public:
                 dp[0][j]=1;
             }
         }
-        cout<<"next";
-        
-       for(int i=0;i<dp.size();i++){
-            for(int j=0;j<dp[0].size();j++){
-                cout<<dp[i][j];
-                cout<<" ";
-            }
-            cout<<"\n";
-        }
+       
         for(int i=1;i<n;i++){
             for(int j=1;j<m;j++){
                 if(grid[i][j]==0){
@@ -52,13 +40,7 @@ public:
             }
         }
 
-for(int i=0;i<dp.size();i++){
-            for(int j=0;j<dp[0].size();j++){
-                cout<<dp[i][j];
-                cout<<" ";
-            }
-            cout<<"\n";
-        }
+
         return dp[n-1][m-1];
     }
 };
