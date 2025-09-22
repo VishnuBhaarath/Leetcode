@@ -1,36 +1,52 @@
 class Solution {
 public:
-   int func(int i, int sum1,int sum2,vector<int>& nums,vector<vector<int>> &dp){
-    if(i==nums.size()){
-        if(sum1==sum2){
-            return 1;
-        }
-        else{
-            return 0;
-        }
-    }
-    if(dp[i][sum1]!=-1){
-        return dp[i][sum1];
-    }
-    if(dp[i][sum2]!=-1){
-        return dp[i][sum2];
-    }
-    int set1=func(i+1,sum1+nums[i],sum2,nums,dp);
-    int set2=func(i+1,sum1,sum2+nums[i],nums,dp);
-    dp[i][sum1]=set1||set2;
-    dp[i][sum2]=set1||set2;
    
-    return set1 || set2;
-   }
-    bool canPartition(vector<int>& nums) {
-         int n=nums.size();
+    bool canPartition(vector<int>& arr) {
+         int n=arr.size();
          int m=0;
-         for(int i=0;i<nums.size();i++){
-            m+=nums[i];
+         for(int i=0;i<arr.size();i++){
+            m+=arr[i];
          }
-         vector<vector<int>> dp(n+1,vector<int>(m+1,-1));
+         if((m%2)!=0){
+            return false;
+         }
 
+         int val=m/2;
+         cout<<"in";
+         cout<<"\n";
+         cout<<m;
+         cout<<" ";
+         cout<<val;
+         cout<<"\n";
+        vector<vector<int>> dp(n,vector<int>(m+1,-1));
+        for(int i=n-1;i>=0;i--){
+            for(int j=m;j>=0;j--){
+                if(i==(n-1)){
+                   
+                    dp[i][arr[i]]=1;
+                }
+                else{
+                    if(dp[i+1][j]==1){
+                        dp[i][j]=1;
+                        dp[i][j+arr[i]]=1;
+                        if((j+arr[i])/2 ==val){
+                           
+                          //  return true;
+                        }
+                    }
+                    if((arr[i])/2 ==val){
+                       
+                        //return true;
+                    }
+                    dp[i][arr[i]]=1;
+                }
+            }
+        } 
+        if(dp[0][val]==1){
+            return true;
+        }
+       
         
-         return func(0,0,0,nums,dp);
+         return false;
     }
 };
