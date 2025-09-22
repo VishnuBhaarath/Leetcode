@@ -12,12 +12,7 @@ public:
          }
 
          int val=m/2;
-         cout<<"in";
-         cout<<"\n";
-         cout<<m;
-         cout<<" ";
-         cout<<val;
-         cout<<"\n";
+        
         vector<vector<int>> dp(n,vector<int>(m+1,-1));
         for(int i=n-1;i>=0;i--){
             for(int j=m;j>=0;j--){
@@ -29,14 +24,14 @@ public:
                     if(dp[i+1][j]==1){
                         dp[i][j]=1;
                         dp[i][j+arr[i]]=1;
-                        if((j+arr[i])/2 ==val){
-                           
-                          //  return true;
+                        if((j+arr[i]) ==val){
+                         
+                           return true;
                         }
                     }
-                    if((arr[i])/2 ==val){
-                       
-                        //return true;
+                    if((arr[i]) ==val){
+                   
+                        return true;
                     }
                     dp[i][arr[i]]=1;
                 }
@@ -45,7 +40,6 @@ public:
         if(dp[0][val]==1){
             return true;
         }
-       
         
          return false;
     }
