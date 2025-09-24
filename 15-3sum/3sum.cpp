@@ -1,61 +1,46 @@
 class Solution {
 public:
     vector<vector<int>> threeSum(vector<int>& nums) {
+        
+         int n = nums.size();
+        vector<vector<int>>ans;
+        sort(nums.begin(), nums.end());
 
-        vector<vector<int>> dp;
-        set<vector<int>> dp1;
-        sort(nums.begin(),nums.end());
-        int n=nums.size();
-        for(int i=0;i<nums.size();i++){
-            int j=i+1;
-            int k=n-1;
-            while(j<k){
-                long long int sum=nums[i]+nums[j];
-                if(sum>0){
-                    if(nums[k]>0){
-                        break;
-                    }
+        for(int i = 0; i < n; i++){
+
+            if(i > 0 && nums[i] == nums[i-1]){
+                continue;
+            }
+
+            if(nums[i] > 0){
+                break;
+            }
+            
+            int j = i + 1;
+            int k = n - 1;
+
+            while(j < k){
+                int total = nums[i] + nums[j] + nums[k];
+
+                if(total > 0){
+                    k--;
                 }
-                if((sum+nums[k])==0){
-                    vector<int> v;
-                    v.push_back(nums[i]);
-                    v.push_back(nums[j]);
-                    v.push_back(nums[k]);
-                    if (dp1.find(v) != dp1.end()) {
+                else if(total < 0){
+                    j++;
+                }
+                else{
+                    ans.push_back({nums[i], nums[j], nums[k]});
+                    j++;
 
-                    } 
-                    else{
- dp1.insert(v);
-                        dp.push_back(v);
+                    while(j < k && nums[j] == nums[j-1]){
+                        j++;
                     }
-                    
-                    
-                    int temp=nums[k];
-                    k=k-1;
-                    while(nums[k]==temp){
+                    while(k>j && nums[k] == nums[k-1]){
                         k-=1;
-                        if(k<=j){
-                            break;
-                        }
-                    }
-                    int temp1=nums[j];
-                    j=j+1;
-                    while(nums[j]==temp1){
-                        j+=1;
-                        if(k<=j){
-                            break;
-                        }
                     }
                 }
-                else if((abs(sum))>nums[k]){
-                    j+=1;
-                }
-                else if((abs(sum))<nums[k]){
-                    k-=1;
-                }
-
             }
         }
-        return dp;
+        return ans;
     }
 };
