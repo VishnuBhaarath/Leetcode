@@ -22,11 +22,8 @@ public:
                 j+=1;
               }
               else{
-                vector<int> v;
-                v.push_back(nums[i]);
-                v.push_back(nums[j]);
-                v.push_back(nums[k]);
-                dp.push_back(v);
+                
+                dp.push_back({nums[i],nums[j],nums[k]});
                 j+=1;
                 k-=1;
                 while(j<k && nums[j]==nums[j-1]) j+=1;
