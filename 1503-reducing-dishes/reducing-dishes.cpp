@@ -5,7 +5,7 @@ public:
         sort(satisfaction.begin(),satisfaction.end());
         int n=satisfaction.size();
         vector<vector<int>> dp(n+2,vector<int>(n+2,INT_MAX));
-    
+     int ans=0;
         for(int i=0;i<n;i++){
           
             for(int j=1;j<=(i+1);j++){
@@ -25,17 +25,18 @@ public:
                     }
               
                 }
+                if(i==n-1){
+                    if(dp[n-1][j]!=INT_MAX){
+                
+                ans=max(ans,dp[n-1][j]);
+            }
+                }
             }
             
         }
         
-        int ans=0;
-        for(int j=0;j<=n;j++){
-            if(dp[n-1][j]!=INT_MAX){
-                
-                ans=max(ans,dp[n-1][j]);
-            }
-        }
+       
+       
         return ans;
     }
 };
