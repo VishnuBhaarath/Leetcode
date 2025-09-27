@@ -1,14 +1,6 @@
 class Solution {
 public:
-    int func(vector<int>&v ,long long int sum, int i, int cnt,vector<vector<int>> dp){
-        if(i==v.size()){
-            return sum;
-        }
-        if(dp[i][cnt]!=-1){
-            return dp[i][cnt];
-        }
-        return dp[i][cnt]=max(func(v,sum+((cnt+1)*v[i]),i+1,cnt+1,dp),func(v,sum,i+1,cnt,dp));
-    }
+   
     int maxSatisfaction(vector<int>& satisfaction) {
         sort(satisfaction.begin(),satisfaction.end());
         int n=satisfaction.size();
