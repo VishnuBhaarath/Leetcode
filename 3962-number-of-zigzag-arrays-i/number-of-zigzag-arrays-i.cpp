@@ -1,41 +1,40 @@
 class Solution {
 public:
- long long MOD = 1e9 + 7;
-    int zigZagArrays(int n, int l, int r) {
-          int m = r - l + 1;
-        if (n == 1) {
-            return m;
+    int zigZagArrays(int N, int L, int R) {
+         const int MOD = 1e9 + 7;
+        int M = R - L + 1;
+
+        vector<vector<int>> dp(N, vector<int>(M, 0));
+        // Initialize first row with 1s
+        for (int i = 0; i < M; ++i) {
+            dp[0][i] = 1;
         }
-        vector<long long> up(m + 1, 0);
-        vector<long long> down(m + 1, 0);
-        for (int j = 1; j <= m; j++) 
-        {
-            up[j] = j - 1;
-            down[j] = m - j;
-        }
-        vector<long long> prefix_up(m + 1, 0);
-        vector<long long> prefix_down(m + 1, 0);
-        vector<long long> next_up(m + 1, 0);
-        vector<long long> next_down(m + 1, 0);
-        for (int len = 3; len <= n; len++) 
-        {
-            for (int i = 1; i <= m; i++) 
-            {
-                prefix_up[i] = (prefix_up[i - 1] + up[i]) % MOD;
-                prefix_down[i] = (prefix_down[i - 1] + down[i]) % MOD;
+
+        for (int i = 1; i < N; ++i) {
+            long long s = 0;
+            for (int j = 0; j < M; ++j)
+                s = (s + dp[i - 1][j]) % MOD;
+
+            if (i % 2 == 1) {
+                long long sum = s;
+                for (int v = M - 1; v >= 0; --v) {
+                    sum = (sum - dp[i - 1][v] + MOD) % MOD;
+                    dp[i][v] = sum;
+                }
+            } else {
+                long long sum = s;
+                for (int v = 0; v < M; ++v) {
+                    sum = (sum - dp[i - 1][v] + MOD) % MOD;
+                    dp[i][v] = sum;
+                }
             }
-            for (int j = 1; j <= m; j++) 
-            {
-                next_up[j] = prefix_down[j - 1];
-                next_down[j] = (prefix_up[m] - prefix_up[j] + MOD) % MOD;
-            }
-            up = next_up;
-            down = next_down;
         }
-        long long ans = 0;
-        for (int j = 1; j <= m; j++) {
-            ans = (ans + up[j] + down[j]) % MOD;
+
+        long long result = 0;
+        for (int v = 0; v < M; ++v) {
+            result = (result + dp[N - 1][v]) % MOD;
         }
-        return (int)ans;
+
+        return (result * 2) % MOD;
     }
 };
