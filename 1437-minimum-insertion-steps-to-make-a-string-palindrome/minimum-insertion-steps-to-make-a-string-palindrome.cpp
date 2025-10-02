@@ -1,23 +1,30 @@
 class Solution {
 public:
-    int minInsertions(string text1) {
-         string text2=text1;
-        reverse(text2.begin(),text2.end());
-
-         int n=text1.size();
-        int m=text2.size();
-        vector<vector<int>> dp(n+1,vector<int>(m+1,0));
+    int minInsertions(string s) {
+         int n = s.size();
         
-        for(int i=0;i<text1.size();i++){
-            for(int j=0;j<text2.size();j++){
-                if(text1[i]==text2[j]){
-                    dp[i+1][j+1]=1+dp[i][j];
-                }
-                else{
-                    dp[i+1][j+1]=max(dp[i][j+1],dp[i+1][j]);
+        // Create DP table
+        vector<vector<int>> dp(n, vector<int>(n, 0));
+        
+        // Base case: when j <= i, dp[i][j] = 0
+        // Already initialized to 0
+        
+        // Fill the DP table
+        // Since we go from i to i+1 and j to j-1, we need:
+        // - i goes from n-1 to 0 (backwards)
+        // - j goes from 0 to n-1 (forwards)
+        for(int i = n - 1; i >= 0; i--) {
+            for(int j = 0; j < n; j++) {
+                if(j <= i) {
+                    dp[i][j] = 0;  // Base case
+                } else if(s[i] == s[j]) {
+                    dp[i][j] = dp[i + 1][j - 1];
+                } else {
+                    dp[i][j] = 1 + min(dp[i + 1][j], dp[i][j - 1]);
                 }
             }
         }
-        return text1.size()-dp[n][m];
+        
+        return dp[0][n - 1];
     }
 };
