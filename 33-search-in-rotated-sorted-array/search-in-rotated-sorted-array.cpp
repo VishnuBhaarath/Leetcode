@@ -21,7 +21,7 @@ public:
                         return mid;
                     }
                 }
-            } else if (nums[mid] <= st) {
+            } else if (nums[mid] < st) {
                 if (target > st) {
                     r = mid - 1;
                 } else {
@@ -34,6 +34,13 @@ public:
                     }
                 }
             }
+            else{
+                if(nums[mid]==target){
+                    return mid;
+                }
+                return -1;
+            }
+           
         }
         return -1;
     }
