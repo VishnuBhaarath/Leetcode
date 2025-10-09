@@ -36,6 +36,7 @@ public:
         int l=0;
         for(int i=0;i<weights.size();i++){
             r+=weights[i];
+            l=max(l,weights[i]);
            
         }
         int ans=-1;
