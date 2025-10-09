@@ -21,7 +21,7 @@ public:
             return piles[n-1];
         }
         int l=1;
-        int r=1e9;
+        int r=piles[n-1];
         int idx=-1;
         while(l<=r){
             int m=l+(r-l)/2;
