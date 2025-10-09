@@ -17,6 +17,9 @@ public:
     int minEatingSpeed(vector<int>& piles, int h) {
         int n=piles.size();
         sort(piles.begin(),piles.end());
+        if(h==n){
+            return piles[n-1];
+        }
         int l=1;
         int r=1e9;
         int idx=-1;
