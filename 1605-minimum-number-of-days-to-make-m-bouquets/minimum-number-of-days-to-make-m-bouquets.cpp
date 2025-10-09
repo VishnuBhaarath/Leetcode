@@ -32,9 +32,15 @@ public:
         if(n < (long long int)(m)*(long long int)(k)){
             return -1;
         }
-       
-        int l=0;
-        int r=1e9;
+
+      
+
+        int l=1e9;
+        int r=0;
+        for(int i=0;i<bloomDay.size();i++){
+            l=min(l,bloomDay[i]);
+            r=max(r,bloomDay[i]);
+        }
         int ans=-1;
         while(l<=r){
             int mid=l+(r-l)/2;
