@@ -9,28 +9,6 @@ public:
         return ans;
 
     }
-    int func(vector<int>& arr,int i, int k,vector<int> & dp){
-        if(i==arr.size()){
-            return 0;
-        }
-        if(dp[i]!=-1){
-            return dp[i];
-        }
-        
-        int ans=INT_MIN;
-        
-        for (int j = i; j < std::min(i+k, (int)(arr.size())); j++) {
-          
-            int sum=(j-i+1)*func1(i,j,arr)+func(arr,j+1,k,dp);
-            ans=max(ans,sum);
-            
-
-        }
-    
-      
-        return dp[i]=ans;
-    }
-
 
     int maxSumAfterPartitioning(vector<int>& arr, int k) {
        int n=arr.size();
