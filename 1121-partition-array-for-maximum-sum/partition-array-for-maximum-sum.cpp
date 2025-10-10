@@ -1,50 +1,56 @@
 class Solution {
 public:
-    
-    int func(vector<int>& arr,int i,int k,vector<vector<int>>&dp,int sz,vector<int> &dp1){
+    int func1(int i,int j,vector<int>&arr){
+        int ans=arr[i];
+        while(i<=j){
+            ans=max(ans,arr[i]);
+            i+=1;
+        }
+        return ans;
+
+    }
+    int func(vector<int>& arr,int i, int k,vector<int> & dp){
         if(i==arr.size()){
             return 0;
         }
-        if(dp1[i]!=-1){
-            return dp1[i];
+        if(dp[i]!=-1){
+            return dp[i];
         }
-       
-        unsigned long long int val=0;
-        for (int j = i; j < std::min(static_cast<int>(arr.size()), i + k); j++){
+        
+        int ans=INT_MIN;
+        
+        for (int j = i; j < std::min(i+k, (int)(arr.size())); j++) {
           
-           unsigned long long int sum=(dp[i][j-i+1])*(j-i+1)+func(arr,j+1,k,dp,(j-i+1),dp1);
-           val=max(val,sum);
-           
+            int sum=(j-i+1)*func1(i,j,arr)+func(arr,j+1,k,dp);
+            ans=max(ans,sum);
+            
+
         }
-       
-        return dp1[i]=val;
+    
+      
+        return dp[i]=ans;
     }
 
+
     int maxSumAfterPartitioning(vector<int>& arr, int k) {
-        int n=arr.size();
-        vector<vector<int>> dp(n+1,vector<int> (k+1,0));
-        vector<int> dp1 (n+1,-1);
+       int n=arr.size();
+       vector<int> dp(n+1,0); 
 
-        for(int i=1;i<=k;i++){
-    
-            dp[n-1][i]=arr[n-1];
-        }
-        
-        for(int i=n-2;i>=0;i--){
-            for(int j=k;j>=1;j--){
-               
-                int val=dp[i+1][j-1];
-                val=max(val,arr[i]);
-                dp[i][j]=val;
-            }
-        }
+
+       for(int i=n-1;i>=0;i--){
+        int ans=INT_MIN;
       
-
+        for(int j = i; j < std::min(i+k, (int)(arr.size())); j++){
+           
+            int sum=(j-i+1)*func1(i,j,arr)+dp[j+1];
+         
+            ans=max(ans,sum);
+        }
        
-
-       
-        return func(arr,0,k,dp,0,dp1);
-        
-       
+        dp[i]=ans;
+      }
+     
+       return dp[0];
+      
     }
 };
