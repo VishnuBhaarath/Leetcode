@@ -15,16 +15,12 @@ public:
         while(!q.empty()){
            int sz=q.size();
             int t=false;
-            cout<<val;
-            cout<<" ";
+          
            while(sz){
 
               int x=q.front().first;
               int y=q.front().second;
-              cout<<x;
-              cout<<" ";
-              cout<<y;
-              cout<<"\n";
+            
               q.pop();
 
               if(x-1>=0 && mat[x-1][y]==1){
