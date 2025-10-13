@@ -11,8 +11,8 @@ public:
         }
         queue<int> q;
         q.push(source);
-        map<int,int> umap1;
-        umap1[source]=1;
+        vector<int> v1(n,0);
+        v1[source]=1;
         while(!q.empty()){
              vector<int> v=umap[q.front()];
              q.pop();
@@ -20,9 +20,9 @@ public:
                 if(v[i]==destination){
                     return true;
                 }
-                if(umap1[v[i]]==0){
+                if(v1[v[i]]==0){
                     q.push(v[i]);
-                    umap1[v[i]]+=1;
+                    v1[v[i]]+=1;
                 }
              }
         }
