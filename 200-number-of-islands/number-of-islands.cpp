@@ -14,7 +14,7 @@ public:
         for(int i=0;i<grid.size();i++){
             for(int j=0;j<grid[0].size();j++){
                 if(grid[i][j]=='1'){
-                 if(vis[i][j]==0){
+             
                      queue<pair<int,int>> q;
                      q.push({i,j});
                  
@@ -29,19 +29,19 @@ public:
                              int x1=x+row[k];
                              int y1=y+col[k];
                              
-                             if(x1>=0 && y1>=0 && x1<n && y1<m && grid[x1][y1]=='1' && vis[x1][y1]==0)
+                             if(x1>=0 && y1>=0 && x1<n && y1<m && grid[x1][y1]=='1')
                              {
-                                 vis[x1][y1]=1;
+                            
                                  grid[x1][y1]='0';
                                  q.push({x1,y1});
                              }
                          }
                      }
                      
-                 }}
+                 }
             }
         }
-        cout<<cnt;
+   
         return cnt;
     }
 };
