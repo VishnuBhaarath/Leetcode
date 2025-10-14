@@ -18,7 +18,7 @@ public:
                      queue<pair<int,int>> q;
                      q.push({i,j});
                  
-                     vis[i][j]=1;
+                     grid[i][j]='0';
                      cnt+=1;
                      while(!q.empty()){
                          int x=q.front().first;
@@ -32,6 +32,7 @@ public:
                              if(x1>=0 && y1>=0 && x1<n && y1<m && grid[x1][y1]=='1' && vis[x1][y1]==0)
                              {
                                  vis[x1][y1]=1;
+                                 grid[x1][y1]='0';
                                  q.push({x1,y1});
                              }
                          }
