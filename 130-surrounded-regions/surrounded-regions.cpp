@@ -3,17 +3,7 @@ public:
     void solve(vector<vector<char>>& board) {
         int n=board.size();
         int m=board[0].size();
-        cout<<n;
-        cout<<" ";
-        cout<<m;
-        cout<<"\n";
-        for(int i=0;i<board.size();i++){
-            for(int j=0;j<board[i].size();j++){
-                cout<<board[i][j];
-                cout<<" ";
-            }
-            cout<<"\n";
-        }
+        
         vector<vector<int>> dp(n,vector<int>(m,0));
         for(int i=1;i<(n-1);i++){
             for(int j=1;j<(m-1);j++){
