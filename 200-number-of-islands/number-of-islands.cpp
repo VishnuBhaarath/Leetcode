@@ -2,9 +2,7 @@ class Solution {
 public:
     int numIslands(vector<vector<char>>& grid) {
            // code here
-        vector<vector<pair<int,int>>> dp;
-        vector<pair<int,int>> v;
-        dp.push_back(v);
+   
         int n=grid.size();
         int m=grid[0].size();
         
