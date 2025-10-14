@@ -1,88 +1,48 @@
 class Solution {
 public:
     int numIslands(vector<vector<char>>& grid) {
+           // code here
+        vector<vector<pair<int,int>>> dp;
+        vector<pair<int,int>> v;
+        dp.push_back(v);
         int n=grid.size();
         int m=grid[0].size();
-        map<pair<int,int>,int> umap;
+        
+        vector<vector<int>> vis(n,vector<int>(m,0));
+        
+        vector<int> row={1,-1,0,0};
+        vector<int> col={0,0,1,-1};
         int cnt=0;
         for(int i=0;i<grid.size();i++){
-            for(int j=0;j<grid[i].size();j++){
+            for(int j=0;j<grid[0].size();j++){
                 if(grid[i][j]=='1'){
-                    if(umap[{i,j}]==0){
-                        queue<pair<int,int>> q;
-                        umap[{i,j}]+=1;
-                        q.push({i,j});
-                        cnt+=1;
-                        while(!q.empty()){
-                            int k=q.front().first;
-                            int l=q.front().second;
-                             q.pop();
-
-                            int a=k;
-                            int b=l;
-                            while(a>=0){
-                                if(grid[a][b]=='1'){
-                                    if(umap[{a,b}]==0){
-                                        q.push({a,b});
-                                        umap[{a,b}]+=1;
-                                    }
-                                }
-                                else{
-                                    break;
-                                }
-                                a-=1;
-                            }
-                            a=k;
-                            while(a<n){
-                                if(grid[a][b]=='1'){
-                                    if(umap[{a,b}]==0){
-                                        q.push({a,b});
-                                        umap[{a,b}]+=1;
-                                    }
-                                }
-                                else{
-                                    break;
-                                }
-                                a+=1;
-                            }
-                            a=k;
-                            b=l;
-
-                              while(b>=0){
-                                if(grid[a][b]=='1'){
-                                    if(umap[{a,b}]==0){
-                                        q.push({a,b});
-                                        umap[{a,b}]+=1;
-                                    }
-                                }
-                                else{
-                                    break;
-                                }
-                                b-=1;
-                            }
-                            b=l;
-
-                             while(b<m){
-                                if(grid[a][b]=='1'){
-                                    if(umap[{a,b}]==0){
-                                        q.push({a,b});
-                                        umap[{a,b}]+=1;
-                                    }
-                                }
-                                else{
-                                    break;
-                                }
-                                b+=1;
-                            }
-                           
-                        }
-
-                    }
-                }
+                 if(vis[i][j]==0){
+                     queue<pair<int,int>> q;
+                     q.push({i,j});
+                 
+                     vis[i][j]=1;
+                     cnt+=1;
+                     while(!q.empty()){
+                         int x=q.front().first;
+                         int y=q.front().second;
+                         q.pop();
+                         
+                         for(int k=0;k<4;k++){
+                             int x1=x+row[k];
+                             int y1=y+col[k];
+                             
+                             if(x1>=0 && y1>=0 && x1<n && y1<m && grid[x1][y1]=='1' && vis[x1][y1]==0)
+                             {
+                                 vis[x1][y1]=1;
+                                 q.push({x1,y1});
+                             }
+                         }
+                     }
+                     
+                 }}
             }
         }
-
+        cout<<cnt;
         return cnt;
-
     }
 };
