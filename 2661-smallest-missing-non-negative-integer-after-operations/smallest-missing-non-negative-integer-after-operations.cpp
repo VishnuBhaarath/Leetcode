@@ -2,9 +2,7 @@ class Solution {
 public:
     int findSmallestInteger(vector<int>& nums, int value) {
         unordered_map<int,int> umap;
-        int val=-7;
-        int r=val%4;
-        cout<<r;
+     
 
         for(int i=0;i<nums.size();i++){
             nums[i]=(nums[i])%value;
