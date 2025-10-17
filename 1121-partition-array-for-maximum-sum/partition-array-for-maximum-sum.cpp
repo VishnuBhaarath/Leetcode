@@ -31,8 +31,11 @@ public:
         int ans= INT_MIN;
 
         for(int i=n-1;i>=0;i--){
+            int val=arr[i];
              for(int j=i;j<min(n,i+k);j++){
-                   int sum=func1(i,j,arr)+dp[j+1];
+                   val=max(val,arr[j]);
+                   int sz=(j-i)+1;
+                   int sum=val*sz+dp[j+1];
 
                     ans=max(ans,sum);
                      dp[i]=ans;
