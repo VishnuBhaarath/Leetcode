@@ -27,8 +27,18 @@ public:
     }
     int maxSumAfterPartitioning(vector<int>& arr, int k) {
         int n=arr.size();
-        vector<int> dp(n,-1);
-        int ans= func(n,k,arr,0,dp);
+        vector<int> dp(n+1,0);
+        int ans= INT_MIN;
+
+        for(int i=n-1;i>=0;i--){
+             for(int j=i;j<min(n,i+k);j++){
+                   int sum=func1(i,j,arr)+dp[j+1];
+
+                    ans=max(ans,sum);
+                     dp[i]=ans;
+             }   
+            
+        }
        
         return ans;
     }
