@@ -4,8 +4,8 @@ public:
         sort(nums.begin(),nums.end());
         nums[0]-=k;
         int val=nums[0]+1;
-        unordered_map<int,int> umap;
-        umap[nums[0]]+=1;
+        set <int> umap;
+        umap.insert(nums[0]);
         
         for(int i=1;i<nums.size();i++){
             if(val==nums[i]){
@@ -32,7 +32,7 @@ public:
                     val+=1;
                 }
             }
-            umap[nums[i]]+=1;
+            umap.insert(nums[i]);
         }
        
         return umap.size();
