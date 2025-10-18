@@ -4,7 +4,7 @@ public:
         sort(nums.begin(),nums.end());
         nums[0]-=k;
         int val=nums[0]+1;
-        map<int,int> umap;
+        unordered_map<int,int> umap;
         umap[nums[0]]+=1;
         
         for(int i=1;i<nums.size();i++){
