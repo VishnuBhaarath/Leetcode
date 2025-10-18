@@ -4,6 +4,9 @@ public:
         sort(nums.begin(),nums.end());
         nums[0]-=k;
         int val=nums[0]+1;
+        map<int,int> umap;
+        umap[nums[0]]+=1;
+        
         for(int i=1;i<nums.size();i++){
             if(val==nums[i]){
                 val+=1;
@@ -29,11 +32,9 @@ public:
                     val+=1;
                 }
             }
-        }
-        map<int,int> umap;
-        for(int i=0;i<nums.size();i++){
             umap[nums[i]]+=1;
-        } 
+        }
+       
         return umap.size();
     }
 };
