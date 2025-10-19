@@ -1,72 +1,60 @@
 class Solution {
 public:
- vector<int> counts;
-    
-    void merge(vector<pair<int, int>>& nums, int l, int m, int r) {
-        vector<pair<int, int>> temp;
-        int i = l;      // pointer for left subarray
-        int j = m + 1;  // pointer for right subarray
-        
-        while (i <= m && j <= r) {
-            if (nums[i].first <= nums[j].first) {
-                // When we take from left subarray, count how many 
-                // elements from right subarray are smaller
-                counts[nums[i].second] += (j - (m + 1));
-                temp.push_back(nums[i]);
+    void merge(vector<pair<int,int>>& arr, vector<int>& cnt, int left, int mid, int right){
+        vector<pair<int,int>> temp(right-left+1);
+        int i = left; 
+        int j = mid+1;
+        int k = 0;
+        // we need to sort in descending order
+        while(i<=mid && j<=right){
+            if(arr[i].first <= arr[j].first){ // increaing order
+                temp[k++] = arr[j++];
+            }
+            else{// descending order and the greater elem comes first then smaller elms 
+                cnt[arr[i].second] += right-j+1;
+                temp[k] = arr[i];
                 i++;
-            } else {
-                // Take from right subarray
-                temp.push_back(nums[j]);
-                j++;
+                k++;
             }
         }
-        
-        // Process remaining elements from left subarray
-        while (i <= m) {
-            // All elements from right subarray have been processed
-            // so add the count of all elements from right subarray
-            counts[nums[i].second] += (j - (m + 1));
-            temp.push_back(nums[i]);
+
+        // remaining elms
+        while(i<=mid){
+            temp[k]= arr[i];
+            k++;
             i++;
         }
-        
-        // Process remaining elements from right subarray
-        while (j <= r) {
-            temp.push_back(nums[j]);
+
+        while(j<=right){
+            temp[k] = arr[j];
+            k++;
             j++;
         }
-        
-        // Copy back to original array
-        for (int i = l; i <= r; i++) {
-            nums[i] = temp[i - l];
+        // copying elmt to original arr
+        for(int i=left; i<=right; i++){
+            arr[i]= temp[i-left];
         }
+
     }
-
-
- void mergeSort(vector<pair<int, int>>& nums, int l, int r) {
-        if (l >= r) return;
+    void mergeSort(vector<pair<int,int>>& arr, vector<int>& cnt, int left, int right){
+        if(left>=right)
+            return;
         
-        int m = l + (r - l) / 2;
-        mergeSort(nums, l, m);
-        mergeSort(nums, m + 1, r);
-        merge(nums, l, m, r);
+        int mid = left + (right-left)/2;
+        mergeSort(arr, cnt, left, mid);
+        mergeSort(arr, cnt, mid+1, right);
+        merge(arr, cnt, left, mid, right);
     }
 
-    
-    
     vector<int> countSmaller(vector<int>& nums) {
-         int n = nums.size();
-        counts.resize(n, 0);
-        
-        // Create pairs of (value, original_index)
-        vector<pair<int, int>> indexedNums;
-        for (int i = 0; i < n; i++) {
-            indexedNums.push_back({nums[i], i});
+        int n = nums.size();
+        vector<pair<int,int>> arr(n);
+        for(int i=0; i<n; i++){
+            arr[i]={nums[i],i};
         }
-        
-        mergeSort(indexedNums, 0, n - 1);
-        
-        return counts;
-        
+
+        vector<int> cnt(n,0);
+        mergeSort(arr, cnt, 0, n-1);
+        return cnt;
     }
 };
