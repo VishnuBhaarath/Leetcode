@@ -1,56 +1,41 @@
 class Solution {
 public:
     vector<vector<int>> intervalIntersection(vector<vector<int>>& firstList, vector<vector<int>>& secondList) {
-        int n=firstList.size();
-        int m=secondList.size();
-        int i=0;
-        int j=0;
-        vector<vector<int>> ans;
-        while(i<n && j<m){
-            int x1=firstList[i][0];
-            int y1=firstList[i][1];
+        vector<vector<int>> answer;
+        int f = 0;
+        int s = 0;
+        int n = firstList.size();
+        int m = secondList.size();
 
-            int x2=secondList[j][0];
-            int y2=secondList[j][1];
-         // vector<int> v;
-            if(x1<x2){
-                if(y1>=y2){
-                
-                    ans.push_back({x2,y2});
-                    
-                }
-                else{
-                    if(x2<=y1){
-                    
-                         ans.push_back({x2,y1});
-
-                    }
-                    
-                }
-            }
-            else{
-                if(y2>=y1){
-              
-                    ans.push_back({x1,y1});
-
-                }
-                else{
-                  if(x1<=y2){
-                     
-                 
-                     ans.push_back({x1,y2});
-                  }
-                }
-
+        while(f < n && s < m){
+            if(firstList[f][0] > secondList[s][1]){
+                s++;
+                continue;
+            }else if(secondList[s][0] > firstList[f][1]){
+                f++;
+                continue;
             }
 
-            if(y1>y2){
-                j+=1;
+            int minElement = max(firstList[f][0], secondList[s][0]);
+            int maxElement = min(firstList[f][1], secondList[s][1]);
+
+
+            if(maxElement >= firstList[f][1]){
+                f++;
+            }else{
+                firstList[f][0] = maxElement;
             }
-            else{
-                i+=1;
+
+            if(maxElement >= secondList[s][1]){
+                s++;
+            }else{
+                secondList[s][0] = maxElement;
+            }
+            if(maxElement >= minElement){
+                answer.push_back({minElement, maxElement});
             }
         }
-        return ans;
+
+        return answer;
     }
 };
