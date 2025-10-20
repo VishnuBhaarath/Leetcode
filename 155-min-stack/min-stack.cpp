@@ -1,45 +1,47 @@
 class MinStack {
 public:
-    stack<int> s;
-    stack<int> s1;
-    map<int,int> umap;
-    int cnt=0;
+    /** initialize your data structure here. */
     MinStack() {
-        
+       
     }
-    
-    void push(int val) {
-        if(s.empty()){
-            s1.push(cnt);
+     stack<int>s1;
+        stack<int> min;
+    void push(int x) {
+       s1.push(x);
+       if(!min.empty()){
+           int y=min.top();
+           if(y<x){
+               min.push(y);
+           }
+           else{
+               min.push(x);
+           }
+       }
+        else{
+            min.push(x);
         }
-        else if(val<=umap[s1.top()]){
-            s1.push(cnt);
-        }
-        s.push(cnt);
-        umap[cnt]=val;
-        cnt+=1;
     }
     
     void pop() {
-        if(s.top()==s1.top()){
-            s1.pop();
-        }
-        s.pop();
+       s1.pop();
+        min.pop();
     }
     
     int top() {
-        return umap[s.top()];
+       
+        return s1.top();
     }
     
     int getMin() {
-        return umap[s1.top()];
+        cout<<min.top();
+        return min.top();
     }
 };
 
 /**
  * Your MinStack object will be instantiated and called as such:
  * MinStack* obj = new MinStack();
- * obj->push(val);
+ * obj->push(x);
  * obj->pop();
  * int param_3 = obj->top();
  * int param_4 = obj->getMin();
