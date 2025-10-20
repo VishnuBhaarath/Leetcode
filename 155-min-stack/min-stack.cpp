@@ -33,7 +33,7 @@ public:
     }
     
     int getMin() {
-        cout<<min.top();
+      
         return min.top();
     }
 };
