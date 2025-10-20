@@ -12,20 +12,17 @@ public:
 
             int x2=secondList[j][0];
             int y2=secondList[j][1];
-            vector<int> v;
+         // vector<int> v;
             if(x1<x2){
                 if(y1>=y2){
-                    v.push_back(x2);
-                    v.push_back(y2);
-                    ans.push_back(v);
+                
+                    ans.push_back({x2,y2});
                     
                 }
                 else{
                     if(x2<=y1){
-                     
-                        v.push_back(x2);
-                         v.push_back(y1);
-                         ans.push_back(v);
+                    
+                         ans.push_back({x2,y1});
 
                     }
                     
@@ -33,18 +30,15 @@ public:
             }
             else{
                 if(y2>=y1){
-                   
-                    v.push_back(x1);
-                    v.push_back(y1);
-                    ans.push_back(v);
+              
+                    ans.push_back({x1,y1});
 
                 }
                 else{
                   if(x1<=y2){
                      
-                     v.push_back(x1);
-                     v.push_back(y2);
-                     ans.push_back(v);
+                 
+                     ans.push_back({x1,y2});
                   }
                 }
 
