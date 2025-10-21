@@ -1,196 +1,84 @@
 class Solution {
 public:
-    void pge(vector<int> & left1,vector<int> & arr){
-        int n=arr.size();
-        stack<int> s;
-      
-        s.push(0);
-        for(int i=1;i<arr.size();i++){
-            if(s.empty()){
-                s.push(i);
+vector<int> findNSE(vector<int> &arr){
+        stack<int> st;
+        int n = arr.size();
+        vector<int> ans(n);
+        for(int i = n-1; i >= 0; i--){
+            while (!st.empty() && arr[st.top()] >= arr[i]){
+                st.pop();
             }
-            else if(arr[i]<arr[s.top()]){
-                  left1[i]=s.top();
-                  s.push(i);
-            }
-            else{
-                while(arr[i]>=arr[s.top()]){
-                    s.pop();
-                    if(s.empty()){
-                        break;
-                    }
-                }
-                if(!s.empty()){
-                    left1[i]=s.top();
-                }
-                s.push(i);
-            }
+            ans[i] = !st.empty() ? st.top() : n;
+            st.push(i);
         }
+        return ans;
     }
-
-    void nge(vector<int> & right1,vector<int> & arr){
-         int n=arr.size();
-        stack<int> s1;
-        s1.push(n-1);
-
-        for(int i=n-2;i>=0;i--){
-            if(s1.empty()){
-                s1.push(i);
+    vector<int> findNGE(vector<int> &arr){
+        stack<int> st;
+        int n = arr.size();
+        vector<int> ans(n);
+        for(int i = n-1; i >= 0; i--){
+            while (!st.empty() && arr[st.top()] <= arr[i]){
+                st.pop();
             }
-            else if(arr[i]<=arr[s1.top()]){
-                
-                right1[i]=s1.top();
-                s1.push(i);
-            }
-            else{
-                while(arr[i]>arr[s1.top()]){
-                    s1.pop();
-                    if(s1.empty()){
-                        break;
-                    }
-                }
-                if(!s1.empty()){
-                    right1[i]=s1.top();
-                }
-                s1.push(i);
-            }
+            ans[i] = !st.empty() ? st.top() : n;
+            st.push(i);
         }
-
+        return ans;
     }
-
-    void nse(vector<int> & right,vector<int> & arr){
-         int n=arr.size();
-         stack<int> s1;
-        s1.push(n-1);
-
-        for(int i=n-2;i>=0;i--){
-            if(s1.empty()){
-                s1.push(i);
+    vector<int> findPSE(vector<int> &arr){
+       stack<int> st;
+        int n = arr.size();
+        vector<int> ans(n);
+        for(int i = 0; i < n; i++){
+            while (!st.empty() && arr[st.top()] > arr[i]){
+                st.pop();
             }
-            else if(arr[i]>=arr[s1.top()]){
-                
-                right[i]=s1.top();
-                s1.push(i);
-            }
-            else{
-                while(arr[i]<arr[s1.top()]){
-                    s1.pop();
-                    if(s1.empty()){
-                        break;
-                    }
-                }
-                if(!s1.empty()){
-                    right[i]=s1.top();
-                }
-                s1.push(i);
-            }
+            ans[i] = !st.empty() ? st.top() : -1;
+            st.push(i);
         }
-
+        return ans;
     }
-    void pse(vector<int> & left,vector<int> & arr){
-         int n=arr.size();
-        stack<int> s;
-        s.push(0);
-        for(int i=1;i<arr.size();i++){
-            if(s.empty()){
-                s.push(i);
+    vector<int> findPGE(vector<int> &arr){
+       stack<int> st;
+        int n = arr.size();
+        vector<int> ans(n);
+        for(int i = 0; i < n; i++){
+            while (!st.empty() && arr[st.top()] < arr[i]){
+                st.pop();
             }
-            else if(arr[i]>arr[s.top()]){
-                  left[i]=s.top();
-                  s.push(i);
-            }
-            else{
-                while(arr[i]<=arr[s.top()]){
-                    s.pop();
-                    if(s.empty()){
-                        break;
-                    }
-                }
-                if(!s.empty()){
-                    left[i]=s.top();
-                }
-                s.push(i);
-            }
+            ans[i] = !st.empty() ? st.top() : -1;
+            st.push(i);
         }
-        for(int i=0;i<left.size();i++){
-            cout<<left[i];
-            cout<<" ";
+        return ans;
+    }
+    long long sumSubarrayMaxs(vector<int>& arr) {
+        int n = arr.size();
+        vector<int> nse = findNGE(arr);
+        vector<int> pse = findPGE(arr);
+        long long sum = 0;
+        for(int i = 0; i < n; i++){
+            int left = i - pse[i];
+            int right = nse[i] - i;
+            sum = sum + (long long)arr[i] * left * right;
         }
-        cout<<"\n";
+        return sum;
+    }
+     long long sumSubarrayMins(vector<int>& arr) {
+        int n = arr.size();
+        vector<int> nse = findNSE(arr);
+        vector<int> pse = findPSE(arr);
+        long long sum = 0;
+        for(int i = 0; i < n; i++){
+            int left = i - pse[i];
+            int right = nse[i] - i;
+            sum = sum + (long long)arr[i] * left * right;
+        }
+        return sum;
     }
     long long subArrayRanges(vector<int>& nums) {
-        int n=nums.size();
-        vector<int> left(n,-1);
-        vector<int> right(n,-1);
-
-        pse(left,nums);
-        nse(right,nums);
-
-        vector<int> left1(n,-1);
-        vector<int> right1(n,-1);
-
-        pge(left1,nums);
-        nge(right1,nums);
-
-      
-
-
-         long long int ans=0;
- 
-         vector<int> arr=nums;
-
-        for(int i=0;i<arr.size();i++){
-            
-            if(left[i]==-1 && right[i]==-1){
-                ans+=(long long)(arr[i])*(long long)(i+1)*(long long)(n-i);
-            
-            }
-            else {
-                int l=left[i];
-                int r=right[i];
-                if(r!=-1 && l!=-1){
-                    ans+=(long long)(arr[i])*(long long)(i-l)*(long long)(r-i);
-                    
-                }
-                else if(l==-1){
-                    ans+=(long long)(arr[i])*(long long)(i+1)*(long long)(r-i);
-                  
-                }
-                else if(r==-1){
-                    ans+=(long long)(arr[i])*(long long)(i-l)*(long long)(n-i);
-                   
-                }
-            }
-           
-        }
-long long int ans1=0;
-
-         for(int i=0;i<arr.size();i++){
-            if(left1[i]==-1 && right1[i]==-1){
-                ans1+=(long long)(arr[i])*(long long)(i+1)*(long long)(n-i);
-            
-            }
-            else {
-                int l=left1[i];
-                int r=right1[i];
-                if(r!=-1 && l!=-1){
-                    ans1+=(long long)(arr[i])*(long long)(i-l)*(long long)(r-i);
-                    
-                }
-                else if(l==-1){
-                    ans1+=(long long)(arr[i])*(long long)(i+1)*(long long)(r-i);
-                   
-                }
-                else if(r==-1){
-                    ans1+=(long long)(arr[i])*(long long)(i-l)*(long long)(n-i);
-                   
-                }
-            }
-           
-        }
-
-     return ans1-ans;
-        
-        
+        long long ans1 = sumSubarrayMaxs(nums);
+        long long ans2 = sumSubarrayMins(nums);
+        return ans1 - ans2;
     }
 };
