@@ -45,12 +45,7 @@ public:
             int h = heights[tp];
             int area = w * h;
             ans = max(ans, area);
-            cout<<heights[tp];
-            cout<<" ";
-            cout<<w;
-            cout<<" ";
-            cout<<area;
-            cout<<"\n";
+            
 
             if (s.empty()) {
                 break;
