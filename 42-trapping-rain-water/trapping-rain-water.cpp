@@ -2,7 +2,7 @@ class Solution {
 public:
     int trap(vector<int>& arr) {
         int n=arr.size();
-        stack<int> s;
+
         int i=0;
         int j=n-1;
         int leftmax=arr[i];
