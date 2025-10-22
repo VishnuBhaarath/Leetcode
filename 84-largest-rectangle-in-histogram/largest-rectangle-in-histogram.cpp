@@ -1,87 +1,62 @@
 class Solution {
 public:
-       void nse(vector<int> & right,vector<int> & arr){
-         int n=arr.size();
-         stack<int> s1;
-        s1.push(n-1);
-
-        for(int i=n-2;i>=0;i--){
-            if(s1.empty()){
-                s1.push(i);
-            }
-            else if(arr[i]>=arr[s1.top()]){
-                
-                right[i]=s1.top();
-                s1.push(i);
-            }
-            else{
-                while(arr[i]<arr[s1.top()]){
-                    s1.pop();
-                    if(s1.empty()){
-                        break;
-                    }
-                }
-                if(!s1.empty()){
-                    right[i]=s1.top();
-                }
-                s1.push(i);
-            }
-        }
-
-    }
-    void pse(vector<int> & left,vector<int> & arr){
-         int n=arr.size();
-        stack<int> s;
-        s.push(0);
-        for(int i=1;i<arr.size();i++){
-            if(s.empty()){
-                s.push(i);
-            }
-            else if(arr[i]>arr[s.top()]){
-                  left[i]=s.top();
-                  s.push(i);
-            }
-            else{
-                while(arr[i]<=arr[s.top()]){
-                    s.pop();
-                    if(s.empty()){
-                        break;
-                    }
-                }
-                if(!s.empty()){
-                    left[i]=s.top();
-                }
-                s.push(i);
-            }
-        }
-       
-    }
     int largestRectangleArea(vector<int>& heights) {
-        int n=heights.size();
-        vector<int> left(n,-1);
-        vector<int> right(n,-1);
+        int n = heights.size();
+        int i = 0;
+        stack<int> s;
+        int ans = 0;
+        for (int i = 0; i < heights.size(); i++) {
+            if (s.empty()) {
+                s.push(i);
+            } else {
+                if (heights[i] >= heights[s.top()]) {
+                    s.push(i);
+                } else {
+                    while (heights[i] < heights[s.top()]) {
+                        int tp = s.top();
+                        s.pop();
+                        int tp1 = -1;
+                        if (!s.empty()) {
+                            tp1 = s.top();
+                        }
 
-        pse(left,heights);
-        nse(right,heights);
-        int ans=0;
-       
-        for(int i=0;i<heights.size();i++){
-            if(left[i]==-1 && right[i]==-1){
-                ans=max(ans,(n*heights[i]));
-            }
-            else if(left[i]!=-1 && right[i]!=-1){
-                 int w=(right[i]-left[i])-1;
-                 ans=max(ans,(w*heights[i]));
-            }
-            else if(left[i]!=-1){
-                int w=n-1-left[i];
-                ans=max(ans,(w*heights[i]));
-            }
-            else if(right[i]!=-1){
-                int w=right[i];
-                ans=max(ans,(w*heights[i]));
+                        int w = (i - tp1 - 1);
+                        int h = heights[tp];
+                        int area = w * h;
+                        ans = max(ans, area);
+                      
+
+                        if (s.empty()) {
+                            break;
+                        }
+                    }
+                    s.push(i);
+                }
             }
         }
+        while (!s.empty()) {
+            int tp = s.top();
+            s.pop();
+            int tp1 = -1;
+            if (!s.empty()) {
+                tp1 = s.top();
+            }
+            int w = (n - tp1-1);
+            int h = heights[tp];
+            int area = w * h;
+            ans = max(ans, area);
+            cout<<heights[tp];
+            cout<<" ";
+            cout<<w;
+            cout<<" ";
+            cout<<area;
+            cout<<"\n";
+
+            if (s.empty()) {
+                break;
+            }
+        }
+
         return ans;
     }
 };
