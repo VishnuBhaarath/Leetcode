@@ -4,6 +4,9 @@ public:
         stack<char> st;
         for (int i = 0; i < num.size(); i++) {
             if (st.empty()) {
+                if(num[i]=='0'){
+                    continue;
+                }
                 st.push(num[i]);
             }
             else if (num[i] >= st.top()) {
@@ -20,44 +23,39 @@ public:
                             break;
                         }
                     }
-                    st.push(num[i]);
+                    if(st.empty()){
+                      if(num[i]!='0'){
+                        st.push(num[i]);
+                      }
+                    }
+                    else{
+                    st.push(num[i]);}
                 } else {
                     st.push(num[i]);
                 }
             }
-            cout<<num[i];
-            cout<<" ";
-            cout<<k;
-            cout<<" ";
-            cout<<st.size();
-            cout<<"\n";
+           
         }
         while(k>0){
+            if(st.empty()){
+                k=0;
+                break;
+            }
             st.pop();
             k-=1;
         }
         string ans="";
         while(!st.empty()){
+          
             ans+=st.top();
             st.pop();
         }
         reverse(ans.begin(),ans.end());
-        int j=-1;
-        for(int i=0;i<ans.size();i++){
-            if(ans[i]!='0'){
-                j=i;
-                break;
-            }
-        }
-        string s="";
-        for(int i=j;i<ans.size();i++){
-            s+=ans[i];
-        }
-        if(s.size()==0){
-            s+='0';
+        if(ans.size()==0){
+            ans+='0';
         }
         
 
-        return s;
+        return ans;
     }
 };
