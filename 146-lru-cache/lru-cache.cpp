@@ -61,7 +61,7 @@ public:
         node->next=forward;
         
         forward->prev=node;
-        head->next=node;  // Fixed: was head->next=temp
+        head->next=node;  
         umap[key]=node;
     }
     
