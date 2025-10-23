@@ -73,6 +73,6 @@ public:
         prevNode->next=nextNode;
         
         umap.erase(key);  // Remove from map
-        delete node;       // Free memory
+       // delete node;       // Free memory
     }
 };
