@@ -8,7 +8,7 @@ class Node{
 
 class LRUCache {
 public:
-    map<int,Node*> umap;
+    unordered_map<int,Node*> umap;
     int cap=0;
     Node* head=new Node();
     Node* tail=new Node();
