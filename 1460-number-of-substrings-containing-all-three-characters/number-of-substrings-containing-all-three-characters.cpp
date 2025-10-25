@@ -1,21 +1,18 @@
 class Solution {
 public:
     int numberOfSubstrings(string s) {
-        map<char,int> umap;
-        int i=0;
-        int j=0;
-        int n=s.size();
-        int cnt=0;
-        while(j<s.size()){
-            umap[s[j]]+=1;
-            while(umap['a']>0 && umap['b']>0 && umap['c']>0){
-                cnt+=(n-j);
-                umap[s[i]]-=1;
-                i+=1;
+        
+         vector<int> m(3,0);
+        int i=0,j=0,n=s.size(),ans=0;
+        while(j<n){
+            m[s[j]-'a']++;
+            while(m[0] && m[1] && m[2]){
+                ans+=n-j;
+                m[s[i]-'a']--;
+                i++;
             }
-          
-            j+=1;
+            j++;
         }
-        return cnt;
+        return ans;
     }
 };
