@@ -3,8 +3,8 @@ public:
     string minWindow(string s, string t) {
         int n=s.size();
         int m=t.size();
-        map<char,int> umap;
-        map<char,int> umap1;
+        unordered_map<char,int> umap;
+        unordered_map<char,int> umap1;
         for(int i=0;i<t.size();i++){
             umap1[t[i]]+=1;
         }
@@ -83,9 +83,7 @@ public:
         if(l==-1){
             return st;
         }
-        for(int i=l;i<=r;i++){
-            st+=s[i];
-        }
-        return st;
+       
+        return s.substr(l,r-l+1);
     }
 };
