@@ -1,30 +1,32 @@
 class Solution {
 public:
     int jump(vector<int>& nums) {
+        int val=nums[0];
+        int steps=1;
+        int val1=0;
         int n=nums.size();
-        vector<int> dp(n,-1);
-        dp[0]=0;
-        for(int i=0;i<nums.size();i++){
-            int j=i+1;
-            if(j==n){
-                break;
-            }
-            int k=nums[i];
-            while(k>0){
-                if(dp[j]==-1){
-                    dp[j]=1+dp[i];
-                }
-                else{
-                    dp[j]=min(dp[j],1+dp[i]);
-                }
-                j+=1;
-                if(j==n){
-                    break;
-                }
-                k-=1;
-            }
+        if(n==1){
+            return 0;
         }
-        
-        return dp[n-1];
+        if(val>=(n-1)){
+            return steps;
+        }
+        for(int i=1;i<nums.size();i++){
+          
+            if(val>=i){
+                val1=max(val1,(i+nums[i]));
+             
+                if(val1>=(n-1)){
+                    return steps+1;
+                }
+                if(val==i){
+                    val=val1;
+                    steps+=1;
+                    val1=0;
+                }
+            }
+           
+        }
+        return steps;
     }
 };
