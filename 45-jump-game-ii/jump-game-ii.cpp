@@ -24,10 +24,7 @@ public:
                 k-=1;
             }
         }
-        for(int i=0;i<dp.size();i++){
-            cout<<dp[i];
-            cout<<" ";
-        }
+        
         return dp[n-1];
     }
 };
