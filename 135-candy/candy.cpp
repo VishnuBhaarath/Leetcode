@@ -8,10 +8,7 @@ public:
                 v[i]=v[i-1]+1;
              }
         }
-        for(int i=0;i<v.size();i++){
-            cout<<v[i];
-            cout<<" ";
-        }
+       
         for(int i=n-1;i>0;i--){
             if(ratings[i-1]>ratings[i]){
                 if(v[i-1]<=v[i]){
