@@ -19,12 +19,7 @@ public:
         if (dp[0][0] != 0) {
             return -1;
         }
-        for(int i=0;i<dp.size();i++){
-            cout<<dp[i][0];
-            cout<<" ";
-            cout<<dp[i][1];
-            cout<<"\n";
-        }
+       
         int i = 1;
         int cnt = 1;
         int st = dp[0][0];
