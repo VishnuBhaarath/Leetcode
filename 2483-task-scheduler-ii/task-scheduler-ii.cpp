@@ -2,7 +2,7 @@ class Solution {
 public:
     long long taskSchedulerII(vector<int>& tasks, int space) {
         long long int cnt=0;
-        map<long long,long long> umap;
+        unordered_map<long long,long long> umap;
         for(int i=0;i<tasks.size();i++){
             if(umap[tasks[i]]==0){
                 cnt+=1;
