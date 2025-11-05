@@ -16,8 +16,10 @@ public:
             return dp[i];
         }
         int ans=0;
+        int val=0;
         for(int j=i;j<min(i+k,n);j++){
-            int sum=func1(i,j,arr)+func(arr,j+1,k,n,dp);
+            val=max(val,arr[j]);
+            int sum=(j-i+1)*val+func(arr,j+1,k,n,dp);
             ans=max(ans,sum);
            
             
@@ -28,5 +30,6 @@ public:
         int n=arr.size();
         vector<int> dp(n,-1);
         return func(arr,0,k,n,dp);
+
     }
 };
