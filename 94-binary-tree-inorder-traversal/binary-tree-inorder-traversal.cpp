@@ -6,8 +6,7 @@
  *     TreeNode *right;
  *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
  *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
- *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left),
- * right(right) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
 class Solution {
@@ -15,36 +14,28 @@ public:
     vector<int> inorderTraversal(TreeNode* root) {
         stack<TreeNode*> st;
         vector<int> v;
-        if (root != NULL)
-            st.push(root);
-
-        while (!st.empty()) {
-            TreeNode* tp = st.top();
-
-            if (tp->left != NULL) {
-                st.push(tp->left);
-
-            } else {
-                v.push_back(tp->val);
-                st.pop();
-                if (tp->right != NULL) {
-                    st.push(tp->right);
-
-                } else {
-                    while (!st.empty()) {
-                        if (st.top()->right == NULL) {
-                            v.push_back(st.top()->val);
-                            st.pop();
-                        } else {
-                            TreeNode* tp1 = st.top();
-                            v.push_back(st.top()->val);
-                            st.pop();
-                            st.push(tp1->right);
-                            break;
-                        }
-                    }
+      
+        TreeNode * curr=root;
+        while(curr!=NULL){
+             if(curr->left == NULL){
+                 v.push_back(curr->val);
+                 curr=curr->right;
+             }
+             else{
+                TreeNode* prev=curr->left;
+                while(prev->right!=NULL && prev->right!=curr){
+                    prev=prev->right;
                 }
-            }
+                if(prev->right==NULL){
+                    prev->right=curr;
+                    curr=curr->left;
+                }
+                else{
+                    prev->right=NULL;
+                    v.push_back(curr->val);
+                    curr=curr->right;
+                }
+             }
         }
         return v;
     }
