@@ -11,22 +11,22 @@
  */
 class Solution {
 public:
-    bool check(TreeNode* root1, TreeNode* root2){
-        if(root1==NULL && root2==NULL){
+    bool check(TreeNode* node1, TreeNode* node2){
+        if((node1==NULL && node2!=NULL) || (node1!=NULL && node2==NULL)){
+            return false;
+        }
+        if(node1!=NULL && node2!=NULL){
+          if(node1->val != node2->val){
+            return false;
+        }
+        }
+        if(node1==NULL && node2==NULL){
             return true;
         }
-        if(root1==NULL && root2!=NULL){
-            return false;
-        }
-        if(root1!=NULL && root2==NULL){
-            return false;
-        }
-        if(root1->val!=root2->val){
-            return false;
-        }
-        return check(root1->left,root2->right) && check(root1->right,root2->left);
+       
+        return check(node1->left,node2->right) && check(node1->right,node2->left);
     }
     bool isSymmetric(TreeNode* root) {
-        return check(root->left, root->right);
+        return check(root->left,root->right);
     }
 };
