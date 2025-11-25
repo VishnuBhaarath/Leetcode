@@ -11,32 +11,28 @@
  */
 class Solution {
 public:
-   bool traversal(TreeNode* root, int sum,int targetSum){
-     if(root->left==NULL && root->right==NULL){
-        if(sum==targetSum){
-            return true;
+    bool ans=false;
+    void traversal(TreeNode* root,int sum,int targetSum){
+        if(ans){
+            return;
         }
-        else{
-            return false;
-        }
-     }
-    if(root->left!=NULL && root->right!=NULL){
-    return (traversal(root->left,sum+root->left->val,targetSum) || traversal(root->right,sum+root->right->val,targetSum));}
-    else if(root->left!=NULL){
-        return traversal(root->left,sum+root->left->val,targetSum);
-    }
-    else if(root->right!=NULL){
-        return traversal(root->right,sum+root->right->val,targetSum);
-    }
-   
-   return false;
-   }
-    bool hasPathSum(TreeNode* root, int targetSum) {
+
         if(root==NULL){
-            
-            return false;
+            return;
         }
-        return traversal(root,root->val,targetSum);
-        
+        if(root->left==NULL && root->right==NULL){
+             
+               if(root->val+sum==targetSum){
+                ans=true;
+               }
+              
+               return;
+        }
+        traversal(root->left,root->val+sum,targetSum);
+        traversal(root->right,root->val+sum,targetSum);
+    }
+    bool hasPathSum(TreeNode* root, int targetSum) {
+        traversal(root,0,targetSum);
+        return ans;
     }
 };
