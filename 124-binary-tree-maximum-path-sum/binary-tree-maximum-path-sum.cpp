@@ -21,10 +21,17 @@ public:
     int maxPathSum(TreeNode* root) {
         stack<TreeNode*> st;
         st.push(root);
+        map<TreeNode*,int> umap;
         while(!st.empty()){
             TreeNode* tp=st.top();
             st.pop();
-            int val=tp->val+sum(tp->left)+sum(tp->right);
+            if(umap.find(tp->left)==umap.end()){
+                umap[tp->left]=sum(tp->left);
+            }
+            if(umap.find(tp->right)==umap.end()){
+                umap[tp->right]=sum(tp->right);
+            }
+            int val=tp->val+umap[tp->left]+umap[tp->right];
             ans=max(ans,val);
             if(tp->left!=NULL){
                 st.push(tp->left);
