@@ -12,16 +12,20 @@
 class Solution {
 public:
     int ans=INT_MIN;
+     map<TreeNode*,int> umap;
     int sum(TreeNode* root){
         if(root==NULL){
             return 0;
         }
-        return max(0,root->val+ max(sum(root->left),sum(root->right)));
+        if(umap.find(root)!=umap.end()){
+            return umap[root];
+        }
+        return umap[root]= max(0,root->val+ max(sum(root->left),sum(root->right)));
     }
     int maxPathSum(TreeNode* root) {
         stack<TreeNode*> st;
         st.push(root);
-        map<TreeNode*,int> umap;
+       
         while(!st.empty()){
             TreeNode* tp=st.top();
             st.pop();
