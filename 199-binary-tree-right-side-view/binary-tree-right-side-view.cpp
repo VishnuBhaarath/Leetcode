@@ -22,10 +22,7 @@ public:
             while(tp>0){
                 TreeNode* tp1=q.front();
                 q.pop();
-                cout<<tp;
-                cout<<" ";
-                cout<<tp1->val;
-                cout<<"  ";
+                
                 if(tp==1){
                     v.push_back(tp1->val);
                 }
@@ -37,7 +34,7 @@ public:
                 }
                 tp-=1;
             }
-            cout<<"\n";
+       
         }
         return v;
     }
