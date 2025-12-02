@@ -1,28 +1,25 @@
 class Solution {
 public:
     int maxScore(vector<int>& cardPoints, int k) {
+        vector<int> presum;
+        presum.push_back(cardPoints[0]);
+        for(int i=1;i<cardPoints.size();i++){
+            presum.push_back(presum[presum.size()-1]+cardPoints[i]);
+        }
         int n=cardPoints.size();
-        int i=0;
-        int j=n-1;
-        int sum=0;
-        int ans=0;
-    
-        while(i<k){
-           sum+=cardPoints[j];
-           j-=1;
-           i+=1;
-           ans=max(ans,sum);
+
+        int ans=presum[n-1];
+        if((n-1-k)>=0){
+            ans=presum[n-1]-presum[n-1-k];
         }
-        i=0;
-        j+=1;
-       
-        while(i<k){
-            sum+=cardPoints[i];
-            sum-=cardPoints[j];
-            i+=1;
-            j+=1;
-            ans=max(ans,sum);
+        for(int i=0;i<k;i++){
+            int sum1=presum[i];
+            int sum2=presum[n-1]-presum[n-(k-i)];
+            
+            ans=max(ans,(sum1+sum2));
+
         }
+
         return ans;
     }
 };
