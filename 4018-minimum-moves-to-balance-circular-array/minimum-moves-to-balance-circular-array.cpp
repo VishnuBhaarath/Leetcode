@@ -34,7 +34,7 @@ public:
       cout<<val;
 
       while(val<0){
-        cout<<"in";
+       
         if(balance[i]>=abs(val)){
             cnt+=(t*(-val));
             val=0;
