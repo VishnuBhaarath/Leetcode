@@ -8,10 +8,7 @@ public:
         for(int i=1;i<damage.size();i++){
             presum.push_back(presum[presum.size()-1]+damage[i]);
         }
-        for(int i=0;i<presum.size();i++){
-            cout<<presum[i];
-            cout<<" ";
-        }
+       
         sum=hp;
         for(int i=0;i<damage.size();i++){
             sum-=damage[i];
