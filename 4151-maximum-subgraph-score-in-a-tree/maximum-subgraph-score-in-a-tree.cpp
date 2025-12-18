@@ -49,10 +49,7 @@ public:
             }
         }
         dfs1(0,-1,0,good);
-        for(int i=0;i<dp.size();i++){
-            cout<<dp[i];
-            cout<<" ";
-        }
+       
         dfs2(0,-1,-1,good);
         
         return res;
