@@ -15,8 +15,7 @@ public:
             int l=0;
             int r=i-1;
             int st=dp[i][1];
-            cout<<st;
-            cout<<" ";
+           
             int end=-1;
             while(l<=r){
                 int m=l+(r-l)/2;
@@ -29,8 +28,7 @@ public:
                 }
 
             }
-            cout<<end;
-            cout<<"\n";
+          
             if(end==-1){
                 if((i-1)>=0){
                     dp1[i]=max(dp1[i],dp1[i-1]);
@@ -44,11 +42,7 @@ public:
         
         }
 
-        for(int i=0;i<dp1.size();i++){
-            cout<<dp1[i];
-            cout<<" ";
-        }
-        cout<<"\n";
+       
        
         return ans;
     }
