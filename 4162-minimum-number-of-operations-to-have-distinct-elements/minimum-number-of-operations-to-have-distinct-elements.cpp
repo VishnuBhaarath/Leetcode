@@ -1,16 +1,15 @@
 class Solution {
 public:
     int minOperations(vector<int>& nums) {
-        map<int,int> umap;
+        unordered_map<int,int> umap;
         int cnt=0;
         for(int i=0;i<nums.size();i++){
             umap[nums[i]]+=1;
-        }
-        for(auto x:umap){
-            if(x.second>1){
+            if(umap[nums[i]]==2){
                 cnt+=1;
             }
         }
+        
      
         if(cnt==0){
             return 0;
