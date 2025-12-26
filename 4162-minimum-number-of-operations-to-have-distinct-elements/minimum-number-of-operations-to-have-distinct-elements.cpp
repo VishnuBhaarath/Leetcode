@@ -11,8 +11,7 @@ public:
                 cnt+=1;
             }
         }
-        cout<<cnt;
-        cout<<"\n";
+     
         if(cnt==0){
             return 0;
         }
