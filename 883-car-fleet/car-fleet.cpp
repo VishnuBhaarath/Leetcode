@@ -27,16 +27,12 @@ public:
                 cnt+=1;
                 st.push(v[i]);
             }
-            else{
-                
-            }
+           
            
         }
       
         cnt+=st.size();
-        if(st.size()!=0){
-            cout<<st.top();
-        }
+       
 
         return cnt;
        
