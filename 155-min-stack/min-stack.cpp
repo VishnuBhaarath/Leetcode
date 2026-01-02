@@ -13,11 +13,11 @@ public:
        
         if(s1.empty()){
             s1.push({val,cnt});
-            cnt1+=1;
+          
         }
         else if(val<=s1.top().first){
             s1.push({val,cnt});
-            cnt1+=1;
+        
         }
          cnt+=1;
     }
@@ -25,7 +25,7 @@ public:
     void pop() {
         if(s1.top().second==s.top().second){
             s1.pop();
-            cnt1-=1;
+         
         }
         s.pop();
         cnt-=1;
