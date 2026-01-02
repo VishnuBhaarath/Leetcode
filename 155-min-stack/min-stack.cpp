@@ -1,37 +1,43 @@
 class MinStack {
 public:
-    stack<int> s;
-    stack<int> s1;
-   // map<int,int> umap;
-
+    stack<pair<int,int>> s;
+    stack<pair<int,int>> s1;
+    int cnt=0;
+    int cnt1=0;
     MinStack() {
         
     }
     
     void push(int val) {
-        if(s.empty()){
-            s1.push(val);
-        }
-        else if(val<=s1.top()){
-            s1.push(val);
-        }
-        s.push(val);
+        s.push({val,cnt});
        
+        if(s1.empty()){
+            s1.push({val,cnt});
+            cnt1+=1;
+        }
+        else if(val<=s1.top().first){
+            s1.push({val,cnt});
+            cnt1+=1;
+        }
+         cnt+=1;
     }
     
     void pop() {
-        if(s.top()==s1.top()){
+        if(s1.top().second==s.top().second){
             s1.pop();
+            cnt1-=1;
         }
         s.pop();
+        cnt-=1;
     }
     
     int top() {
-        return s.top();
+        int tp=s.top().first;
+        return tp;
     }
     
     int getMin() {
-        return s1.top();
+        return s1.top().first;
     }
 };
 
