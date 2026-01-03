@@ -1,25 +1,32 @@
 class FreqStack {
 public:
-    map<int,int> umap;
-    priority_queue<pair<int,pair<int,int>>> pq;
-    int idx=0;
+   
+     unordered_map<int, int> cnt;
+    unordered_map<int, stack<int>> stacks;
+    int maxCnt;
     FreqStack() {
-        
+         maxCnt = 0;
     }
     
     void push(int val) {
-        umap[val]+=1;
-        pq.push({umap[val],{idx,val}});
-        idx+=1;
-        
+        cnt[val]+=1;
+        int valCnt =cnt[val];
+        if (valCnt > maxCnt) {
+            maxCnt = valCnt;
+            stacks[valCnt] = stack<int>();
+        }
+        stacks[valCnt].push(val);
+
     }
     
     int pop() {
-        pair<int,int> p=pq.top().second;
-
-        pq.pop();
-        umap[p.second]-=1;
-        return p.second;
+         int res = stacks[maxCnt].top();
+        stacks[maxCnt].pop();
+        cnt[res]--;
+        if (stacks[maxCnt].empty()) {
+            maxCnt--;
+        }
+        return res;
     }
 };
 
