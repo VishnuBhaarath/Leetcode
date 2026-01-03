@@ -1,14 +1,6 @@
 class Solution {
 public:
-    bool check(int i, vector<int> & nums, int sum1,int sum2){
-        if(i==nums.size()){
-            if(sum1==sum2){
-                return true;
-            }
-            return false;
-        }
-        return check(i+1,nums,nums[i]+sum1,sum2) || check(i+1,nums,sum1,sum2+nums[i]);
-    }
+   
     bool canPartition(vector<int>& nums) {
         int sum=0;
         for(int i=0;i<nums.size();i++){
