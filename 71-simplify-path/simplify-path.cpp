@@ -19,8 +19,7 @@ public:
             result.push_back(temp);
 
         for(int i=0;i<result.size();i++){
-            cout<<result[i];
-            cout<<" ";
+          
             if(result[i]!="."){
                 if(st.empty()){
                     if(result[i]!="..")
@@ -37,12 +36,12 @@ public:
                 }
             }
         }   
-        cout<<"\n";
+   
         vector<string> ans;
         while(!st.empty()){
-            cout<<st.top();
+          
             ans.push_back(st.top());
-            cout<<"\n";
+         
             st.pop();
         } 
         string s="";
