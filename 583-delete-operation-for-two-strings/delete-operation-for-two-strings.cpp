@@ -14,7 +14,7 @@ public:
         if(dp[i][j]!=-1){
             return dp[i][j];
         }
-        if(word1[i]==word2[j]){
+        if(word1[i]== word2[j]){
             return dp[i][j]=check(word1,word2,i+1,j+1,dp);
         }
         else{
@@ -25,7 +25,24 @@ return 0;
     int minDistance(string word1, string word2) {
         int n=word1.size();
         int m=word2.size();
-        vector<vector<int>> dp(n+1,vector<int>(m+1,-1));
-        return check(word1,word2,0,0,dp);
+        vector<vector<int>> dp(n+1,vector<int>(m+1,0));
+        int ans=0;
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+                if(word1[i]==word2[j]){
+                    dp[i+1][j+1]=1+dp[i][j];
+                    ans=max(ans,dp[i+1][j+1]);
+                }
+                else{
+                    dp[i+1][j+1]=max(dp[i][j+1],dp[i+1][j]);
+                     ans=max(ans,dp[i+1][j+1]);
+                }
+            }
+        }
+        cout<<ans;
+        cout<<word1.size();
+        cout<<" ";
+        cout<<word2.size();
+        return word1.size()+word2.size()-ans-ans;
     }
 };
