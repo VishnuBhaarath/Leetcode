@@ -39,10 +39,7 @@ return 0;
                 }
             }
         }
-        cout<<ans;
-        cout<<word1.size();
-        cout<<" ";
-        cout<<word2.size();
+       
         return word1.size()+word2.size()-ans-ans;
     }
 };
