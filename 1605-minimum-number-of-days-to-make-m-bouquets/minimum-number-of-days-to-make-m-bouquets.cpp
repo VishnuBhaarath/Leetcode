@@ -1,58 +1,51 @@
 class Solution {
 public:
-    int check(vector<int> & bloomDay,int idx,int m,int k){
-         int n=bloomDay.size();
-         vector<int> v(n,0);
-         for(int i=0;i<bloomDay.size();i++){
-            if(bloomDay[i]<=idx){
-                v[i]=1;
-            }
-         }
-        int val=0;
-        int cnt=0;
-     
-        for(int i=0;i<v.size();i++){
-        
-            if(v[i]==1){
-                cnt+=1;
+    long long int check(long long int m, vector<int>& bloomDay,long long int k){
+        long long int i=0;
+        long long int l=0;
+        long long int cnt=0;
+        while(i<bloomDay.size()){
+            if(bloomDay[i]<=m){
+                l+=1;
             }
             else{
-                cnt=0;
+                l=0;
             }
-            if(cnt==k){
-                 val+=1;
-                 cnt=0;
+            if(l==k){
+                cnt+=1;
+                l=0;
             }
+            i+=1;
         }
-   
-        return val;
+       return cnt;
     }
     int minDays(vector<int>& bloomDay, int m, int k) {
         long long int n=bloomDay.size();
-        if(n < (long long int)(m)*(long long int)(k)){
+        long long val1=(long long)(m) * (long long)(k);
+        if(val1>n){
             return -1;
         }
-
-      
-
-        int l=1e9;
-        int r=0;
+        long long int l=bloomDay[0];
+        long long int r=bloomDay[1];
         for(int i=0;i<bloomDay.size();i++){
-            l=min(l,bloomDay[i]);
-            r=max(r,bloomDay[i]);
+            if(bloomDay[i]<l){
+                l=bloomDay[i];
+            }
+            if(bloomDay[i]>r){
+                r=bloomDay[i];
+            }
         }
-        int ans=-1;
+long long int ans=-1;
         while(l<=r){
-            int mid=l+(r-l)/2;
-            int val=check(bloomDay,mid,m,k);
+            long long int m1=l+(r-l)/2;
+            long long int val=check(m1,bloomDay,k);
             if(val>=m){
-                ans=mid;
-                r=mid-1;
+                ans=m1;
+                r=m1-1;
             }
             else{
-                l=mid+1;
+                l=m1+1;
             }
-
         }
         return ans;
     }
