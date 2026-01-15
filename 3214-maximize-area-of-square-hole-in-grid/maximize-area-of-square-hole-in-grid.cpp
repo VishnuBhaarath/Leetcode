@@ -16,12 +16,7 @@ public:
         if(h1==w1){
            // ans=h1*w1;
         }
-        cout<<h1;
-        cout<<" ";
-        cout<<w1;
-        cout<<" ";
-        cout<<ans;
-        cout<<"\n";
+       
         int h=1;
 
         for(int i=0;i<hBars.size();i++){
@@ -46,10 +41,7 @@ public:
                     w=2;
                 }
                 if(w==h){
-                    cout<<w;
-                    cout<<" ";
-                    cout<<h;
-                    cout<<"\n";
+                   
                     int area=w*h;
                     ans=max(ans,area);
                 }
