@@ -1,45 +1,31 @@
 class Solution {
 public:
     int firstMissingPositive(vector<int>& nums) {
-        int n=nums.size();
         for(int i=0;i<nums.size();i++){
-            if(nums[i]==i+1){
-                continue;
-            }
-            else if(nums[i]>n || nums[i]<=0){
-                continue;
-            }
-            else{
-                int j=nums[i];
-                if(nums[j-1]==j){
-                    continue;
-                }
-                else{
-                    while(1){
-                        int idx=nums[i];
-                        idx-=1;
-                        if(idx<nums.size() && idx>=0){
-                        if(nums[idx]!=nums[i]){
-                            int temp=nums[idx];
-                            nums[idx]=nums[i];
-                            nums[i]=temp;
-                        }
-                        else{
-                            break;
-                        }}
-                        else{
-                            break;
-                        }
-                    }
-                }
+            if(nums[i]<0){
+                nums[i]=0;
             }
         }
-         for(int i=0;i<nums.size();i++){
-            if(nums[i]!=(i+1)){
-                return (i+1);
+       
+        for(int i=0;i<nums.size();i++){
+             int val=nums[i];
+           
+             if(abs(val)<=nums.size() && val!=0){
+                if(nums[abs(val)-1]>0){
+                nums[abs(val)-1]= -nums[abs(val)-1];
+                }
+                else if(nums[abs(val)-1]==0){
+                    nums[abs(val)-1]=-1e6;
+                }
+             }
+        }
+        for(int i=0;i<nums.size();i++){
+            if(nums[i]>=0){
+                return i+1;
             }
-         }
-         cout<<"\n";
-         return n+1;
+            cout<<nums[i];
+            cout<<" ";
+        }
+        return nums.size()+1;
     }
 };
