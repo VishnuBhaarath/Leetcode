@@ -6,7 +6,7 @@ public:
         int sum=nums[n-1]+nums[0]; 
         int i=0;
         int j=n-1;
-        while(i<=j){
+        while(i<j){
             sum=max(sum,nums[i]+nums[j]);
             i+=1;
             j-=1;
