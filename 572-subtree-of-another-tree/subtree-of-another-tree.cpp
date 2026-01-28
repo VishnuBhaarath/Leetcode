@@ -34,10 +34,7 @@ public:
         if(check(root,subRoot)){
             ans=true;
         }
-        cout<<root->val;
-        cout<<" ";
-        cout<<ans;
-        cout<<"\n";
+      
         traversal(root->left,subRoot);
         traversal(root->right,subRoot);
     }
