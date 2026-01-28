@@ -28,7 +28,7 @@ public:
         if(root->val>val2){
             val2=root->val;
         }
-        return check(root->left,l,val1) && check(root->right,val2,r);
+        return check(root->left,l,root->val) && check(root->right,root->val,r);
     }
     bool isValidBST(TreeNode* root) {
       return check(root,-2147483649,2147483649);
