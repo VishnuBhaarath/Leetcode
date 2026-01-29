@@ -44,30 +44,11 @@ public:
                 ans+="N,";
             }
         }
-        cout<<ans;
-        cout<<"\n";
+     
 
 
 
-        root=temp;
-        if (!root) return "N";
-        string res;
-        queue<TreeNode*> queue;
-        queue.push(root);
-
-        while (!queue.empty()) {
-            TreeNode* node = queue.front();
-            queue.pop();
-            if (!node) {
-                res += "N,";
-            } else {
-                res += to_string(node->val) + ",";
-                queue.push(node->left);
-                queue.push(node->right);
-            }
-        }
-        cout<<res;
-        cout<<"\n";
+      
         return ans;
     }
 
@@ -84,13 +65,7 @@ for (int i = 0; i < data.size(); i++) {
         temp = "";         
     }
 }
-cout<<data;
-        cout<<"\n";
-        for(int i=0;i<v.size();i++){
-            cout<<v[i];
-            cout<<" ";
-        }
-        cout<<"\n";
+
         if(v.size()==0){
             return NULL;
         }
