@@ -50,8 +50,7 @@ public:
         }
         l=0;
         traversal(root,target,-1);
-        cout<<l;
-        cout<<"\n";
+        
         if(l==0){
         return temp;
         }
