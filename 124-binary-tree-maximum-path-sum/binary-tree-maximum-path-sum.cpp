@@ -11,29 +11,21 @@
  */
 class Solution {
 public:
-    int ans=INT_MIN;
-    int sum(TreeNode* root){
-        if(root==NULL){
+    int maxPathSum(TreeNode* root) {
+        int res = root->val;
+        dfs(root, res);
+        return res;
+    }
+
+    int dfs(TreeNode* root, int& res) {
+        if (!root) {
             return 0;
         }
-        return max(0,root->val+ max(sum(root->left),sum(root->right)));
-    }
-    int maxPathSum(TreeNode* root) {
-        stack<TreeNode*> st;
-        st.push(root);
-        while(!st.empty()){
-            TreeNode* tp=st.top();
-            st.pop();
-            int val=tp->val+sum(tp->left)+sum(tp->right);
-            ans=max(ans,val);
-            if(tp->left!=NULL){
-                st.push(tp->left);
-            }
-            if(tp->right!=NULL){
-                st.push(tp->right);
-            }
-        }
-        return ans;
-        
+
+        int leftMax = max(dfs(root->left, res), 0);
+        int rightMax = max(dfs(root->right, res), 0);
+
+        res = max(res, root->val + leftMax + rightMax);
+        return root->val + max(leftMax, rightMax);
     }
 };
