@@ -37,6 +37,7 @@ public:
         while(i < m) {
             // Remove the outgoing element
             if(s1.find(nums[j]) != s1.end()) {
+                
                 s1.erase(s1.find(nums[j]));
             }
             else {
