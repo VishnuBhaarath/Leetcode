@@ -8,22 +8,28 @@ public:
     
     void addNum(int num) {
         pq.push(num);
-        pq1.push(pq.top());
+        int tp=pq.top();
         pq.pop();
-        if(pq1.size()>pq.size()){
-            pq.push(pq1.top());
+        pq1.push(tp);
+        if(pq1.size() > pq.size()){
+            int tp1=pq1.top();
             pq1.pop();
+            pq.push(tp1);
         }
     }
     
     double findMedian() {
-        int sz=pq.size()+pq1.size();
-        if(sz%2==0){
-            double num1=pq1.top();
-            double num2=pq.top();
-            return (num1+num2)/2;
+        int n=pq.size()+pq1.size();
+       
+        if((n%2)==0){
+           double val=(double)(pq.top()) + (double)(pq1.top());
+           return val/2;
         }
-        return pq.top();
+        else{
+            double val=pq.top();
+            return val;
+        }
+        return 10;
     }
 };
 
