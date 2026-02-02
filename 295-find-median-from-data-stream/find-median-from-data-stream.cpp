@@ -1,32 +1,37 @@
 class MedianFinder {
 public:
-    priority_queue<int> pq;
-    priority_queue<int,vector<int>,greater<int>> pq1;
+ 
+    multiset<int> s1;
+    multiset<int> s2;
     MedianFinder() {
         
     }
     
     void addNum(int num) {
-        pq.push(num);
-        int tp=pq.top();
-        pq.pop();
-        pq1.push(tp);
-        if(pq1.size() > pq.size()){
-            int tp1=pq1.top();
-            pq1.pop();
-            pq.push(tp1);
+        s1.insert(num);
+      
+        auto tp1 = *s1.rbegin();
+        s1.erase(s1.find(tp1));
+        s2.insert(tp1);
+     
+     
+        if(s2.size()>s1.size()){
+            auto tp3=*s2.begin();
+            s2.erase(s2.find(tp3));
+            s1.insert(tp3);
         }
+       
     }
     
     double findMedian() {
-        int n=pq.size()+pq1.size();
+        int n=s2.size()+s1.size();
        
         if((n%2)==0){
-           double val=(double)(pq.top()) + (double)(pq1.top());
+           double val=(double)(*s1.rbegin()) + (double)(*s2.begin());
            return val/2;
         }
         else{
-            double val=pq.top();
+            double val=*s1.rbegin();
             return val;
         }
         return 10;
