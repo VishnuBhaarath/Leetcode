@@ -12,24 +12,21 @@ public:
              }
         }
         cnt=0;
+         int ans=-1;
         for(int i=0;i<n;i++){
-            v2[i]=cnt;
-            if(s[i]=='b'){
-                cnt+=1;
-            }
-        }
-        int ans=-1;
-        for(int i=0;i<n;i++){
-            
-            int val=v1[i]+v2[i];
+            int val=v1[i]+cnt;
             if(ans==-1){
                 ans=val;
             }
             else{
                 ans=min(ans,val);
             }
-          
+            if(s[i]=='b'){
+                cnt+=1;
+            }
         }
+       
+        
         return ans;
     }
 };
