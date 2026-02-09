@@ -1,89 +1,40 @@
 class Solution {
 public:
     string minWindow(string s, string t) {
-        int n=s.size();
-        int m=t.size();
-        unordered_map<char,int> umap;
-        unordered_map<char,int> umap1;
-        for(int i=0;i<t.size();i++){
-            umap1[t[i]]+=1;
+        if (t.empty()) return "";
+
+        unordered_map<char, int> countT, window;
+        for (char c : t) {
+            countT[c]++;
         }
 
-        int i=0;
-        int j=0;
-        int idx1=0;
-        int ans=0;
-        int l=-1;
-        int r=-1;
-        while(j<s.size()){
-          if(umap[s[j]]<umap1[s[j]]){
-             umap[s[j]]+=1;
-             idx1+=1;
-             if(idx1==m){
-                int sz=j-i+1;
-                if(ans==0){
-                    ans=sz;
-                    l=i;
-                    r=j;
-                }
-                else if(sz<ans){
-                    ans=sz;
-                    l=i;
-                    r=j;
-                }
-             }
-             while(umap[s[i]]>umap1[s[i]]){
-             
-                umap[s[i]]-=1;
-                   i+=1;
-             }
-             if(idx1==m){
-                int sz=j-i+1;
-                if(ans==0){
-                    ans=sz;
-                    l=i;
-                    r=j;
-                }
-                else if(sz<ans){
-                    ans=sz;
-                    l=i;
-                    r=j;
+        int have = 0, need = countT.size();
+        pair<int, int> res = {-1, -1};
+        int resLen = INT_MAX;
+        int l = 0;
+
+        for (int r = 0; r < s.length(); r++) {
+            char c = s[r];
+            window[c]++;
+
+            if (countT.count(c) && window[c] == countT[c]) {
+                have++;
+            }
+
+            while (have == need) {
+                if ((r - l + 1) < resLen) {
+                    resLen = r - l + 1;
+                    res = {l, r};
                 }
 
-             }
-          }
-          else{
-            umap[s[j]]+=1;
-            while(umap[s[i]]>umap1[s[i]]){
-              
-                umap[s[i]]-=1;
-                  i+=1;
-             }
-                 if(idx1==m){
-                int sz=j-i+1;
-                if(ans==0){
-                    ans=sz;
-                    l=i;
-                    r=j;
+                window[s[l]]--;
+                if (countT.count(s[l]) && window[s[l]] < countT[s[l]]) {
+                    have--;
                 }
-                else if(sz<ans){
-                    ans=sz;
-                    l=i;
-                    r=j;
-                }
+                l++;
+            }
+        }
 
-             }
-             
-          }
-          
-          j+=1;
-        }
-       
-        string st="";
-        if(l==-1){
-            return st;
-        }
-       
-        return s.substr(l,r-l+1);
+        return resLen == INT_MAX ? "" : s.substr(res.first, resLen);
     }
 };
