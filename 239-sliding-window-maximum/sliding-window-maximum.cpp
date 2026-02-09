@@ -12,8 +12,8 @@ public:
         int l=0;
         while(r<nums.size()){
             s.insert(nums[r]);
-        
-            s.erase(s.find(nums[l]));
+            auto it=s.find(nums[l]);
+            s.erase(it);
             auto it1=*s.rbegin();
             v.push_back(it1);
             l+=1;
