@@ -4,7 +4,7 @@ public:
          int n=nums.size();
         vector<int> psum;
         psum.push_back(nums[0]);
-        map<int,int> umap;
+        unordered_map<int,int> umap;
         for(int i=1;i<nums.size();i++){
              int sum=psum[psum.size()-1]+nums[i];
              psum.push_back(sum);
