@@ -1,18 +1,32 @@
 class Solution {
 public:
-    int numberOfSubarrays(vector<int>& nums, int k) {
-        map<int,int> umap;
+ int fun(vector<int>& nums, int k){
+        int n=nums.size();
+        int l=0,r=0;
+        int sum=0;
         int cnt=0;
-        umap[0]+=1;
-        int ans=0;
-        for(auto it:nums){
-            if((it%2)!=0){
-                cnt+=1;
+        while(r<n){
+            sum+=(nums[r]%2);
+            while(sum>k){
+                sum-=(nums[l]%2);
+                l++;
             }
-            ans+=umap[cnt-k];
-            umap[cnt]+=1;
-
+          
+                cnt+=(r-l+1);
+            
+            r++;
         }
-        return ans;
+        return cnt;
+        
+    }
+    
+    int numberOfSubarrays(vector<int>& nums, int k) {
+       int cnt1=fun(nums,k);
+       int cnt2=fun(nums,k-1);
+       cout<<cnt1;
+       cout<<" ";
+       cout<<cnt2;
+       cout<<"\n";
+       return fun(nums,k)-fun(nums,k-1);
     }
 };
