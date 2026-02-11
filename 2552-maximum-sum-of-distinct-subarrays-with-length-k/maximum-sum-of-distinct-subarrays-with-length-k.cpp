@@ -1,7 +1,7 @@
 class Solution {
 public:
     long long maximumSubarraySum(vector<int>& nums, int k) {
-        map<int,int> umap;
+        unordered_map<int,int> umap;
         int l=0;
         int r=0;
         long long int sum=0;
