@@ -3,7 +3,7 @@ public:
     int findMaxLength(vector<int>& nums) {
         int sum=0;
         int ans=0;
-        map<int,int> umap;
+        unordered_map<int,int> umap;
         for(int i=0;i<nums.size();i++){
             if(nums[i]==0){
                 sum-=1;
