@@ -44,8 +44,7 @@ public:
                     }
                 }
                 
-                cout<<-1;
-                cout<<"\n";
+              
                 s.clear();
                 s.insert(nums[j]);
                 i=j;
