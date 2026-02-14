@@ -13,16 +13,13 @@ public:
         while(j<nums.size()){
            
              if((nums[j]-nums[j-1]==1)){
-                s.insert(nums[j]);
-                if(s.size()==k){
-                   auto it=*s.rbegin();
-               
-                   ans.push_back(it);
-                 
-                   auto it1=s.find(nums[i]);
-                   if(it1!=s.end()){
-                   s.erase(it1);}
+               // s.insert(nums[j]);
+                if((j-i+1)==k){
+                   
+                   ans.push_back(nums[j]);
                    i+=1;
+                 
+                   
 
                 }
 
@@ -45,8 +42,8 @@ public:
                 }
                 
               
-                s.clear();
-                s.insert(nums[j]);
+               // s.clear();
+                //s.insert(nums[j]);
                 i=j;
                  
              }
