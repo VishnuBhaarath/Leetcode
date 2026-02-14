@@ -4,12 +4,12 @@ public:
         if(k==1){
             return nums;
         }
-        multiset<int> s;
+ 
         vector<int> ans;
         
         int j=1;
         int i=0;
-        s.insert(nums[0]);
+      
         while(j<nums.size()){
            
              if((nums[j]-nums[j-1]==1)){
@@ -42,8 +42,7 @@ public:
                 }
                 
               
-               // s.clear();
-                //s.insert(nums[j]);
+              
                 i=j;
                  
              }
