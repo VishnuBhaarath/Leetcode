@@ -1,30 +1,26 @@
 class FreqStack {
 public:
-   
-      unordered_map<int, int> cnt;
-    vector<stack<int>> stacks;
-
+    map<int,int> umap;
+    priority_queue<pair<int,pair<int,int>>> pq;
+    int idx=0;
     FreqStack() {
-        stacks.push_back(stack<int>());
+        
     }
-
+    
     void push(int val) {
-        int valCnt = ++cnt[val];
-        if (valCnt == stacks.size()) {
-            stacks.push_back(stack<int>());
-        }
-        stacks[valCnt].push(val);
+        umap[val]+=1;
+       
+        pq.push({umap[val],{idx,val}});
+        idx+=1;
     }
-
+    
     int pop() {
-        stack<int>& topStack = stacks.back();
-        int res = topStack.top();
-        topStack.pop();
-        if (topStack.empty()) {
-            stacks.pop_back();
-        }
-        cnt[res]--;
-        return res;
+     pair<int,int> p=pq.top().second;
+     pq.pop();
+     umap[p.second]-=1;
+        
+       
+        return p.second;
     }
 };
 
