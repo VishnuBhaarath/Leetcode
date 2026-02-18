@@ -11,34 +11,23 @@
  */
 class Solution {
 public:
-    unordered_map<TreeNode*,int> umap;
-    int traversal(TreeNode* root){
-         if(root==NULL){
-            return 0;
-         }
-         if(umap[root]!=0){
-            return umap[root];
-         }
-        
-        if(root->left!=NULL && root->right!=NULL)
-       return umap[root]=max((root->val+traversal(root->left->left)+traversal(root->left->right)+traversal(root->right->left)+traversal(root->right->right)), (traversal(root->left)+traversal(root->right)));
-        else if(root->left!=NULL){
-              return umap[root]=max((root->val+traversal(root->left->left)+traversal(root->left->right)), (traversal(root->left)+traversal(root->right)));
-        }
-        else if(root->right!=NULL){
-           return umap[root]=max((root->val+traversal(root->right->left)+traversal(root->right->right)), (traversal(root->left)+traversal(root->right)));
-
-        }
-        else{
-            return umap[root]=max((root->val), (traversal(root->left)+traversal(root->right)));
-        }
-         return 0;
-
-         
-    }
     int rob(TreeNode* root) {
-       return traversal(root);
+         auto result = dfs(root);
+        return max(result.first, result.second);
+    }
 
-    
+    pair<int, int> dfs(TreeNode* root) {
+        if (!root) {
+            return {0, 0};
+        }
+
+        auto leftPair = dfs(root->left);
+        auto rightPair = dfs(root->right);
+
+        int withRoot = root->val + leftPair.second + rightPair.second;
+        int withoutRoot = max(leftPair.first, leftPair.second) +
+                          max(rightPair.first, rightPair.second);
+
+        return {withRoot, withoutRoot};
     }
 };
