@@ -11,41 +11,20 @@
  */
 class Solution {
 public:
-TreeNode* helper(const string& traversal, int& index, int depth) {
-        if (index >= traversal.size()) return nullptr;
-
-        // Count the number of dashes
-        int dashCount = 0;
-        while (index + dashCount < traversal.size() &&
-               traversal[index + dashCount] == '-') {
-            dashCount++;
+    TreeNode* recoverFromPreorder(string S) {
+        vector<TreeNode*> stack;
+        for (int i = 0, level, val; i < S.length();) {
+            for (level = 0; S[i] == '-'; i++)
+                level++;
+            for (val = 0; i < S.length() && S[i] != '-'; i++)
+                val = val * 10 + S[i] - '0';
+            TreeNode* node = new TreeNode(val);
+            while (stack.size() > level) stack.pop_back();
+            if (!stack.empty())
+                if (!stack.back()->left) stack.back()->left = node;
+                else stack.back()->right = node;
+            stack.push_back(node);
         }
-
-        // If the number of dashes doesn't match the current depth, return null
-        if (dashCount != depth) return nullptr;
-
-        // Move index past the dashes
-        index += dashCount;
-
-        // Extract the node value
-        int value = 0;
-        while (index < traversal.size() && isdigit(traversal[index])) {
-            value = value * 10 + (traversal[index] - '0');
-            index++;
-        }
-
-        // Create the current node
-        TreeNode* node = new TreeNode(value);
-
-        // Recursively build the left and right subtrees
-        node->left = helper(traversal, index, depth + 1);
-        node->right = helper(traversal, index, depth + 1);
-
-        return node;
-    }
-    TreeNode* recoverFromPreorder(string traversal) {
-        int index = 0;
-        return helper(traversal, index, 0);
-
+        return stack[0];
     }
 };
