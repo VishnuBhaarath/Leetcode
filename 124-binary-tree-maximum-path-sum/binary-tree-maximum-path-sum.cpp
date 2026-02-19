@@ -46,9 +46,7 @@ public:
             return 0;
         }
         cout<<traversal(root);
-        cout<<" ";
-        cout<<ans;
-        cout<<"\n";
+       
        // ans=max(ans,root->val);
        
         
