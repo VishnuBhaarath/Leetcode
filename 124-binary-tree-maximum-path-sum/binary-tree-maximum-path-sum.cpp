@@ -11,21 +11,50 @@
  */
 class Solution {
 public:
-    int maxPathSum(TreeNode* root) {
-        int res = root->val;
-        dfs(root, res);
-        return res;
-    }
+    int ans=INT_MIN;
+    int traversal(TreeNode* root){
+         if(root==NULL){
+            return 0;
+         }
+        
+        int lh=traversal(root->left);
+        int rh=traversal(root->right);
 
-    int dfs(TreeNode* root, int& res) {
-        if (!root) {
+        int val=max(lh,rh);
+        int sum=0;
+        if(lh>0 && rh>0){
+            sum=lh+rh;
+        }
+        else if(lh>0){
+            sum=lh;
+        }
+        else if(rh>0){
+            sum=rh;
+        }
+        ans=max(ans,sum+root->val);
+        if(val<0){
+            val=root->val;
+        }
+        else{
+        val+=root->val;}
+        return val;
+
+         
+    }
+    int maxPathSum(TreeNode* root) {
+        if(root==NULL){
             return 0;
         }
+        cout<<traversal(root);
+        cout<<" ";
+        cout<<ans;
+        cout<<"\n";
+       // ans=max(ans,root->val);
+       
+        
+       
 
-        int leftMax = max(dfs(root->left, res), 0);
-        int rightMax = max(dfs(root->right, res), 0);
-
-        res = max(res, root->val + leftMax + rightMax);
-        return root->val + max(leftMax, rightMax);
+     
+        return ans;
     }
 };
