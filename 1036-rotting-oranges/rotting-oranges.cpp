@@ -3,118 +3,53 @@ public:
     int orangesRotting(vector<vector<int>>& grid) {
         int n=grid.size();
         int m=grid[0].size();
-        vector<vector<int>> dp(n,vector<int>(m,0));
-        int ans=0;
-           map<pair<int,int>,int> umap;
+
+        queue<pair<int,int>> q;
+        int tc=0;
         for(int i=0;i<grid.size();i++){
             for(int j=0;j<grid[i].size();j++){
-                 if(grid[i][j]==2){
-                    if(dp[i][j]==0){
-                         dp[i][j]=1;
-                         vector<vector<int>> dp1(n,vector<int>(m,0));
-                         queue<pair<int,int>> q;
-                      
-                         q.push({i,j});
-                       
-                         while(!q.empty()){
-                            int x=q.front().first;
-                            int y=q.front().second;
-                         
-                            int temp=umap[{x,y}];
-                            q.pop();
-                            if((x-1)>=0){
-                                if(grid[x-1][y]==1){
-                                    if(dp1[x-1][y]==0){
-                                        dp1[x-1][y]=1;
-                                     //   grid[x-1][y]=2;
-                                        if(umap[{x-1,y}]!=0){
-                                            umap[{x-1,y}]=min(umap[{x-1,y}],temp+1);
-                                        }
-                                        else{
-                                            umap[{x-1,y}]=temp+1;
-                                        }
-                                      //  ans=max(ans,umap[{x-1,y}]);
-                                       
-                                        q.push({x-1,y});
-                                   }
-                                }
-                            }
-                            if((x+1)<n){
-                                 if(grid[x+1][y]==1){
-                                    if(dp1[x+1][y]==0){
-                                        dp1[x+1][y]=1;
-                                       //grid[x+1][y]=2;
-                                        if(umap[{x+1,y}]!=0){
-                                            umap[{x+1,y}]=min(umap[{x+1,y}],temp+1);
-                                        }
-                                        else{
-                                            umap[{x+1,y}]=temp+1;
-                                        }
-                                      //  ans=max(ans,umap[{x+1,y}]);
-                                        q.push({x+1,y});
-                                    }
-                                }
-                            }
-
-                            if((y-1)>=0){
-                                if(grid[x][y-1]==1){
-                                    if(dp1[x][y-1]==0){
-                                        dp1[x][y-1]=1;
-                                       // grid[x][y-1]=2;
-                                        if(umap[{x,y-1}]!=0){
-                                            umap[{x,y-1}]=min(umap[{x,y-1}],temp+1);
-                                        }
-                                        else{
-                                            umap[{x,y-1}]=temp+1;
-                                        }
-                                      //   ans=max(ans,umap[{x,y-1}]);
-                                     
-                                        q.push({x,y-1});
-                                   }
-                                }
-                            }
-
-
-                            if((y+1)<m){
-                                if(grid[x][y+1]==1){
-                                    if(dp1[x][y+1]==0){
-                                        dp1[x][y+1]=1;
-                                     //   grid[x][y+1]=2;
-                                         if(umap[{x,y+1}]!=0){
-                                            umap[{x,y+1}]=min(umap[{x,y+1}],temp+1);
-                                        }
-                                         else{
-                                            umap[{x,y+1}]=temp+1;
-                                        }
-                                       // ans=max(ans,umap[{x,y+1}]);
-                                        q.push({x,y+1});
-                                  }
-                                }
-                            }
-
-
-                           
-                         }
-                    }
-                 }
+                  if(grid[i][j]==2){
+                    q.push({i,j});
+                    grid[i][j]=0;
+                  }
+                  if(grid[i][j]==1){
+                    tc+=1;
+                  }
             }
         }
-       
-
-        for(int i=0;i<grid.size();i++){
-            for(int j=0;j<grid[i].size();j++){
-                if(grid[i][j]==1){
-                    if(umap[{i,j}]==0){
-                        return -1;
-                    }
+        vector<int> row={1,-1,0,0};
+        vector<int> col={0,0,1,-1};
+        int cnt=0;
+        int val=0;
+        while(!q.empty()){
+            int sz=q.size();
+            
+            while(sz>0){
+                pair<int,int> p=q.front();
+                q.pop();
+                int x=p.first;
+                int y=p.second;
+                for(int i=0;i<4;i++){
+                     int x1=x+row[i];
+                     int y1=y+col[i];
+                     if((x1>=0 && x1<n) && (y1>=0 && y1<m)){
+                        if(grid[x1][y1]==1){
+                            q.push({x1,y1});
+                            grid[x1][y1]=0;
+                            val+=1;
+                        }
+                     }
                 }
+                sz-=1;
             }
-           
+            if(!q.empty()){
+                cnt+=1;
+            }
         }
-        for(auto x:umap){
-          
-            ans=max(ans,x.second);
+        if(val!=tc){
+            return -1;
         }
-        return ans;
+return cnt;
+        
     }
 };
