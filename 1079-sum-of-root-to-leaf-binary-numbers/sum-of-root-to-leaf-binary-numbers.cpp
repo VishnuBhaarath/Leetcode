@@ -18,13 +18,14 @@ public:
         
         curr = (curr << 1) | root->val;  // shift left and add current bit
         
-        if (!root->left && !root->right) {
-            ans += curr;
-            return;
-        }
+      
         
         traversal(root->left, curr);
         traversal(root->right, curr);
+          if (!root->left && !root->right) {
+            ans += curr;
+            //return;
+        }
     }
     
     int sumRootToLeaf(TreeNode* root) {
