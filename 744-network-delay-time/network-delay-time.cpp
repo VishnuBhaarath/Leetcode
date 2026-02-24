@@ -11,7 +11,7 @@ public:
         for(int i=0;i<times.size();i++){
             umap[{times[i][0],times[i][1]}]=times[i][2];
         }
-        priority_queue<pair<int,int>> pq;
+      priority_queue<pair<int,int>, vector<pair<int,int>>,greater<pair<int,int>>> pq;
         pq.push({0,k});
         v[k]=0;
         while(!pq.empty()){
