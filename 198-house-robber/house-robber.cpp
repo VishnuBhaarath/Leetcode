@@ -3,17 +3,27 @@ public:
     int rob(vector<int>& nums) {
         int n=nums.size();
         vector<int> dp(n,0);
+        
         dp[0]=nums[0];
+        int ans=dp[0];
         if(n==1){
-            return nums[0];
+            return ans;
         }
-        dp[1]=max(dp[0],nums[1]);
-
+        dp[1]=nums[1];
+        ans=max(ans,dp[1]);
         for(int i=2;i<nums.size();i++){
-            int val1=nums[i]+dp[i-2];
-            int val2=dp[i-1];
-            dp[i]=max(val1,val2);
+             dp[i]=dp[i-1];
+            
+             for(int j=i-2;j>=0;j--){
+                 dp[i]=max(dp[i],nums[i]+dp[j]);
+                 ans=max(ans,dp[i]);
+             }
         }
-        return dp[n-1];
+
+        for(int i=0;i<dp.size();i++){
+            cout<<dp[i];
+            cout<<" ";
+        }
+        return ans;
     }
 };
