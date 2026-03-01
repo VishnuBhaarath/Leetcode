@@ -15,11 +15,7 @@ public:
              dp[i]=max(dp[i-1],dp[i-2]+nums[i]);
              ans=max(ans,dp[i]);
         }
-        for(int i=0;i<dp.size();i++){
-            cout<<dp[i];
-            cout<<" ";
-        }
-        cout<<"\n";
+       
 
         vector<int> dp1(n,0);
         
@@ -37,11 +33,7 @@ public:
         }
 
 
-          for(int i=0;i<dp1.size();i++){
-            cout<<dp1[i];
-            cout<<" ";
-        }
-        cout<<"\n";
+        
         return ans;
         
     }
