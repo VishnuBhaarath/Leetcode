@@ -21,10 +21,7 @@ cnt2+=1;
 cnt2+=1;
                 }
             }
-            cout<<cnt1;
-            cout<<" ";
-            cout<<cnt2;
-            cout<<"\n";
+          
         }
 
         return min(cnt1,cnt2);
