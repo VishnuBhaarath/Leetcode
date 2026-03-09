@@ -20,6 +20,7 @@ public:
          st.pop_back();
          st+='1';
          func(i+1,n,st);
+         return;
     }
 
     string findDifferentBinaryString(vector<string>& nums) {
