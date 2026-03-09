@@ -1,7 +1,7 @@
 class Solution {
 public:
     string ans="";
-    map<string,int> umap;
+    unordered_map<string,int> umap;
     void func(int i,int n,string st){
         if(ans.size()!=0){
             return;
