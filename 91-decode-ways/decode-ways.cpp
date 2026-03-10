@@ -1,43 +1,6 @@
 class Solution {
 public:
-   int ans=0;
-   int check(vector<char>& arr, int i, int j){
-     if(arr[i]=='0'){
-        return -1;
-     }
-     string st="";
-    
-     int val=arr[i];
-     for(int k=i;k<j;k++){
-        st+=arr[k];
-       
-     }
-     if(stoi(st)>26){
-        return -1;
-     }
- 
-     return 1;
-
-   }
-   void func(vector<char>& arr, int k,int i){
-      if(i==arr.size()){
-       
-        ans+=1;
-       
-        return;
-      }
-      int n=arr.size();
-      int val1=-1;
-      for(int j=i+1;j<min(n+1,i+k+1);j++){
-          
-         int val=check(arr,i,j);
-         if(val==-1){
-            return ;
-         }
-
-          func(arr,k,j);
-      }
-   }
+  
 
     int numDecodings(string s) {
         int n=s.size();
@@ -80,11 +43,7 @@ public:
             dp[i]=ans; 
             }  
          }
-        for(int i=0;i<dp.size();i++){
-            cout<<dp[i];
-            cout<<" ";
-        }
-        cout<<"\n";
+      
         //func(arr,2,0);
 return dp[0];
     }
