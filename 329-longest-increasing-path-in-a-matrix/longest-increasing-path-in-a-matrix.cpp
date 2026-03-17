@@ -6,34 +6,30 @@ public:
         vector<int> r={1,-1,0,0};
         vector<int> c={0,0,1,-1};
         int ans=1;
-        // ADD 1: memo table
-        vector<vector<int>> memo(n, vector<int>(m, 0));
+          vector<vector<int>> dp(n,vector<int>(m,0));
         for(int i=0;i<n;i++){
             for(int j=0;j<m;j++){
-                 stack<pair<pair<int,int>,int>> st;
-                 st.push({{i,j},1});
-                 while(!st.empty()){
+                 queue<pair<pair<int,int>,int>> q;
+
+                 q.push({{i,j},1});
+              //   dp[i][j]=1;
+                 while(!q.empty()){
                 
-                     pair<int,int> p=st.top().first;
-                     int d=st.top().second;
+                     pair<int,int> p=q.front().first;
+                     int d=q.front().second;
                      ans=max(ans,d);
-                     st.pop();
+                     q.pop();
                      int x=p.first;
                      int y=p.second;
-
-                     // ADD 2: update memo if we found a longer path
-                     memo[x][y] = max(memo[x][y], d);
-
+                     dp[x][y]=max(dp[x][y],d);
                      for(int k=0;k<4;k++){
                         int x1=x+r[k];
                         int y1=y+c[k];
                         if(x1>=0 && x1<n){
                              if(y1>=0 && y1<m){
-                                 if(matrix[x1][y1]>matrix[x][y]){
-                                    // ADD 3: skip if we already know a longer/equal path from here
-                                    if(memo[x1][y1] == 0 || memo[x1][y1] < d+1){
-                                        st.push({{x1,y1},d+1});
-                                    }
+                                 if(matrix[x1][y1]>matrix[x][y] && dp[x1][y1]< d+1){
+                                    q.push({{x1,y1},d+1});
+                                    dp[x1][y1]=d+1;
                                  }
                              }
                         }
