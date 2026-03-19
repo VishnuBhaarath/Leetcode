@@ -26,8 +26,32 @@ public:
     int minDistance(string word1, string word2) {
         int n=word1.size();
         int m=word2.size();
-        dp.resize(n+1,vector<int>(m+1,-1));
-        return func(word1,word2,0,0);
+        dp.resize(n+1,vector<int>(m+1,0));
+        for(int j=0;j<dp[0].size();j++){
+             dp[n][j]=word2.size()-j;
+        }
+        for(int i=0;i<dp.size();i++){
+             dp[i][m]=word1.size()-i;
+        }
+        for(int i=n-1;i>=0;i--){
+            for(int j=m-1;j>=0;j--){
+                 if(word1[i]==word2[j]){
+                     dp[i][j]=dp[i+1][j+1];
+                 }
+                 else{
+                    dp[i][j]=1+min(min(dp[i+1][j+1],dp[i+1][j]),dp[i][j+1]);
+                 }
+            }
+        }
+
+        for(int i=0;i<dp.size();i++){
+            for(int j=0;j<dp[0].size();j++){
+                cout<<dp[i][j];
+                cout<<" ";
+            }
+            cout<<"\n";
+        }
+        return dp[0][0];
         
     }
 };
