@@ -1,24 +1,40 @@
 class Solution {
 public:
     bool isNStraightHand(vector<int>& hand, int groupSize) {
-         if (hand.size() % groupSize != 0) return false;
+         if (hand.size() % groupSize != 0) {
+            return false;
+        }
 
-        unordered_map<int, int> count;
-        for (int num : hand) count[num]++;
+        // Map to store the count of each card value
+        unordered_map<int, int> cardCount;
+        for (int card : hand) {
+            cardCount[card]++;
+        }
 
-        for (int num : hand) {
-            int start = num;
-            while (count[start - 1] > 0) start--;
-            while (start <= num) {
-                while (count[start] > 0) {
-                    for (int i = start; i < start + groupSize; i++) {
-                        if (count[i] == 0) return false;
-                        count[i]--;
+        for (int card : hand) {
+            int startCard = card;
+            // Find the start of the potential straight sequence
+            while (cardCount[startCard - 1]) {
+                startCard--;
+            }
+
+            // Process the sequence starting from startCard
+            while (startCard <= card) {
+                while (cardCount[startCard]) {
+                    // Check if we can form a consecutive sequence of
+                    // groupSize cards
+                    for (int nextCard = startCard;
+                         nextCard < startCard + groupSize; nextCard++) {
+                        if (!cardCount[nextCard]) {
+                            return false;
+                        }
+                        cardCount[nextCard]--;
                     }
                 }
-                start++;
+                startCard++;
             }
         }
+
         return true;
     }
 };
