@@ -29,6 +29,9 @@ public:
                       sum=v[i];
                       idx=i;
                       cnt=1;
+                      if(idx>=gas.size()){
+                        return -1;
+                      }
                  }
                  i+=1;
             }
