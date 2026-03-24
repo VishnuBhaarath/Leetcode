@@ -3,12 +3,10 @@ public:
     vector<vector<int>> ans;
     set<vector<int>> s;
     void func(vector<int>&nums,int i,vector<int> &v){
-         if(s.find(v)==s.end()){
-            
-         ans.push_back(v);
-         s.insert(v);}
+        
          
          if(i==nums.size()){
+              ans.push_back(v);
             return;
          }
         v.push_back(nums[i]);
