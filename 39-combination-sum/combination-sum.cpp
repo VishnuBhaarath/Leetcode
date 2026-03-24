@@ -8,10 +8,9 @@ public:
             return;
         }
         if(sum==target){
-             if(s.find(v)==s.end()){
+             
                 ans.push_back(v);
-                s.insert(v);
-             }
+             
              return;
         }
         if(i==candidates.size()){
