@@ -2,10 +2,7 @@ class Solution {
 public:
  vector<vector<int>> ans;
     void func(vector<int>& nums,vector<int> &v,int i,vector<int> &visited){
-           if(i==nums.size()){
-           
-            return;
-         }
+         
          
          if(v.size()==nums.size()){
             
