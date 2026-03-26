@@ -1,6 +1,18 @@
 class Solution {
 public:
     vector<vector<string>> ans;
+    bool ischeck(string s){
+        int i=0;
+        int j=s.size()-1;
+        while(i<=j){
+            if(s[i]!=s[j]){
+                return false;
+            }
+            i+=1;
+            j-=1;
+        }
+        return true;
+    }
     void check(vector<string> v){
  int t=0;
         for(int i=0;i<v.size();i++){
@@ -26,17 +38,18 @@ break;
     }
     void func(int i, string s,vector<string> v){
         if(i==s.size()){
-            check(v);
-            
+           // check(v);
+            ans.push_back(v);
             return;
         }
        
         string s1="";
         for(int j=i;j<s.size();j++){
            s1+=s[j];
+           if(ischeck(s1)){
            v.push_back(s1);
            func(j+1,s,v);
-           v.pop_back();
+           v.pop_back();}
           
         }
     }
