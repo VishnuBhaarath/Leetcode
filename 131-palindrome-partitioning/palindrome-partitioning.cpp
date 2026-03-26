@@ -2,18 +2,7 @@ class Solution {
 public:
     vector<vector<string>> ans;
          vector<vector<int>> dp;
-    bool check(string s){
-        int i=0;
-        int j=s.size()-1;
-        while(i<=j){
-            if(s[i]!=s[j]){
-                return false;
-            }
-            i+=1;
-            j-=1;
-        }
-        return true;
-    }
+  
   
     void func(int i, string s,vector<string> v){
         if(i==s.size()){
