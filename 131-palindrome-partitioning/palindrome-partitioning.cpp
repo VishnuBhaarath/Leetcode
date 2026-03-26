@@ -13,29 +13,7 @@ public:
         }
         return true;
     }
-    void check(vector<string> v){
- int t=0;
-        for(int i=0;i<v.size();i++){
-            string st=v[i];
-            int j=0;
-            int k=st.size()-1;
-           
-            while(j<=k){
-                 if(st[j]!=st[k]){
-t=1;
-break;
-                 }
-                 j+=1;
-                 k-=1;
-            }
-            if(t==1){
-                break;
-            }
-        }
-        if(t==0){
-            ans.push_back(v);
-        }
-    }
+  
     void func(int i, string s,vector<string> v){
         if(i==s.size()){
            // check(v);
