@@ -1,6 +1,7 @@
 class Solution {
 public:
     vector<vector<string>> ans;
+    map<string,int> umap;
     bool ischeck(string s){
         int i=0;
         int j=s.size()-1;
@@ -24,10 +25,23 @@ public:
         string s1="";
         for(int j=i;j<s.size();j++){
            s1+=s[j];
-           if(ischeck(s1)){
-           v.push_back(s1);
+           if(umap[s1]==0){
+              if(ischeck(s1)){
+                 v.push_back(s1);
            func(j+1,s,v);
-           v.pop_back();}
+           v.pop_back();
+           umap[s1]=1;
+              }
+              else{
+                 umap[s1]=-1;
+              }
+           }
+           else if(umap[s1]==1){
+             v.push_back(s1);
+           func(j+1,s,v);
+           v.pop_back();
+           }
+           
           
         }
     }
