@@ -39,15 +39,12 @@ public:
         int n=s.size();
     dp.resize(n,vector<int>(n,0));
 
-         for(int i=0;i<s.size();i++){
-            string st="";
-            for(int j=i;j<s.size();j++){
-                st+=s[j];
-                if(check(st)){
-                    dp[i][j]=1;
-                }
-            }
-         }
+        for(int i = n-1; i >= 0; i--){        // go bottom-up
+    for(int j = i; j < n; j++){
+        if(s[i] == s[j] && (j-i <= 2 || dp[i+1][j-1]))
+            dp[i][j] = 1;
+    }
+}
          func(0,s,v);
          return ans;
     }
