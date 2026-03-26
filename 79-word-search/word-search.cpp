@@ -38,15 +38,17 @@ public:
         if(n*m<word.size()){
             return false;
         }
+        vector<vector<int>> visited(n,vector<int>(m,0));
         for(int i=0;i<n;i++){
             for(int j=0;j<m;j++){
                  if(board[i][j]==word[0]){
                      string s="";
                      t=0;
                      s+=board[i][j];
-                     vector<vector<int>> visited(n,vector<int>(m,0));
+                     
                      visited[i][j]=1;
                      func(i,j,n,m,board,s,word,visited);
+                     visited[i][j]=0;
                      if(t==1){
                         return true;
                      }
