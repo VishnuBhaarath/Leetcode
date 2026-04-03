@@ -1,8 +1,8 @@
 class Solution {
 public:
     vector<int> survivedRobotsHealths(vector<int>& positions, vector<int>& healths, string directions) {
-        map<int,int> umap;
-        map<int,char> umap1;
+        unordered_map<int,int> umap;
+         unordered_map<int,char> umap1;
         vector<int> v=positions;
         for(int i=0;i<positions.size();i++){
              umap[positions[i]]=healths[i];
