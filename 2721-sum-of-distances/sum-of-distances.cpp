@@ -18,17 +18,14 @@ public:
             umap1[nums[i]]+=1;
         }
         vector<long long> ans(n,0);
-        for(int i=0;i<v.size();i++){
-            cout<<v[i];
-            cout<<" ";
-        }
+       
 
          map<long long int,long long int> umap3;
         map<long long int,long long int> umap4;
         map<long long int,long long int> umap5;
         
         vector<long long> v1(n,0);
-         cout<<"\n";
+       
  for(int i=n-1;i>=0;i--){
             if(umap4[nums[i]]!=0){
                 int cnt=umap4[nums[i]];
@@ -41,11 +38,7 @@ public:
             umap4[nums[i]]+=1;
         }
          
-         for(int i=0;i<n;i++){
-            cout<<v1[i];
-            cout<<" ";
-        }
-        cout<<"\n";
+       
         //vector<long long > ans(n,0);
        for(int i=0;i<n;i++){
         ans[i]=v[i]+v1[i];
