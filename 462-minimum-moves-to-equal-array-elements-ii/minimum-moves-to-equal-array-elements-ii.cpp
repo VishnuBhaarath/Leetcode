@@ -4,16 +4,12 @@ public:
         sort(nums.begin(),nums.end());
        
        long long int ans=INT_MAX;
-        for(int i=0;i<nums.size();i++){
-             long long int psum=0;
-             for(int j=0;j<i;j++){
-               psum+=abs(nums[i]-nums[j]);
-             }
-             for(int k=i+1;k<nums.size();k++){
-psum+=abs(nums[i]-nums[k]);
-             }
-             ans=min(ans,psum);
-        }
-        return ans;
+       int n=nums.size();
+       int val=nums[n/2];
+       int sum=0;
+       for(int i=0;i<nums.size();i++){
+        sum+=abs(nums[i]-val);
+       }
+       return sum;
     }
 };
