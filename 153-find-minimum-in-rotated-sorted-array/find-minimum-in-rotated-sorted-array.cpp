@@ -12,12 +12,7 @@ public:
     }
         while(l<=r){
             int m=l+(r-l)/2;
-            cout<<l;
-            cout<<" ";
-            cout<<r;
-            cout<<" ";
-            cout<<m;
-            cout<<"\n";
+            
             if(m-1>=0 && m+1<n){
                 if(nums[m]<nums[m-1] && nums[m]<nums[m+1]){
                     return nums[m];
