@@ -8,14 +8,7 @@ public:
 
         sort(v.begin(),v.end());
 
-        for(int i=0;i<v.size();i++){
-            cout<<v[i][0];
-            cout<<" ";
-            cout<<v[i][1];
-              cout<<" ";
-            cout<<v[i][2];
-            cout<<"\n";
-        }
+       
         int n=v.size();
         int ans=v[n-1][2];
         int sum=v[n-1][0];
