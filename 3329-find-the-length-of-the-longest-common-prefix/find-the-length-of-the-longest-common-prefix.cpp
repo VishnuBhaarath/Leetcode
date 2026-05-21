@@ -28,6 +28,9 @@ public:
                         int sz=temp.size();
                         ans=max(ans,sz);
                      }
+                     else{
+                        break;
+                     }
                     
                      k+=1;
                 }
