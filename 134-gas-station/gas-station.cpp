@@ -1,42 +1,45 @@
 class Solution {
 public:
     int canCompleteCircuit(vector<int>& gas, vector<int>& cost) {
-            vector<int> v=gas;
-            vector<int> c=cost;
+        int val=0;
+        int n=gas.size();
+        for(int i=0;i<gas.size();i++){
+            val+=gas[i]-cost[i];
+        }
+        if(val<0){
+            return -1;
+        }
+        vector<int> v1=gas;
+        vector<int> v2=cost;
 
-            for(int i=0;i<gas.size();i++){
-                 v.push_back(gas[i]);
-                 c.push_back(cost[i]);
-            }
-            
-           
+        for(int i=0;i<gas.size();i++){
+            v1.push_back(gas[i]);
+            v2.push_back(cost[i]);
+        }
+        int st=-1;
+        int sum=0;
 
-            int sum=v[0];
-            int cnt=1;
-            int idx=0;
-
-            int i=1;
-            while(i<v.size()){
-                 if(sum>=c[i-1]){
-                     sum+=v[i];
-                     sum-=c[i-1];
-                     cnt+=1;
-                     if(cnt==gas.size()+1){
-                        return idx;
-                     }
+        for(int i=0;i<v1.size();i++){
+             if(st==-1){
+                 if(v1[i]>=v2[i]){
+                    sum+=(v1[i]-v2[i]);
+                    st=i;
                  }
-                 else{
-                      sum=v[i];
-                      idx=i;
-                      cnt=1;
-                      if(idx>=gas.size()){
-                        return -1;
-                      }
-                 }
-                 i+=1;
-            }
-
-
-          return  -1;
+             }
+             else{
+                if((sum+v1[i])>=v2[i]){
+                    sum+=v1[i];
+                    sum-=v2[i];
+                    if((i-st+1)==n){
+                        return st;
+                    }
+                }
+                else{
+                    st=-1;
+                    sum=0;
+                }
+             }
+        }
+        return st;
     }
 };
