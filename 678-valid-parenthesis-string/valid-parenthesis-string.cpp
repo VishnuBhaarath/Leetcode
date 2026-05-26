@@ -1,52 +1,49 @@
 class Solution {
 public:
     bool checkValidString(string s) {
-        stack<char> st1,st2;
+        stack<int> s1;
+        stack<int> s2;
 
         for(int i=0;i<s.size();i++){
              if(s[i]=='('){
-                st1.push(i);
+                s1.push(i);
              }
              else if(s[i]=='*'){
-                st2.push(i);
+                s2.push(i);
              }
              else{
-                if(st1.empty() && st2.empty()){
+                if(s1.empty() && s2.empty()){
                     return false;
                 }
-                else if(st1.size()!=0){
-                    st1.pop();
+                else if(!s1.empty()){
+                    s1.pop();
                 }
-                else{
-                    st2.pop();
+                else if(!s2.empty()){
+                    s2.pop();
                 }
              }
-        }
-        if(st1.size()==0){
-            return true;
-        }
-        if(st1.size()!=0 && st2.size()==0){
-            return false;
-        }
-        if(st1.top()>st2.top()){
-            return false;
         }
 
-        while(!st1.empty()){
-             if(st1.top()<st2.top()){
-                st1.pop();
-                st2.pop();
-             }
-             else{
-                return false;
-             }
-             if(st1.empty()){
-                return true;
-             }
-             if(st2.empty()){
-                return false;
-             }
+        if(s1.empty()){
+            return true;
         }
+        if(!s1.empty() && s2.empty()){
+            return false;
+        }
+        while(!s1.empty()){
+            if(s2.empty()){
+                return false;
+            }
+            int tp=s1.top();
+            s1.pop();
+            int tp1=s2.top();
+            s2.pop();
+            if(tp1<tp){
+                return false;
+            }
+            
+        }
+
         return true;
     }
 };
