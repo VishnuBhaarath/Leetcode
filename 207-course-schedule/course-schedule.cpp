@@ -2,34 +2,44 @@ class Solution {
 public:
     bool canFinish(int numCourses, vector<vector<int>>& prerequisites) {
         vector<int> v(numCourses,0);
-        map<int,vector<int>> umap;
+        vector<vector<int>> adj(numCourses);
+        set<int> s;
         for(int i=0;i<prerequisites.size();i++){
-            v[prerequisites[i][1]]+=1;
-            umap[prerequisites[i][0]].push_back(prerequisites[i][1]);
+            v[prerequisites[i][0]]+=1;
+            adj[prerequisites[i][1]].push_back(prerequisites[i][0]);
         }
-
         queue<int> q;
+        int cnt=0;
         for(int i=0;i<v.size();i++){
             if(v[i]==0){
                 q.push(i);
+                cnt+=1;
+                s.insert(i);
             }
         }
-        int cnt=q.size();
+       cout<<q.size();
+       cout<<" ";
+       cout<<cnt;
+       cout<<"\n";
         while(!q.empty()){
             int tp=q.front();
             q.pop();
-            vector<int> v1=umap[tp];
-            for(int j=0;j<v1.size();j++){
-                v[v1[j]]-=1;
-                if(v[v1[j]]==0){
-                    q.push(v1[j]);
+            for(int i=0;i<adj[tp].size();i++){
+                v[adj[tp][i]]-=1;
+                if(v[adj[tp][i]]==0){
+                    if(s.count(adj[tp][i])==0){
+                        s.insert(adj[tp][i]);
+                        q.push(adj[tp][i]);
+                    }
                     cnt+=1;
                 }
             }
         }
-        if(cnt==numCourses){
-            return true;
-        }
+if(cnt==numCourses){
+    return true;
+}
         return false;
+        
+
     }
 };
