@@ -1,78 +1,102 @@
 class Node{
- public:
-    int key;
-    int val;
-    Node* next;
+    public:
     Node* prev;
+    Node* next;
+    int val;
+    int key;
+
+
 };
 
 class LRUCache {
 public:
-    unordered_map<int,Node*> umap;
-    int cap=0;
-    Node* head=new Node();
-    Node* tail=new Node();
-    
+    map<int,Node*> umap;
+     Node* head=new Node();
+      Node* tail=new Node();
+      int cnt=0;
+      int sz=0;
     LRUCache(int capacity) {
+       sz=capacity;
         head->val=-1;
-        tail->val=-1;
-        head->next=tail;
+      //  head->next=NULL;
         head->prev=NULL;
-        tail->prev=head;
+
+       
+        tail->val=-1;
         tail->next=NULL;
-        cap=capacity;
+        tail->prev=head;
+        head->next=tail;
+
+        
     }
     
     int get(int key) {
-        if(umap.find(key)==umap.end()){
+        cout<<key;
+        cout<<"\n";
+        if(umap[key]==NULL){
             return -1;
         }
-        
-        int value = umap[key]->val;  // Save value before deleting
-        deletenode(key);
-        insertafterhead(key, value);
-        return value;
+         deleteNode(key);
+            inserthead(key,umap[key]->val);
+        return umap[key]->val;
     }
     
     void put(int key, int value) {
-        if(umap.find(key) == umap.end()){
-            if(cap==0){
-                Node* node=tail->prev;
-                deletenode(node->key);  // Delete LRU node
-            } 
-            else{
-                cap-=1;
+        Node* temp=umap[key];
+        if(temp==NULL){
+            if(cnt<sz){
+            inserthead(key,value);
+            cnt+=1;
             }
-            insertafterhead(key, value);
+            else{
+delete1();
+inserthead(key,value);
+            }
         }
         else{
-            deletenode(key);
-            insertafterhead(key, value);
+            deleteNode(key);
+            inserthead(key,value);
+           // cnt+=1;
         }
     }
-    
-    void insertafterhead(int key, int value){
-        Node* forward=head->next;
-        
-        Node* node=new Node();
-        node->key=key;
-        node->val=value;
-        node->prev=head;
-        node->next=forward;
-        
-        forward->prev=node;
-        head->next=node;  
-        umap[key]=node;
+    void inserthead(int key,int val){
+           Node* temp=new Node();
+           temp->val=val;
+           temp->key=key;
+
+           Node* temp1=head->next;
+
+           head->next=temp;
+           temp->prev=head;
+
+           temp->next=temp1;
+           temp1->prev=temp;
+           umap[key]=temp;
     }
-    
-    void deletenode(int key){
-        Node* node = umap[key];
-        Node* prevNode=node->prev;
-        Node* nextNode=node->next;
-        nextNode->prev=prevNode;
-        prevNode->next=nextNode;
-        
-        umap.erase(key);  // Remove from map
-       // delete node;       // Free memory
+
+    void deleteNode(int key){
+        Node* temp=umap[key];
+        Node* temp1=temp->next;
+        Node* temp2=temp->prev;
+
+        temp1->prev=temp2;
+        temp2->next=temp1;
+
+        temp->prev=NULL;
+        temp->next=NULL;
+    }
+    void delete1(){
+        Node* temp=tail->prev;
+        Node* temp1=temp->prev;
+        temp1->next=tail;
+        tail->prev=temp1;
+        umap[temp->key]=NULL;
     }
 };
+
+/**
+ * Your LRUCache object will be instantiated and called as such:
+ * LRUCache* obj = new LRUCache(capacity);
+ * int param_1 = obj->get(key);
+ * obj->put(key,value);
+ */
