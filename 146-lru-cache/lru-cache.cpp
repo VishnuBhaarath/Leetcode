@@ -10,7 +10,7 @@ class Node{
 
 class LRUCache {
 public:
-    map<int,Node*> umap;
+    unordered_map<int,Node*> umap;
      Node* head=new Node();
       Node* tail=new Node();
       int cnt=0;
@@ -31,8 +31,7 @@ public:
     }
     
     int get(int key) {
-        cout<<key;
-        cout<<"\n";
+       
         if(umap[key]==NULL){
             return -1;
         }
