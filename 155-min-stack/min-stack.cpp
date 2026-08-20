@@ -2,7 +2,7 @@ class MinStack {
 public:
     stack<int> s;
     stack<int> s1;
-    map<int,int> umap;
+    unordered_map<int,int> umap;
     int idx=0;
     MinStack() {
         
