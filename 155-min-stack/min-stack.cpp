@@ -2,7 +2,7 @@ class MinStack {
 public:
     //stack<int> s;
     //stack<int> s1;
-    unordered_map<int,int> umap;
+  //  unordered_map<int,int> umap;
     stack<pair<int,int>> s;
     stack<pair<int,int>> s1;
    
@@ -24,7 +24,7 @@ public:
             }
         }
          s.push({idx,value});
-          umap[idx]=value;
+         // umap[idx]=value;
         idx+=1;
     }
     
