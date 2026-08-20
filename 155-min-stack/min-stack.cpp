@@ -50,9 +50,7 @@ public:
     int getMin() {
         int tp=s.top().first;
       
-        while(s1.top().first>tp){
-            s1.pop();
-        }
+       
         return s1.top().second;
     }
 };
