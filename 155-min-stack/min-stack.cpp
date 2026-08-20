@@ -46,10 +46,7 @@ public:
     
     int getMin() {
         int tp=s.top();
-        cout<<s.size();
-        cout<<" ";
-        cout<<s1.size();
-        cout<<"\n";
+      
         while(s1.top()>tp){
             s1.pop();
         }
