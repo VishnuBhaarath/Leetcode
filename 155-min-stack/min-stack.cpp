@@ -1,50 +1,66 @@
 class MinStack {
 public:
-    stack<pair<int,int>> s;
-    stack<pair<int,int>> s1;
-    int cnt=0;
-    int cnt1=0;
+    stack<int> s;
+    stack<int> s1;
+    map<int,int> umap;
+    int idx=0;
     MinStack() {
         
     }
     
-    void push(int val) {
-        s.push({val,cnt});
+    void push(int value) {
+       
        
         if(s1.empty()){
-            s1.push({val,cnt});
-          
+            s1.push(idx);
         }
-        else if(val<=s1.top().first){
-            s1.push({val,cnt});
-        
+        else{
+            int tp=umap[s1.top()];
+            if(tp>value){
+                s1.push(idx);
+            }
         }
-         cnt+=1;
+         s.push(idx);
+          umap[idx]=value;
+        idx+=1;
     }
     
     void pop() {
-        if(s1.top().second==s.top().second){
+         int tp=s.top();
+          s.pop();
+          if(s1.size()>0){
+        while(s1.top()>=tp){
             s1.pop();
-         
-        }
-        s.pop();
-        cnt-=1;
+            if(s1.empty()){
+                break;
+            }
+        }}
+       
     }
     
     int top() {
-        int tp=s.top().first;
-        return tp;
+        int tp=s.top();
+       
+        return umap[tp];
     }
     
     int getMin() {
-        return s1.top().first;
+        int tp=s.top();
+        cout<<s.size();
+        cout<<" ";
+        cout<<s1.size();
+        cout<<"\n";
+        while(s1.top()>tp){
+            s1.pop();
+        }
+        return umap[s1.top()];
     }
 };
 
 /**
  * Your MinStack object will be instantiated and called as such:
  * MinStack* obj = new MinStack();
- * obj->push(val);
+ * obj->push(value);
  * obj->pop();
  * int param_3 = obj->top();
  * int param_4 = obj->getMin();
