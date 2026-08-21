@@ -1,25 +1,64 @@
 class Solution {
 public:
     vector<int> maxSlidingWindow(vector<int>& nums, int k) {
-        multiset<int> s;
-        vector<int> v;
+        int n=nums.size();
+      
+        priority_queue<pair<int,int>> q;
+        vector<int> ans;
         for(int i=0;i<k;i++){
-            s.insert(nums[i]);
+            if(q.empty()){
+                q.push({nums[i],i});
+            }
+            else{
+                while(nums[i]>q.top().first){
+                    q.pop();
+                    if(q.empty()){
+                        break;
+                    }
+                }
+                q.push({nums[i],i});
+            }
         }
-        auto it=*s.rbegin();
-        v.push_back(it);
-        int r=k;
-        int l=0;
-        while(r<nums.size()){
-            s.insert(nums[r]);
-            auto it=s.find(nums[l]);
-            s.erase(it);
-            auto it1=*s.rbegin();
-            v.push_back(it1);
-            l+=1;
-            r+=1;
+       
+      ans.push_back(q.top().first);
+    
+      int r=k;
+      int l=0;
+      while(r<n){
+        if(q.empty()){
+            q.push({nums[r],r});
         }
-        return v;
+        else{
+        while(q.top().second<=l){
+            q.pop();
+            if(q.empty()){
+                break;
+            }
+        }
+        if(!q.empty()){
+        while(nums[r]>q.top().first){
+                    q.pop();
+                    if(q.empty()){
+                        break;
+                    }
+                }
+             q.push({nums[r],r});   
+        }
+        else{
+             q.push({nums[r],r}); 
+        }
+        }
+        
+         l+=1;
+         r+=1;
+         while(q.top().second < l){
+            q.pop();
+         }
+         
+         ans.push_back(q.top().first);
+       
 
+      }
+      return ans;
     }
 };
