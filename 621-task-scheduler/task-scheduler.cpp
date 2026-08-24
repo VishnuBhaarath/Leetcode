@@ -18,8 +18,7 @@ public:
              int tp=pq.top();
              pq.pop();
              tp-=1;
-             cout<<pq.size();
-             cout<<" ";
+             
              int t=0;
              if(tp!=0){
                 v1.push_back(tp);
@@ -44,10 +43,7 @@ public:
                 cnt+=1;
                 
              }
-               cout<<pq.size();
-             cout<<" ";
-             cout<<cnt;
-             cout<<"\n";
+             
              for(int i=0;i<v1.size();i++){
                 pq.push(v1[i]);
              }
