@@ -1,45 +1,57 @@
 class Solution {
 public:
     int leastInterval(vector<char>& tasks, int n) {
-        vector<int> v(26, 0);
-        for (int i = 0; i < tasks.size(); i++) {
-            v[tasks[i] - 'A'] += 1;
+        vector<int> v(26,0);
+        for(int i=0;i<tasks.size();i++){
+            v[tasks[i]-'A']+=1;
         }
-        priority_queue<pair<int, int>> pq;
-        for (int i = 0; i < v.size(); i++) {
-            if (v[i] != 0) {
-                pq.push({v[i], i});
-            }
+        priority_queue<int> pq;
+        for(int i=0;i<v.size();i++){
+           
+            if(v[i]!=0)
+            pq.push(v[i]);
         }
-        int cnt = 0;
-        if(n==0){
-            return tasks.size();
-        }
-        while (!pq.empty()) {
-            priority_queue<pair<int, int>> pq1;
-            int m = 0;
-
-            while (!pq.empty()) {
-                pair<int, int> p = pq.top();
-                pq.pop();
-                p.first -= 1;
-                m += 1;
-                cnt += 1;
-                if (p.first > 0) {
-                    pq1.push(p);
-                }
-                if (m == (n+1)) {
+        int cnt=0;
+        while(!pq.empty()){
+             vector<int> v1;
+             cnt+=1;
+             int tp=pq.top();
+             pq.pop();
+             tp-=1;
+             cout<<pq.size();
+             cout<<" ";
+             int t=0;
+             if(tp!=0){
+                v1.push_back(tp);
+             }
+             else{
+                t=1;
+             }
+             for(int i=0;i<n;i++){
+                if(pq.empty()){
+                    if(t==1){
+                        break;
+                    }
+                    cnt+=(n-i);
                     break;
                 }
-            }
-            if(!pq1.empty()){
-            cnt += (n+1 - m);}
-            while (!pq1.empty()) {
-                pq.push(pq1.top());
-                pq1.pop();
-            }
+                int tp1=pq.top();
+                pq.pop();
+                tp1-=1;
+                if(tp1!=0){
+                    v1.push_back(tp1);
+                }
+                cnt+=1;
+                
+             }
+               cout<<pq.size();
+             cout<<" ";
+             cout<<cnt;
+             cout<<"\n";
+             for(int i=0;i<v1.size();i++){
+                pq.push(v1[i]);
+             }
         }
-
         return cnt;
     }
 };
