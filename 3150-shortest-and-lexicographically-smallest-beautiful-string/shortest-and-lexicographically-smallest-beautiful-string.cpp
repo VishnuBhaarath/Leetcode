@@ -18,18 +18,18 @@ public:
                         
                         if(len==-1){
                             len=s1.size();
-                            temp=s.substr(l,(r-l+1));
+                            temp=s1;
                         }
                         else{
                             if(s1.size() ==len){
-                                if(s.substr(l,(r-l+1))< temp){
-                                    temp=s.substr(l,(r-l+1));
+                                if(s1< temp){
+                                    temp=s1;
                                 }
 
                             }
                             else if(s1.size() < len){
                                 len=s1.size();
-                                temp=s.substr(l,(r-l+1));
+                                temp=s1;
                             }
 
                         }
@@ -46,17 +46,17 @@ public:
                    
                     if(len==-1){
                             len=s1.size();
-                            temp=s.substr(l,(r-l+1));
+                            temp=s1;
                         }
                         else{
                             if(s1.size() ==len){
-                                if(s.substr(l,(r-l+1))< temp){
-                                    temp=s.substr(l,(r-l+1));
+                                if(s1< temp){
+                                    temp=s1;
                                 }
                             }
                             else if(s1.size() < len){
                                 len=s1.size();
-                                temp=s.substr(l,(r-l+1));
+                                temp=s1;
                             }
                         }
                   
@@ -71,17 +71,17 @@ public:
                       
                       if(len==-1){
                             len=s1.size();
-                            temp=s.substr(l,(r-l+1));
+                            temp=s1;
                         }
                         else{
                             if(s1.size() ==len){
-                                if(s.substr(l,(r-l+1))< temp){
-                                    temp=s.substr(l,(r-l+1));
+                                if(s1< temp){
+                                    temp=s1;
                                 }
                             }
                             else if(s1.size() < len){
                                 len=s1.size();
-                                temp=s.substr(l,(r-l+1));
+                                temp=s1;
                             }
                         }
                         
@@ -119,17 +119,17 @@ public:
                  
                   if(len==-1){
                             len=s1.size();
-                            temp=s.substr(l,(r-l+1));
+                            temp=s1;
                         }
                         else{
                             if(s1.size() ==len){
-                                if(s.substr(l,(r-l+1))< temp){
-                                    temp=s.substr(l,(r-l+1));
+                                if(s1< temp){
+                                    temp=s1;
                                 }
                             }
                             else if(s1.size() < len){
                                 len=s1.size();
-                                temp=s.substr(l,(r-l+1));
+                                temp=s1;
                             }
                         }
                         
