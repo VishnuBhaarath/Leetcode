@@ -1,36 +1,35 @@
 class Solution {
 public:
-    long long int check(int m,vector<int>& piles){
-        long long int days=0;
-        for(int i=0;i<piles.size();i++){
-            int q=piles[i]/m;
-            days+=q;
-            if(piles[i]%m !=0){
-                days+=1;
-            }
-        }
-        return days;
-    }
     int minEatingSpeed(vector<int>& piles, int h) {
-        long long int r=piles[0];
-        for(int i=0;i<piles.size();i++){
-            if(piles[i]>r){
-                r=piles[i];
-            }
-        }
-        long long int ans=-1;
-        long long int l=1;
+        sort(piles.begin(),piles.end());
+         int n=piles.size();
+         int l=1;
+     int r=piles[n-1];
+     int ans=-1;
         while(l<=r){
-            long long int m=l+(r-l)/2;
-            long long int val=check(m,piles);
-           
-            if(val<=h){
-                ans=m;
-                r=m-1;
+            int m=l+(r-l)/2;
+           long long  int sum=0;
+            for(int i=0;i<piles.size();i++){
+                int q=piles[i]/m;
+                int r=piles[i]%m;
+                sum+=q;
+               
+                if(r!=0){
+                    sum+=1;
+                }
+            }
+            
+            if(sum>h){
+                l=m+1;
             }
             else{
-                
-                l=m+1;
+                if(ans==-1){
+                    ans=m;
+                }
+                else{
+                    ans=min(ans,m);
+                }
+                r=m-1;
             }
 
         }
