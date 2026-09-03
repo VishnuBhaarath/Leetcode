@@ -9,8 +9,7 @@ public:
         }
         while(l<=r){
             int m=l+(r-l)/2;
-            cout<<m;
-            cout<<"\n";
+         
             if(m+1<n && m-1>=0){
             if(nums[m]>nums[m+1] && nums[m]>nums[m-1]){
                 return nums[m+1];
