@@ -13,6 +13,6 @@ public:
                 r=m;
             }
         }
-        return nums[r];
+        return nums[l];
     }
 };
