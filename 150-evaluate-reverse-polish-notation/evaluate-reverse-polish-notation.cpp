@@ -34,8 +34,7 @@ int tp=s.top();
                 s.push(tp1/tp);
             }
             else{
-                cout<<stoi(tokens[i]);
-                cout<<"\n";
+     
                 s.push(stoi(tokens[i]));
             }
         }
