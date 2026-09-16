@@ -3,7 +3,7 @@ public:
     int minInsertions(string s) {
         int n = s.size();
 
-        vector<vector<int>> dp(n+1, vector<int>(n+1, 0));
+        vector<vector<int>> dp(n, vector<int>(n, 0));
 
         for (int i = n - 1; i >= 0; i--) {
             for (int j = i + 1; j < n; j++) {
