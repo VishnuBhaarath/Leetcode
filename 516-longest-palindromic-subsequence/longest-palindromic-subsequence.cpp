@@ -7,12 +7,14 @@ public:
         vector<vector<int>> dp(n+1,vector<int>(n+1,0));
 
         for(int i=0;i<n;i++){
-            for(int j=0;j<n;j++){
-                if(s[i]==s1[j]){
-                    dp[i+1][j+1]=1+dp[i][j];
+            for(int j=n-1;j>=0;j--){
+                int idx=n-1-j;
+                if(s[i]==s[j]){
+                    
+                    dp[i+1][idx+1]=1+dp[i][idx];
                 }
                 else{
-                    dp[i+1][j+1]=max(dp[i][j+1],dp[i+1][j]);
+                    dp[i+1][idx+1]=max(dp[i+1][idx],dp[i][idx+1]);
                 }
             }
         }
