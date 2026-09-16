@@ -2,7 +2,7 @@ class Solution {
 public:
     int longestPalindromeSubseq(string s) {
         string s1=s;
-        reverse(s1.begin(),s1.end());
+      //  reverse(s1.begin(),s1.end());
         int n=s1.size();
         vector<vector<int>> dp(n+1,vector<int>(n+1,0));
 
