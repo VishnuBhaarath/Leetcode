@@ -20,6 +20,10 @@ public:
                  ans=max(ans,dp[i+1][j+1]);
             }
         }
-        return ans;
+        int i=n-1;
+        int j=m-1;
+        string temp="";
+       
+        return dp[n][m];
     }
 };
