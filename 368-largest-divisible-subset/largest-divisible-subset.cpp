@@ -14,12 +14,10 @@ public:
                 }
             }
         }
-        cout<<ans;
-        cout<<"\n";
+     
         int temp=0;
         for(int i=n-1;i>=0;i--){
-            cout<<dp[i];
-            cout<<" ";
+           
             if(dp[i]==ans){
                 if(temp % nums[i]==0){
                 v.push_back(nums[i]);
