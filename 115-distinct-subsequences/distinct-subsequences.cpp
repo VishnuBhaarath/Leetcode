@@ -2,7 +2,7 @@ class Solution {
 public:
 //int cnt=0;
     vector<vector<int>> dp;
-    int func(string s,int i,int j,string t){
+    int func(string &s,int i,int j,string &t){
         
         if(j==t.size()){
             return 1;
