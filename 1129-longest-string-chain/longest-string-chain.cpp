@@ -36,15 +36,7 @@ public:
             dp[words[i].size()].push_back(words[i]);
         }
 
-        for(int i=0;i<dp.size();i++){
-            cout<<i;
-            cout<<" ";
-            for(int j=0;j<dp[i].size();j++){
-                cout<<dp[i][j];
-                cout<<" ";
-            }
-            cout<<"\n";
-        }
+        
         int ans=1;
         vector<vector<int>> dp1(17,vector<int>(n+1,1));
 
@@ -62,14 +54,7 @@ public:
                  }
              }
         }
-        for(int i=0;i<dp1.size();i++){
-            for(int j=0;j<dp1[i].size();j++){
-                cout<<dp1[i][j];
-                cout<<" ";
-            }
-            cout<<"\n";
-        }
-
+      
         return ans;
     }
 };
