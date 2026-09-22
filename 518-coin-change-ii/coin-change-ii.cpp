@@ -1,28 +1,26 @@
 class Solution {
 public:
-    int cnt=0;
-    vector<vector<int>> dp;
-    int func(int amount,vector<int>&coins,int i,int sum){
-        
-        if(sum==amount){
-           return 1;
-        }
-       
-        if(i==coins.size()){
-            return 0;
-        }
-        if(sum>amount){
-            return 0;
-        }
-        if(dp[i][sum]!=-1){
-            return dp[i][sum];
-        }
-        return dp[i][sum]=func(amount,coins,i,sum+coins[i]) + func(amount,coins,i+1,sum);
-    }
     int change(int amount, vector<int>& coins) {
-        int n=coins.size();
-        dp.resize(n,vector<int>(amount+1,-1));
-        return func(amount,coins,0,0);
-       // return cnt;
+        unsigned long long int n = coins.size();
+
+        vector<vector<unsigned long long int>> dp(n + 1, vector<unsigned long long int>(amount + 1, 0));
+
+       
+        for ( long long int i = 0; i <= n; i++) {
+            dp[i][amount] = 1;
+        }
+
+        for (long long int i = n - 1; i >= 0; i--) {
+            for (long long int sum = amount - 1; sum >= 0; sum--) {
+
+                dp[i][sum] = dp[i + 1][sum];
+
+                if (sum + coins[i] <= amount) {
+                    dp[i][sum] += dp[i][sum + coins[i]];
+                }
+            }
+        }
+
+        return dp[0][0];
     }
 };
