@@ -1,26 +1,19 @@
 class Solution {
 public:
     int cnt=0;
-    vector<vector<int>> dp;
-    void func(int i,vector<int>& nums,int sum,int target){
-        if(i==nums.size()){
-         
-            
+    void func(vector<int>& nums,int target,int sum,int i){
+         if(i==nums.size()){
             if(sum==target){
                 cnt+=1;
             }
             return;
-           
-        }
-         
-       func(i+1,nums,sum+nums[i],target); 
-        func(i+1,nums,sum-nums[i],target);
-
+         }
+         func(nums,target,sum+nums[i],i+1);
+         func(nums,target,sum-nums[i],i+1);
     }
-
     int findTargetSumWays(vector<int>& nums, int target) {
-       // dp.resize(n,vector<int>(2002,0));
-        func(0,nums,0,target);
+        
+        func(nums,target,0,0);
         return cnt;
     }
 };
