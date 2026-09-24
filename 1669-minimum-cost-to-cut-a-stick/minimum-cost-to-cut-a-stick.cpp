@@ -1,33 +1,33 @@
 class Solution {
 public:
-   
-    int minCost(int n, vector<int>& cuts) {
-        //  sort(cuts.begin(), cuts.end());
-        int i = 0;
-        int j = n;
-        cuts.push_back(0);
-        cuts.push_back(n);
-        sort(cuts.begin(), cuts.end());
-        int m = cuts.size() - 1;
-        vector<vector<int>> dp(m + 1, vector<int>(m + 1, 0));
-        // return func(cuts, 0, m, n,dp);
-        for (int i = m; i >= 0; i--) {
-            for (int j = i + 1; j <= m; j++) {
-                int ans = INT_MAX;
-                for (int k = 0; k < cuts.size(); k++) {
-                    if (cuts[k] > cuts[i] && cuts[k] < cuts[j]) {
+    vector<vector<int>> dp;
+    int func(vector<int>&cuts,int i,int j){
 
-                        int sum = (cuts[j] - cuts[i]) +
-                                  dp[i][k] +
-                                  dp[k][j];
-                        ans = min(ans, sum);
-                    }
-                }
-                if (ans != INT_MAX) {
-                    dp[i][j] = ans;
-                }
-            }
+        if(j<i){
+            return 0;
         }
-        return dp[0][m];
+        if(dp[i][j]!=-1){
+            return dp[i][j];
+        }
+        int ans=INT_MAX;
+        for(int k=i;k<=j;k++){
+           int val= cuts[j+1]-cuts[i-1]+func(cuts,k+1,j)+func(cuts,i,k-1);
+           ans=min(ans,val);
+        }
+        return dp[i][j]=ans;
+    }
+
+    int minCost(int n, vector<int>& cuts) {
+        
+        sort(cuts.begin(),cuts.end());
+        vector<int> v;
+        v.push_back(0);
+        for(int i=0;i<cuts.size();i++){
+            v.push_back(cuts[i]);
+        }
+        v.push_back(n);
+        int m=v.size();
+        dp.resize(m+2,vector<int>(m+2,-1));
+        return func(v,1,m-2);
     }
 };
