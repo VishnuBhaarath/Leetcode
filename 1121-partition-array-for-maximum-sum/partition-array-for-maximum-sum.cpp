@@ -1,28 +1,34 @@
 class Solution {
 public:
-  
+    vector<int> dp;
+    int func(vector<int>& arr,int k,int i,int n){
+        if(i==arr.size()){
+            return 0;
+        }
+
+        int val=0;
+        int ans=0;
+        if(dp[i]!=-1){
+            return dp[i];
+        }
+        for(int j=i;j<min(i+k,n);j++){
+           
+            val=max(val,arr[j]);
+            int sz=(j-i+1);
+            ans=max(ans,(val*sz)+func(arr,k,j+1,n));
+           
+          
+        }
+        return dp[i]=ans;
+
+    }
     int maxSumAfterPartitioning(vector<int>& arr, int k) {
         int n=arr.size();
-        vector<int> dp;
-        dp.resize(n+1,0);
-
-   //   func(arr,0,k,n);
-       
-
-        for(int i=n-1;i>=0;i--){
-            int val=-1;
-            int ans=-1;
-            for(int j=i;j<min(n,i+k);j++){
- val=max(val,arr[j]);
-          int sz=(j-i+1);
-          int val1=sz*val;
-          int sum=val1+dp[j+1];
-          ans=max(ans,sum);
-
-            }
-            dp[i]=ans;
-        }
-         
-      return dp[0];
+        dp.resize(n+1,-1);
+        
+      return func(arr,k,0,n);
+     
+        return 84;
+        
     }
 };
