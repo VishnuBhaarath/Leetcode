@@ -1,7 +1,7 @@
 class Solution {
 public:
     vector<vector<int>> ans;
-    void func(int i,vector<int>&nums,vector<int>v){
+    void func(int i,vector<int>&nums,vector<int> &v){
         if(i==nums.size()){
             ans.push_back(v);
             return;
@@ -14,8 +14,8 @@ public:
     }
     vector<vector<int>> subsets(vector<int>& nums) {
         int n=nums.size();
-        
-        func(0,nums,{});
+        vector<int> v;
+        func(0,nums,v);
         return ans;
     }
 };
