@@ -1,25 +1,25 @@
 class Solution {
 public:
+    vector<vector<int>> dp;
     set<vector<int>> s;
-    vector<vector<int>> ans;
-    void func(vector<int>& nums,vector<int> v,int i){
-         if(i==nums.size()){
+    void func(vector<int>&nums,int i,vector<int>&v){
+        if(i==nums.size()){
             if(s.find(v)==s.end()){
                 s.insert(v);
-                ans.push_back(v);
+                dp.push_back(v);
+              
             }
-            return;
-         }
-
-         v.push_back(nums[i]);
-         func(nums,v,i+1);
-         v.pop_back();
-         func(nums,v,i+1);
+              return;
+        }
+        v.push_back(nums[i]);
+        func(nums,i+1,v);
+        v.pop_back();
+         func(nums,i+1,v);
     }
     vector<vector<int>> subsetsWithDup(vector<int>& nums) {
-        vector<int> v;
         sort(nums.begin(),nums.end());
-        func(nums,v,0);
-        return ans;
+        vector<int> v;
+        func(nums,0,v);
+        return dp;
     }
 };
