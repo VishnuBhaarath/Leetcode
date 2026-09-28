@@ -25,6 +25,7 @@ public:
         int l=0;
         for(int i=0;i<nums.size();i++){
             r+=nums[i];
+            l=max(l,nums[i]);
         }
         int ans=0;
         while(l<=r){
