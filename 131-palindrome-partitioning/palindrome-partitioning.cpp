@@ -14,7 +14,7 @@ vector<vector<string>> ans;
          }
          return 1;
     }
-    void func(int i,int n,string s,vector<string> v){
+    void func(int i,int n,string s,vector<string> &v){
        
         if(i==n){
             ans.push_back(v);
