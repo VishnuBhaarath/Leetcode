@@ -1,17 +1,20 @@
 class Solution {
 public:
 vector<vector<string>> ans;
+map<string,int> umap;
     int check(string s){
        
          int i=0;
          int j=s.size()-1;
          while(i<=j){
             if(s[i]!=s[j]){
+                umap[s]=-1;
                 return 0;
             }
             i+=1;
             j-=1;
          }
+         umap[s]=1;
          return 1;
     }
     void func(int i,int n,string s,vector<string> &v){
@@ -24,8 +27,15 @@ vector<vector<string>> ans;
         string st="";
         for(int j=i;j<s.size();j++){
             st+=s[j];
-            if(check(st)){
-                v.push_back(st);
+            if(umap[s]==0){
+                if(check(st)){
+ v.push_back(st);
+                func(j+1,n,s,v);
+                v.pop_back();
+                }
+            }
+            else if(umap[s]==1){
+               v.push_back(st);
                 func(j+1,n,s,v);
                 v.pop_back();
             }
