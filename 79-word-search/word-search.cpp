@@ -1,64 +1,104 @@
 class Solution {
 public:
-    vector<int> r={1,-1,0,0};
-    vector<int> c={0,0,1,-1};
-    int t=0;
-    void func(int i,int j,int n,int m,vector<vector<char>>& board,string s,string word,vector<vector<int>>&visited){
-   
-      if(t==1)
-       return;
-      if(word==s){
-         t=1;
-         return;
-      }
-      if(s.size()>=word.size()){
-        return;
-      }
-
-       for(int k=0;k<4;k++){
-        int x=i+r[k];
-        int y=j+c[k];
-         if((x>=0 && x<n) && (y>=0 && y<m)){
-            if(visited[x][y]==0){
-             int sz=s.size();
+   int t=0;
+   void func(int i,int j, vector<vector<char>>& board, string & word,int n,int m,string st,vector<vector<int>> &dp){
+          
+            if(i==n || j==m){
+                return;
+            }
+            if(i<0 || j<0){
+                return;
+            }
+            if(t==1){
+                return;
+            }
+             
             
-             if(word[sz]==board[x][y]){
-             s+=board[x][y];
-             visited[x][y]=1;
-             func(x,y,n,m,board,s,word,visited);
-             s.pop_back();
-             visited[x][y]=0;}}
-         }
-       }
+            if(word==st){
+           
+                t=1;
+              
+                return;
+            }
+            
+            
+            if(i+1<n){
+                if(dp[i+1][j]==0){
+                    int sz=st.size();
+                    if(word[sz]==board[i+1][j]){
+                        st+=board[i+1][j];
+                        dp[i+1][j]=1;
+                        func(i+1,j,board,word,n,m,st,dp);
+                        st.pop_back();
+                        dp[i+1][j]=0;
+                    }
+                }
+            }
+            if(j+1<m){
+                 if(dp[i][j+1]==0){
+                    int sz=st.size();
+                   
+                    if(word[sz]==board[i][j+1]){
+                        st+=board[i][j+1];
+                        dp[i][j+1]=1;
+                        func(i,j+1,board,word,n,m,st,dp);
+                         st.pop_back();
+                      
+                        dp[i][j+1]=0;
+                    }
+                 }
+            }
+            if(i-1>=0){
+                 if(dp[i-1][j]==0){
+                    int sz=st.size();
+                    if(word[sz]==board[i-1][j]){
+                        st+=board[i-1][j];
+                        dp[i-1][j]=1;
+                        func(i-1,j,board,word,n,m,st,dp);
+                         st.pop_back();
+                        dp[i-1][j]=0;
+                    }
+                }
 
+            }
+            if(j-1>=0){
+                 if(dp[i][j-1]==0){
+                    int sz=st.size();
+                    if(word[sz]==board[i][j-1]){
+                        st+=board[i][j-1];
+                        dp[i][j-1]=1;
+                        func(i,j-1,board,word,n,m,st,dp);
+                         st.pop_back();
+                        dp[i][j-1]=0;
+                    }
+                }
+            }
+           return;
+        
+ 
     }
     bool exist(vector<vector<char>>& board, string word) {
         int n=board.size();
         int m=board[0].size();
-        if(n*m<word.size()){
-            return false;
-        }
-        vector<vector<int>> visited(n,vector<int>(m,0));
-        for(int i=0;i<n;i++){
-            for(int j=0;j<m;j++){
-                 if(board[i][j]==word[0]){
-                     string s="";
-                     t=0;
-                     s+=board[i][j];
-                     
-                     visited[i][j]=1;
-                     func(i,j,n,m,board,s,word,visited);
-                     visited[i][j]=0;
-                     if(t==1){
-                        return true;
-                     }
-                 }
+        
+        vector<vector<int>> dp(n,vector<int>(m,0));
+       
+       // dp[i][j]=0;
+        for(int i=0;i<board.size();i++){
+            for(int j=0;j<board[i].size();j++){
+                string st="";
+                st+=board[i][j];
+                dp[i][j]=1;
+                func(i,j,board,word,n,m,st,dp);
+                dp[i][j]=0;
+                if(t==1){
+                    return true;
+                }
             }
         }
-        
-        if(t==0){
-            return false;
-        }
+       if(t==0){
+        return false;
+       }
         return true;
     }
 };
