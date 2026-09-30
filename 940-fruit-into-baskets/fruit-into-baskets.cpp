@@ -1,57 +1,43 @@
 class Solution {
 public:
     int totalFruit(vector<int>& fruits) {
+        int n=fruits.size();
         int i=0;
         int j=0;
-        int temp1=-1;
-        int temp2=-1;
+        map<int,int> umap;
         int cnt=0;
-        int cnt1=0;
-        int cnt2=0;
-        int ans=0;
-        while(j<fruits.size()){
-           
-            if(temp1==-1 || temp1==fruits[j]){
-                temp1=fruits[j];
-                cnt=1;
-                cnt1+=1;
-            }
-            else if(temp2==-1 || temp2==fruits[j]){
-                temp2=fruits[j];
-                cnt=2;
-                cnt2+=1;
+        int ans=1;
+        while(j<n){
+            if(umap[fruits[j]]!=0){
+                umap[fruits[j]]+=1;
+                int sz=(j-i+1);
+                ans=max(ans,sz);
+                j+=1;
             }
             else{
-                while(i<=j){
-                    if(fruits[i]==temp1){
-                        cnt1-=1;
-                    }
-                    else if(fruits[i]==temp2){
-                        cnt2-=1;
-                    }
-                      i+=1;
-                    if(cnt1==0 || cnt2==0){
-                        break;
-                    }
-                  
+                if(cnt<2){
+                    cnt+=1;
+                    umap[fruits[j]]+=1;
+                    int sz=(j-i+1);
+                    ans=max(ans,sz);
+                    j+=1;
                 }
-                
-                if(cnt1==0){
-                    temp1=temp2;
-                    temp2=fruits[j];
-                    cnt1=cnt2;
-                    cnt2=1;
-                }
-                else if(cnt2==0){
-                     temp2=fruits[j];
-                     cnt2=1;
+                else{
+                    while(1){
+                        umap[fruits[i]]-=1;
+                        if(umap[fruits[i]]==0){
+                            i+=1;
+                            break;
+                        }
+                        i+=1;
+                    }
+                    umap[fruits[j]]+=1;
+                     int sz=(j-i+1);
+                    ans=max(ans,sz);
+                    j+=1;
                 }
             }
-            ans=max(ans,cnt1+cnt2);
-          
-           
-            j+=1;
         }
-          return ans;
+        return ans;
     }
 };
