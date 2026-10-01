@@ -1,52 +1,74 @@
 class Solution {
 public:
     string minWindow(string s, string t) {
-        unordered_map<char,int> umap;
-
-        for(int i=0;i<t.size();i++){
-            umap[t[i]]+=1;
+        vector<int> v(128, 0);
+        int cnt=0;
+        for (char c : t) {
+            v[c]++;
+            cnt+=1;
         }
-        int l=0;
-        int r=0;
+        vector<int> v1=v;
+        int i=0;
+        int j=0;
         int sz=-1;
-int cnt=0;
-        int st=0;
-        int n=s.size();
-        int m=t.size();
-
-        while(r<n){
-            
-             umap[s[r]]-=1;
-             if(umap[s[r]]>0){
-                cnt+=1;
-             }
-             if(umap[s[r]]==0){
-                cnt+=1;
-                while(cnt==m){
+        string ans="";
+        int st=-1;
+        int end=-1;
+        while(j<s.size()){
+            if(v[s[j]]>0){
+                v[s[j]]-=1;
+                cnt-=1;
+                if(cnt==0){
+                   
                     if(sz==-1){
-                        sz=(r-l+1);
-                        st=l;
+                        sz=(j-i+1);
+                        st=i;
+                        end=j;
+                    }
+                    else if(j-i+1 <sz){
+                        sz=j-i+1;
+                        st=i;
+                        end=j;
+                    }
+                  
+                }
+                while(cnt==0){
+                    if(v1[s[i]]>0){
+                        v[s[i]]+=1;
+                        if(v[s[i]]>0){
+                        cnt+=1;}
+                        i+=1;
                     }
                     else{
-                        if(r-l+1 < sz){
-                            sz=r-l+1;
-                            st=l;
-                        }
+                        i+=1;
                     }
-                 
-                    umap[s[l]]+=1;
-                    if(umap[s[l]]>0){
-                        cnt-=1;
+                     if(cnt==0){
+                       
+                        if(sz==-1){
+                             sz=(j-i+1);
+                        st=i;
+                        end=j;
                     }
-                    l+=1;
+                    else if(j-i+1 <sz){
+                         sz=(j-i+1);
+                       st=i;
+                        end=j;
+                    }
+                    }
                 }
-             }
-             r+=1;
+               
+            }
+            else{
+                v[s[j]]-=1;
+            }
+j+=1;
         }
-     
-        if(sz==-1){
-            return "";
+      
+        if(st==-1){
+            return ans;
         }
-        return s.substr(st,sz);
+        ans=s.substr(st,(end-st+1));
+
+        return ans;
     }
 };
