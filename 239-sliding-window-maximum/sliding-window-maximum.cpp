@@ -1,52 +1,32 @@
 class Solution {
 public:
     vector<int> maxSlidingWindow(vector<int>& nums, int k) {
-       priority_queue<pair<int,int>> pq;
+        deque<int> q;
         vector<int> ans;
-        for(int i=0;i<k;i++){
-            if(pq.empty()){
-                pq.push({nums[i],i});
-            }
-            else{
-            int t=0;
-            while(nums[i]>pq.top().first){
-                pq.pop();
-                if(pq.empty()){
-                    t=1;
-                    pq.push({nums[i],i});
-                    break;
-                }
-            }
-            if(t==0){
-                pq.push({nums[i],i});
-            }
-            }
-        }
-        ans.push_back(pq.top().first);
-     
         int i=0;
-        for(int j=k;j<nums.size();j++){
-            while(nums[j]>pq.top().first){
-                pq.pop();
-                if(pq.empty()){
-                    break;
+        for(int j=0;j<nums.size();j++){
+             if(q.empty()){
+                q.push_back(j);
+             }
+             else{
+                while(nums[j]>nums[q.back()]){
+                    q.pop_back();
+                    if(q.empty()){
+                        break;
+                    }
                 }
-            }
-            pq.push({nums[j],j});
-         
-            while(pq.top().second<=i){
-                pq.pop();
-                if(pq.empty()){
-                    break;
-                }
-            }
-        
-            i+=1;
-            ans.push_back(pq.top().first);
+                q.push_back(j);
+             }
+             while(q.front()<i){
+                q.pop_front();
+             }
+             if(j-i+1>=k){
+                ans.push_back(nums[q.front()]);
+                i+=1;
+             }
+
+             
         }
-
-       
-
         return ans;
 
     }
