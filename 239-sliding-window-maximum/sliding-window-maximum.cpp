@@ -1,64 +1,53 @@
 class Solution {
 public:
     vector<int> maxSlidingWindow(vector<int>& nums, int k) {
-        int n=nums.size();
-      
-        priority_queue<pair<int,int>> q;
+       priority_queue<pair<int,int>> pq;
         vector<int> ans;
         for(int i=0;i<k;i++){
-            if(q.empty()){
-                q.push({nums[i],i});
+            if(pq.empty()){
+                pq.push({nums[i],i});
             }
             else{
-                while(nums[i]>q.top().first){
-                    q.pop();
-                    if(q.empty()){
-                        break;
-                    }
+            int t=0;
+            while(nums[i]>pq.top().first){
+                pq.pop();
+                if(pq.empty()){
+                    t=1;
+                    pq.push({nums[i],i});
+                    break;
                 }
-                q.push({nums[i],i});
+            }
+            if(t==0){
+                pq.push({nums[i],i});
+            }
             }
         }
-       
-      ans.push_back(q.top().first);
-    
-      int r=k;
-      int l=0;
-      while(r<n){
-        if(q.empty()){
-            q.push({nums[r],r});
-        }
-        else{
-        while(q.top().second<=l){
-            q.pop();
-            if(q.empty()){
-                break;
-            }
-        }
-        if(!q.empty()){
-        while(nums[r]>q.top().first){
-                    q.pop();
-                    if(q.empty()){
-                        break;
-                    }
+        ans.push_back(pq.top().first);
+     
+        int i=0;
+        for(int j=k;j<nums.size();j++){
+            while(nums[j]>pq.top().first){
+                pq.pop();
+                if(pq.empty()){
+                    break;
                 }
-             q.push({nums[r],r});   
-        }
-        else{
-             q.push({nums[r],r}); 
-        }
-        }
-        
-         l+=1;
-         r+=1;
-         while(q.top().second < l){
-            q.pop();
-         }
+            }
+            pq.push({nums[j],j});
          
-         ans.push_back(q.top().first);
+            while(pq.top().second<=i){
+                pq.pop();
+                if(pq.empty()){
+                    break;
+                }
+            }
+        
+            i+=1;
+            ans.push_back(pq.top().first);
+        }
+
        
 
-      }
-      return ans;
+        return ans;
+
     }
 };
