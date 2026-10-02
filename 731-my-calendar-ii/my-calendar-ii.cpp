@@ -1,36 +1,42 @@
 class MyCalendarTwo {
-public:
-    map<int,int> events;
+private:
+    vector<pair<int, int>> bookings;
+    vector<pair<int, int>> doubleBookings;
 
+public:
     MyCalendarTwo() {
-        
     }
-    
+
     bool book(int startTime, int endTime) {
-        
-        events[startTime]++;
-        events[endTime]--;
-        int cnt=0;
-        for(auto x:events){
-             cnt+=x.second;
-             if(cnt>2){
-                events[startTime]--;
-                events[endTime]++;
-                if(events[startTime]==0){
-                    events.erase(startTime);
-                }
-                if(events[endTime]==0){
-                    events.erase(endTime);
-                }
+
+        // Check if this booking creates a triple booking
+        for (auto interval : doubleBookings) {
+            int start = interval.first;
+            int end = interval.second;
+
+            if (startTime < end && start < endTime) {
                 return false;
-             }
+            }
         }
+
+        // Find newly created double bookings
+        for (auto interval : bookings) {
+            int start = interval.first;
+            int end = interval.second;
+
+            if (startTime < end && start < endTime) {
+                int overlapStart = max(startTime, start);
+                int overlapEnd = min(endTime, end);
+
+                doubleBookings.push_back(
+                    {overlapStart, overlapEnd}
+                );
+            }
+        }
+
+        // Add the new booking
+        bookings.push_back({startTime, endTime});
+
         return true;
     }
 };
-
-/**
- * Your MyCalendarTwo object will be instantiated and called as such:
- * MyCalendarTwo* obj = new MyCalendarTwo();
- * bool param_1 = obj->book(startTime,endTime);
- */
