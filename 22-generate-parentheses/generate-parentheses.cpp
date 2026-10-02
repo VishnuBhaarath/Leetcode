@@ -24,9 +24,9 @@ public:
     }
     void func(int m,int n,int open ,string s){
         if(m==0 && n==0){
-          if(check(s)){
+          
             ans.push_back(s);
-           }
+           
            return;
         }
         if(m>0){
@@ -37,7 +37,7 @@ public:
         }
         if(n>0 && open>0){
             s+=')';
-            func(m,n-1,open,s);
+            func(m,n-1,open-1,s);
             s.pop_back();
         }
 
