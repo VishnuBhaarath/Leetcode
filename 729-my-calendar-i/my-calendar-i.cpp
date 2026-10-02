@@ -6,18 +6,12 @@ public:
     }
     
     bool book(int startTime, int endTime) {
-        vector<pair<int,int>> v=events;
-        events.push_back({startTime,1});
-        events.push_back({endTime,-1});
-        int cnt=0;
-        sort(events.begin(),events.end());
         for(auto x:events){
-            cnt+=x.second;
-            if(cnt>1){
-                events=v;
+            if(startTime<x.second && endTime>x.first){
                 return false;
             }
         }
+        events.push_back({startTime,endTime});
         return true;
     }
 };
