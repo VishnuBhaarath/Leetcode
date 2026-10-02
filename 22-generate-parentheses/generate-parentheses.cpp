@@ -1,47 +1,52 @@
 class Solution {
 public:
     vector<string> ans;
-    bool isvalid(string &s){
-        stack<char> st;
-        for(int j=0;j<s.size();j++){
-            if(st.empty()){
-                st.push(s[j]);
-            }
-            else if(s[j]=='('){
-                st.push(s[j]);
+    int check(string s){
+         stack<char> st;
+         for(int i=0;i<s.size();i++){
+            if(st.empty() || s[i]=='('){
+                st.push(s[i]);
             }
             else{
-                if(st.top()=='('){
+                int tp=st.top();
+                if(tp=='('){
                     st.pop();
                 }
                 else{
                     st.push(')');
                 }
             }
-        }
-        if(st.empty()){
-            return true;
-        }
-        return false;
+         }
+         if(st.empty()){
+            return 1;
+         }
+         return 0;
     }
-    void func(int i,int n,int cnt1,int cnt2,string s){
-        if(cnt1==0 && cnt2==0){
-            if(isvalid(s)){
-                ans.push_back(s);
-            }
-           
+    void func(int m,int n,string s){
+        if(m==0 && n==0){
+          
+           if(check(s)){
+            ans.push_back(s);
+           }
+           return;
+        }
+        if(m>0){
+            s+='(';
+            func(m-1,n,s);
+            s.pop_back();
+
+        }
+        if(n>0){
+            s+=')';
+            func(m,n-1,s);
+            s.pop_back();
         }
 
-        if(cnt1>0){
-            func(i+1,n,cnt1-1,cnt2,s+'(');
-        }
-        if(cnt2>0){
-            func(i+1,n,cnt1,cnt2-1,s+')');
-        }
     }
     vector<string> generateParenthesis(int n) {
-        int i=0;
-        func(i,2*n,n,n,"");
+        string s="";
+        func(n,n,s);
         return ans;
+        
     }
 };
