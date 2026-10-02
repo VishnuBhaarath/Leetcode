@@ -1,23 +1,29 @@
 class MyCalendarTwo {
 public:
-    vector<pair<int,int>> events;
+    map<int,int> events;
 
     MyCalendarTwo() {
         
     }
     
     bool book(int startTime, int endTime) {
-        vector<pair<int,int>> v=events;
-        events.push_back({startTime,1});
-        events.push_back({endTime,-1});
+        
+        events[startTime]++;
+        events[endTime]--;
         int cnt=0;
-        sort(events.begin(),events.end());
         for(auto x:events){
-            cnt+=x.second;
-            if(cnt>2){
-                events=v;
+             cnt+=x.second;
+             if(cnt>2){
+                events[startTime]--;
+                events[endTime]++;
+                if(events[startTime]==0){
+                    events.erase(startTime);
+                }
+                if(events[endTime]==0){
+                    events.erase(endTime);
+                }
                 return false;
-            }
+             }
         }
         return true;
     }
