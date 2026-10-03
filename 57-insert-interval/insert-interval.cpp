@@ -1,27 +1,33 @@
 class Solution {
 public:
     vector<vector<int>> insert(vector<vector<int>>& intervals, vector<int>& newInterval) {
-        map<int,int> umap;
-        for(int i=0;i<intervals.size();i++){
-            umap[intervals[i][0]]+=1;
-            umap[intervals[i][1]]-=1;
-        }
-      umap[newInterval[0]]+=1;
-umap[newInterval[1]]-=1;
+        int l=newInterval[0];
+        int r=newInterval[1];
         vector<vector<int>> ans;
-        vector<int> v;
-        int cnt=0;
-        for(auto x:umap){
-             if(v.size()==0){
-                v.push_back(x.first);
-             }
-             cnt+=x.second;
-             if(cnt==0){
-                v.push_back(x.first);
-                ans.push_back(v);
-                v.clear();
-             }
+        int idx=-1;
+        for(int i=0;i<intervals.size();i++){
+            if(intervals[i][1]<l){
+                ans.push_back({intervals[i][0],intervals[i][1]});
+            }
+            else if(l<=intervals[i][1] && r>=intervals[i][0]){
+                l=min(l,intervals[i][0]);
+                r=max(r,intervals[i][1]);
+            }
+            else if(intervals[i][0]>r){
+                idx=i;
+                
+                ans.push_back({l,r});
+                break;
+            }
         }
+        if(idx==-1){
+            ans.push_back({l,r});
+        }
+        for(int i=idx;i<intervals.size();i++){
+            ans.push_back({intervals[i][0],intervals[i][1]});
+        }
+
         return ans;
+
     }
 };
