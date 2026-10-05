@@ -15,12 +15,7 @@ public:
         
         }
         sort(v.begin(),v.end());
-        for(int i=0;i<v.size();i++){
-            cout<<v[i][0];
-            cout<<" ";
-            cout<<v[i][1];
-            cout<<"\n";
-        }
+        
         if(v[0][0]>0){
             return -1;
         }
