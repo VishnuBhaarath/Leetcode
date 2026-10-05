@@ -1,22 +1,33 @@
 class Solution {
 public:
     int minMoves(vector<int>& nums, int limit) {
-         int N = nums.size();
-    vector<int> memo(limit*2 + 2, 0);
-    for (int i = 0; i < N/2; ++i) {
-        int l = nums[i], r = nums[N-1-i];
-        --memo[min(l, r) + 1];
-        --memo[l + r];
-        ++memo[l + r + 1];
-        ++memo[max(l, r) + limit + 1];
-    }
+        int n = nums.size();
+        int ans = INT_MAX;
 
- 
-    int ans = N, curr = N;
-    for (int i = 2; i <= limit*2; ++i) {
-        curr += memo[i];
-        ans = min(ans, curr);
-    }
-    return ans;
+        vector<vector<int>> v;
+        map<int,int> umap;
+        for (int j = 0; j < n / 2; j++) {
+            int val1 = nums[j];
+            int val2 = nums[n - 1 - j];
+            int temp1 = min(val1, val2);
+            int temp2 = max(val1, val2);
+            int l=temp1+1;
+            int r=temp2+limit;
+            umap[l]-=1;
+            umap[r+1]+=1;
+            umap[val1+val2]-=1;
+            umap[val1+val2+1]+=1;
+           
+        }
+        int cnt=n;
+      //  sort(v.begin(),v.end());
+      
+        for(auto x:umap){
+        
+            cnt+=x.second;
+            ans=min(ans,cnt);
+        }
+
+        return ans;
     }
 };
