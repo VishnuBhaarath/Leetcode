@@ -23,13 +23,9 @@ public:
             }
             else if(v2[i]!=0 && cnt!=0){
                 if(idx!=-1){
-                    cout<<idx;
-                    cout<<" ";
-                    cout<<i;
-                    cout<<" ";
-                    cout<<cnt;
+                  
                     ans.push_back({idx,i,cnt});
-                    cout<<"\n";
+                    
                 }
                 cnt+=v[i];
                 idx=i;
