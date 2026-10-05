@@ -4,7 +4,7 @@ public:
         int n = nums.size();
         int ans = INT_MAX;
 
-        vector<vector<int>> v;
+      
         map<int,int> umap;
         for (int j = 0; j < n / 2; j++) {
             int val1 = nums[j];
