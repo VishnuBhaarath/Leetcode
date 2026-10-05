@@ -1,14 +1,13 @@
 class Solution {
 public:
     int maxSumRangeQuery(vector<int>& nums, vector<vector<int>>& requests) {
-        map<int,int> umap;
+    
         int n=nums.size();
         vector<int> v(n+1,0);
         for(int i=0;i<requests.size();i++){
             int l=requests[i][0];
             int r=requests[i][1];
-            umap[l]+=1;
-            umap[r+1]-=1;
+          
             v[l]+=1;
             v[r+1]-=1;
         }
