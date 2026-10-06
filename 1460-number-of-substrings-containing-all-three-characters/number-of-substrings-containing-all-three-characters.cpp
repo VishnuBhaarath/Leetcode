@@ -19,12 +19,9 @@ public:
                 cntC+=1;
             }
             while(cntA>=1 && cntB>=1 && cntC>=1){
-                cout<<i;
-                cout<<" ";
-                cout<<j;
-                cout<<" ";
+                
                 cnt+=(n-j);
-                cout<<"\n";
+               
 
                 if(s[i]=='a'){
                     cntA-=1;
