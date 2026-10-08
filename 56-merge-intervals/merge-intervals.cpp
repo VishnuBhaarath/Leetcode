@@ -1,26 +1,22 @@
 class Solution {
 public:
     vector<vector<int>> merge(vector<vector<int>>& intervals) {
-        map<int,int> umap;
-        for(int i=0;i<intervals.size();i++){
-            umap[intervals[i][0]]++;
-            umap[intervals[i][1]]--;
+        vector<vector<int>> v;
+        sort(intervals.begin(),intervals.end());
+        int start=intervals[0][0];
+        int end=intervals[0][1];
+        for(int i=1;i<intervals.size();i++){
+            if(intervals[i][0]>end){
+                v.push_back({start,end});
+                start=intervals[i][0];
+                end=intervals[i][1];
+            }
+            else{
+                start=min(start,intervals[i][0]);
+                end=max(end,intervals[i][1]);
+            }
         }
-        vector<vector<int>> ans;
-        int cnt=0;
-        vector<int> v;
-
-        for(auto x:umap){
-          if(v.size()==0){
-             v.push_back(x.first);
-          }
-          cnt+=x.second;
-          if(cnt==0){
-            v.push_back(x.first);
-            ans.push_back(v);
-            v.clear();
-          }
-        }
-        return ans;
+        v.push_back({start,end});
+        return v;
     }
 };
