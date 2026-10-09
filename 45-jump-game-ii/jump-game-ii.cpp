@@ -4,21 +4,31 @@ public:
         int n=nums.size();
         vector<int> dp(n,-1);
         dp[0]=0;
-        for(int i=0;i<nums.size();i++){
-             if(dp[i]!=-1){
-             int k=min(n-1,i+nums[i]);
-             for(int j=i+1;j<=k;j++){
-                 if(dp[j]==-1){
-                    dp[j]=1+dp[i];
-                 }
-                 else{
-                    dp[j]=min(dp[j],1+dp[i]);
-                 }
-             }
-             
-             }
+        int cnt=0;
+        if(n==1){
+            return 0;
+        }
+        int r=min(nums[0],n-1);
+        int i=1;
+        int r1=0;
+        cnt+=1;
+        while(i<=r){
+            r1=max(r1,(i+nums[i]));
+            if(i==n-1){
+                return cnt;
+            }
+            if(i==r){
+                r=r1;
+                r=min(r,n-1);
+                r1=0;
+                cnt+=1;
+            }
+            i+=1;
 
         }
-        return dp[n-1];
+
+
+        return 2;
+       
     }
 };
