@@ -34,10 +34,7 @@ public:
                     return -1;
                  }
              }
-             cout<<startFuel;
-             cout<<" ";
-             cout<<cnt;
-             cout<<"\n";
+            
         }
         return cnt;
     }
