@@ -1,33 +1,54 @@
 class Solution {
 public:
     vector<int> maxSlidingWindow(vector<int>& nums, int k) {
-        deque<int> q;
-        vector<int> ans;
-        int i=0;
-        for(int j=0;j<nums.size();j++){
-             if(q.empty()){
-                q.push_back(j);
+        priority_queue<pair<int,int>> pq;
+        int l=0;
+        int r=0;
+        int n=nums.size();
+        vector<int> v;
+        while(r<n){
+            if(r-l+1<=k){
+             if(pq.empty()){
+                pq.push({nums[r],r});
+             }
+             else if(nums[r]<pq.top().first){
+                pq.push({nums[r],r});
              }
              else{
-                while(nums[j]>nums[q.back()]){
-                    q.pop_back();
-                    if(q.empty()){
+                while(nums[r]>=pq.top().first){
+                    pq.pop();
+                    if(pq.empty()){
                         break;
                     }
                 }
-                q.push_back(j);
+                pq.push({nums[r],r});
+              
+               
              }
-             while(q.front()<i){
-                q.pop_front();
+              if(r-l+1==k){
+                  
+                    v.push_back(pq.top().first);
+                }
              }
-             if(j-i+1>=k){
-                ans.push_back(nums[q.front()]);
-                i+=1;
+             else{
+                 while(pq.top().second<=l){
+                    pq.pop();
+                    if(pq.empty()){
+                        break;
+                    }
+                 }
+                 pq.push({nums[r],r});
+                 l+=1;
+              
+                  if(r-l+1==k){
+                     cout<<pq.top().first;
+                   
+                    v.push_back(pq.top().first);
+                }
+           
              }
-
-             
+            r+=1;
         }
-        return ans;
-
+        return v;
     }
 };
