@@ -41,7 +41,7 @@ public:
                  l+=1;
               
                   if(r-l+1==k){
-                     cout<<pq.top().first;
+                    
                    
                     v.push_back(pq.top().first);
                 }
