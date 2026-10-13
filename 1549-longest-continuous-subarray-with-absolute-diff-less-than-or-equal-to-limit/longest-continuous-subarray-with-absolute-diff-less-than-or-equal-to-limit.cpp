@@ -15,10 +15,7 @@ public:
                 pq1.push({nums[r],r});
             }
             else{
-               cout<<pq.top().first;
-               cout<<" ";
-               cout<<pq1.top().first;
-               cout<<" ";
+              
                int t=0;
                while(abs(pq.top().first-nums[r])>limit){
                     l=max(l,pq.top().second);
