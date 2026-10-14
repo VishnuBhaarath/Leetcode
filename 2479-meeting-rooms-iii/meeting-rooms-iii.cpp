@@ -1,53 +1,36 @@
 class Solution {
 public:
     int mostBooked(int n, vector<vector<int>>& meetings) {
-         vector<int> v(n, 0);
-
-        // (time room becomes free, room index); long long to avoid overflow
+        vector<int> v(n+1,0);
+        
+        priority_queue<int,vector<int>,greater<int>> pq1;
         priority_queue<pair<long long,int>, vector<pair<long long,int>>, greater<pair<long long,int>>> pq;
-
-        for(int i = 0; i < n; i++){
-            pq.push({0, i});
+        for(int i=0;i<n;i++){
+            pq1.push(i);
         }
-        sort(meetings.begin(), meetings.end());
-
-        for(int i = 0; i < meetings.size(); i++){
-
-            queue<pair<long long,int>> q;
-            int t = -1;
-            while(pq.top().first <= meetings[i][0]){
-                q.push({pq.top().first, pq.top().second});
-                if(t == -1){
-                    t = pq.top().second;
-                }
-                else{
-                    t = min(t, pq.top().second);
-                }
+        sort(meetings.begin(),meetings.end());
+        for(int i=0;i<meetings.size();i++){
+            if(!pq.empty()){
+                 while(pq.top().first<=meetings[i][0]){
+                     pq1.push(pq.top().second);
+                     pq.pop();
+                     if(pq.empty()){
+                        break;
+                     }
+                 }
+            }
+            if(pq1.empty()){
+                long long st=pq.top().first;
+                int idx=pq.top().second;
                 pq.pop();
-                if(pq.empty()){
-                    break;
-                }
+                v[idx]+=1;
+                pq.push({st+(meetings[i][1]-meetings[i][0]),idx});
             }
-            if(t != -1){
-                v[t] += 1;
-            }
-            while(!q.empty()){
-                if(q.front().second != t){
-                    pq.push({q.front().first, q.front().second});
-                }
-                else{
-                    // room is free, so the meeting starts on time and ends at meetings[i][1]
-                    pq.push({meetings[i][1], q.front().second});
-                }
-                q.pop();
-            }
-            if(t == -1){
-                long long tp = pq.top().first;
-                int idx = pq.top().second;
-                pq.pop();
-                v[idx] += 1;
-                // delayed meeting keeps its duration
-                pq.push({tp + (meetings[i][1] - meetings[i][0]), idx});
+            else{
+                int idx=pq1.top();
+                v[idx]+=1;
+                pq.push({meetings[i][1],idx});
+                pq1.pop();
             }
         }
 
