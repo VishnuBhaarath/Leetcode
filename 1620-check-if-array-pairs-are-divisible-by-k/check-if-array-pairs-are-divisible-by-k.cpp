@@ -7,10 +7,7 @@ public:
             umap[r]+=1;
         }
         for(auto x:umap){
-            cout<<x.first;
-            cout<<" ";
-            cout<<x.second;
-            cout<<" ";
+          
             if(x.first==0){
                 if(x.second%2!=0){
                     return false;
@@ -25,7 +22,7 @@ public:
                 }
                 
             }
-            cout<<"\n";
+          
         }
         return true;
     }
