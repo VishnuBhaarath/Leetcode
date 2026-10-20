@@ -4,7 +4,8 @@ public:
         stack<char> s;
         for(int i=0;i<num.size();i++){
             if(s.empty()){
-                s.push(num[i]);
+                if(num[i]!='0'){
+                s.push(num[i]);}
             }
             else{
                 if(s.top()-'0'<= num[i]-'0'){
@@ -21,7 +22,15 @@ public:
                             break;
                         }
                     }
-                    s.push(num[i]);
+                    if(s.empty()){
+                        if(num[i]!='0'){
+s.push(num[i]);
+                        }
+                    }
+                    else{
+                        s.push(num[i]);
+                    }
+                    
                 }
                 else{
                     s.push(num[i]);
@@ -32,6 +41,9 @@ public:
      
         string ans="";
         while(k>0){
+            if(s.empty()){
+                break;
+            }
             s.pop();
             k-=1;
             if(s.empty()){
@@ -44,20 +56,10 @@ public:
                     }
                     reverse(ans.begin(),ans.end());
 
-        string ans1="";
-        for(int i=0;i<ans.size();i++){
-            if(ans1.size()==0){
-                if(ans[i]!='0'){
-                    ans1+=ans[i];
-                }
-            }
-            else{
-                ans1+=ans[i];
-            }
-        }
-        if(ans1.size()==0){
+       
+        if(ans.size()==0){
             return "0";
         }
-        return ans1;
+        return ans;
     }
 };
