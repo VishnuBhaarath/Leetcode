@@ -29,8 +29,7 @@ public:
 
             }
         }
-        cout<<s.size();
-        cout<<"\n";
+     
         string ans="";
         while(k>0){
             s.pop();
