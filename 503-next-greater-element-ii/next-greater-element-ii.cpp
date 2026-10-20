@@ -5,28 +5,27 @@ public:
         int n=nums.size();
         vector<int> ans(n,-1);
         v=nums;
-        for(int i=0;i<nums.size();i++){
-            v.push_back(nums[i]);
-        }
+       
         stack<int> s;
-        for(int i=0;i<v.size();i++){
+        for(int i=0;i<(2*n);i++){
+            int j=i%n;
             if(s.empty()){
-                s.push(i);
+                s.push(j);
             }
-            else if(v[i]<=v[s.top()]){
-                s.push(i);
+            else if(v[j]<=v[s.top()]){
+                s.push(j);
             }
             else{
-                 while(v[i]>v[s.top()]){
+                 while(v[j]>v[s.top()]){
                     if(s.top()<n){
-                        ans[s.top()]=v[i];
+                        ans[s.top()]=v[j];
                     }
                     s.pop();
                     if(s.empty()){
                         break;
                     }
                  }
-                 s.push(i);
+                 s.push(j);
             }
         }
         return ans;
