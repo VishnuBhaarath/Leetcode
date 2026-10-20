@@ -1,61 +1,64 @@
 class Solution {
 public:
     string removeKdigits(string num, int k) {
-        stack<char> st;
-        for (int i = 0; i < num.size(); i++) {
-            if (st.empty()) {
-                if(num[i]=='0'){
-                    continue;
-                }
-                st.push(num[i]);
+        stack<char> s;
+        for(int i=0;i<num.size();i++){
+            if(s.empty()){
+                s.push(num[i]);
             }
-            else if (num[i] >= st.top()) {
-                st.push(num[i]);
-            } else {
-                if (k > 0) {
-                    while (num[i] < st.top()) {
-                        st.pop();
-                        k -= 1;
-                        if (st.empty()) {
+            else{
+                if(s.top()-'0'<= num[i]-'0'){
+                    s.push(num[i]);
+                }
+                else if(k>0){
+                    while(s.top()-'0' > num[i]-'0'){
+                        s.pop();
+                        k-=1;
+                        if(s.empty()){
                             break;
                         }
                         if(k==0){
                             break;
                         }
                     }
-                    if(st.empty()){
-                      if(num[i]!='0'){
-                        st.push(num[i]);
-                      }
-                    }
-                    else{
-                    st.push(num[i]);}
-                } else {
-                    st.push(num[i]);
+                    s.push(num[i]);
                 }
+                else{
+                    s.push(num[i]);
+                }
+
             }
-           
         }
+        cout<<s.size();
+        cout<<"\n";
+        string ans="";
         while(k>0){
-            if(st.empty()){
-                k=0;
+            s.pop();
+            k-=1;
+            if(s.empty()){
                 break;
             }
-            st.pop();
-            k-=1;
         }
-        string ans="";
-        while(!st.empty()){
-          
-            ans+=st.top();
-            st.pop();
-        }
-        reverse(ans.begin(),ans.end());
-        if(ans.size()==0){
-            ans+='0';
-        }
-        
+        while(!s.empty()){
+            ans+=s.top();
+            s.pop();
+                    }
+                    reverse(ans.begin(),ans.end());
 
-        return ans;
+        string ans1="";
+        for(int i=0;i<ans.size();i++){
+            if(ans1.size()==0){
+                if(ans[i]!='0'){
+                    ans1+=ans[i];
+                }
+            }
+            else{
+                ans1+=ans[i];
+            }
+        }
+        if(ans1.size()==0){
+            return "0";
+        }
+        return ans1;
     }
 };
