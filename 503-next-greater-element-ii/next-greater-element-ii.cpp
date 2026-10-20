@@ -1,51 +1,30 @@
 class Solution {
 public:
     vector<int> nextGreaterElements(vector<int>& nums) {
-        stack<int> s;
+        vector<int> v;
         int n=nums.size();
-        s.push(n-1);
-        for(int i=n-2;i>=0;i--){
+        vector<int> ans(n,-1);
+        v=nums;
+        for(int i=0;i<nums.size();i++){
+            v.push_back(nums[i]);
+        }
+        stack<int> s;
+        for(int i=0;i<v.size();i++){
             if(s.empty()){
                 s.push(i);
             }
-            else if(nums[i]==nums[s.top()]){
+            else if(v[i]<=v[s.top()]){
                 s.push(i);
             }
             else{
-                while(nums[i]>=nums[s.top()]){
+                 while(v[i]>v[s.top()]){
+                    if(s.top()<n){
+                        ans[s.top()]=v[i];
+                    }
                     s.pop();
                     if(s.empty()){
                         break;
                     }
-
-                }
-                s.push(i);
-            }
-
-        }
-       
-        vector<int> ans(n,-1);
-        for(int i=n-1;i>=0;i--){
-            if(s.empty()){
-                s.push(i);
-                ans[i]=-1;
-            }
-            else if(nums[i]<nums[s.top()]){
-                ans[i]=nums[s.top()];
-                s.push(i);
-            }
-            else{
-                 while(nums[i]>=nums[s.top()]){
-                    s.pop();
-                    if(s.empty()){
-                      break;
-                    }
-                 }
-                 if(s.empty()){
-                    ans[i]=-1;
-                 }
-                 else{
-                    ans[i]=nums[s.top()];
                  }
                  s.push(i);
             }
