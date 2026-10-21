@@ -1,70 +1,84 @@
 class Solution {
 public:
-    int largestRectangleArea(vector<int>& heights) {
-        int area=0;
-        int n=heights.size();
-        int marea=0;
+    int largestRectangleArea(vector<int>& arr) {
+        
+
+
+         int n=arr.size();
+        vector<int> l(n,-1);
+        vector<int> r(n,-1);
+
         stack<int> s;
-        for(int i=0;i<heights.size();i++){
-           if(s.empty()){
-             s.push(i);
-           }
-           else{
-              if(heights[i]>=heights[s.top()]){
+        for(int i=0;i<arr.size();i++){
+            if(s.empty()){
                 s.push(i);
-              }
-              else{
-                while(heights[s.top()]> heights[i]){
-                     int tp=s.top();
-                     int h=heights[s.top()];
-                    
-                     int w=i-s.top();
-                      s.pop();
-                      int tp1=-1;
-                      if(!s.empty()){
-                        tp1=s.top();
-                      }
-                      w+=(tp-tp1-1);
-
-                     int area=h*w;
-                     marea=max(marea,area);
-                     
-                     if(s.empty()){
-                        break;
-                     }
+            }
+            else{
+                if(arr[s.top()]<arr[i]){
+                    s.push(i);
                 }
-                s.push(i);
-                
-              }
-           }
+                else{
+                    while(arr[s.top()]>=arr[i]){
+                        l[s.top()]=i;
+                        s.pop();
+                        if(s.empty()){
+                            break;
+                        }
+                    }
+                    s.push(i);
+                }
+            }
         }
-       
-        vector<int> v;
-        while(!s.empty()){
-           v.push_back(s.top());
-           s.pop();
-        }
-        int m=v.size();
-        reverse(v.begin(),v.end());
-        int r=v[m-1];
-        int l=0;
-        for(int i=m-1;i>=0;i--){
-              int w=r-v[i];
-              w+=1;
-              if(i==0){
-                w+=(v[i]-l);
-              }
-              else{
-                int d=v[i]-v[i-1];
-                d-=1;
-                w+=d;
-              }
-              int h=heights[v[i]];
-              int area=h*w;
-             
-              marea=max(marea,area);
 
+      
+        stack<int> s1;
+        for(int i=n-1;i>=0;i--){
+            if(s1.empty()){
+                s1.push(i);
+            }
+            else{
+                if(arr[s1.top()]<=arr[i]){
+                    s1.push(i);
+                }
+                else{
+                    while(arr[s1.top()]>arr[i]){
+                        r[s1.top()]=i;
+                        s1.pop();
+                        if(s1.empty()){
+                            break;
+                        }
+                    }
+                    s1.push(i);
+                }
+            }
         }
-        return marea;
+        int ans=0;
+        for(int i=0;i<l.size();i++){
+            int l1=l[i];
+            int r1=r[i];
+            int w=1;
+            if(r1!=-1 && l1!=-1){
+                cout<<"one";
+                w=(l1-r1-1);
+            }
+            else if(r1==-1 && l1!=-1){
+                 cout<<"two";
+                w=i+(l1-i);
+            }
+            else if(l1==-1 && r1!=-1){
+                cout<<"three";
+                w=(n-i)+(i-r1)-1;
+            }
+            else if(l1==-1 && r1==-1){
+                cout<<"four";
+                w=n;
+            }
+         
+            int area=arr[i]*w;
+            ans=max(ans,area);
+            
+        }
+
+        return ans;
     }
 };
