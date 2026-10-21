@@ -58,19 +58,19 @@ public:
             int r1=r[i];
             int w=1;
             if(r1!=-1 && l1!=-1){
-                cout<<"one";
+             
                 w=(l1-r1-1);
             }
             else if(r1==-1 && l1!=-1){
-                 cout<<"two";
+                 
                 w=i+(l1-i);
             }
             else if(l1==-1 && r1!=-1){
-                cout<<"three";
+               
                 w=(n-i)+(i-r1)-1;
             }
             else if(l1==-1 && r1==-1){
-                cout<<"four";
+               
                 w=n;
             }
          
