@@ -20,7 +20,7 @@ public:
                 }
             }
         }
-        cout<<st.size();
+       
         int q=st.size()/2;
         int ans=q/2;
         if(q%2!=0){
