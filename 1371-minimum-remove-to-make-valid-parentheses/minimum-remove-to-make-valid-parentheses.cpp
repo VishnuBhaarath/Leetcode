@@ -2,6 +2,7 @@ class Solution {
 public:
     string minRemoveToMakeValid(string s) {
         stack<int> st;
+        int n=s.size();
         for(int i=0;i<s.size();i++){
             if(s[i]=='(' || s[i]==')'){
                 if(st.empty()){
@@ -22,14 +23,14 @@ public:
                 }
             }
         }
-        map<int,int> umap;
+        vector<int> v(n,0);
         while(!st.empty()){
-            umap[st.top()]+=1;
+            v[st.top()]+=1;
             st.pop();
         }
         string s1;
         for(int i=0;i<s.size();i++){
-            if(umap[i]==0){
+            if(v[i]==0){
                 s1+=s[i];
             }
         }
