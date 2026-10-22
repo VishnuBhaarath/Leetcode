@@ -16,10 +16,7 @@ public:
                 }
             }
         }
-        cout<<s.size();
-        cout<<" ";
-        cout<<s1.size();
-        cout<<"\n";
+       
         while(!s.empty() && !s1.empty()){
             int tp=s1.top();
             while(tp<s.top()){
