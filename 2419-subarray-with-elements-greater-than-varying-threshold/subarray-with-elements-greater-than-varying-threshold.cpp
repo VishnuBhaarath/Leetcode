@@ -2,8 +2,7 @@ class Solution {
 public:
     int validSubarraySize(vector<int>& arr, int threshold) {
         int n=arr.size();
-        cout<<n;
-        cout<<"\n";  
+      
         vector<int> l(n,-1);
         vector<int> r(n,-1);
 
