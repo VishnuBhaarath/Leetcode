@@ -5,22 +5,22 @@ public:
         map<int,int> umap;
         int k=0;
         int sz=0;
-
+        int ans=-1;
         for(int i=0;i<arr.size();i++){
-            umap[arr[i]]+=1;
+           umap[arr[i]]+=1;
+            ans=max(ans,arr[i]);
             sz+=1;
-            if(umap[k]==1){
+            if(umap[k]>0){
                 int t=0;
-                for(int j=k;j<=(k+sz-1);j++){
-                    if(umap[j]==0){
-                        t=1;
-                        break;
-                    }
+                if(k+sz-1!=ans){
+                    t=1;
                 }
+               
                 if(t==0){
                     k+=sz;
                     sz=0;
                     cnt+=1;
+                    ans=-1;
                     
                 }
             }
