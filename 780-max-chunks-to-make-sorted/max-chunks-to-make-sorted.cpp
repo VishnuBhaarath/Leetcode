@@ -2,7 +2,7 @@ class Solution {
 public:
     int maxChunksToSorted(vector<int>& arr) {
         int cnt=0;
-        map<int,int> umap;
+        unordered_map<int,int> umap;
         int k=0;
         int sz=0;
         int ans=-1;
