@@ -1,22 +1,46 @@
 class Solution {
 public:
-    vector<double> getCollisionTimes(vector<vector<int>>& A) {
-        int n = A.size();
-        vector<int> stack;
-        vector<double> res(n, -1);
-        for (int i = n - 1; i >= 0; --i) {
-            int p = A[i][0], s = A[i][1];
-            while (!stack.empty()) {
-                int j = stack.back(), p2 = A[j][0], s2 = A[j][1];
-                if (s <= s2 || 1.0 * (p2 - p) / (s - s2) >= res[j] && res[j] > 0)
-                    stack.pop_back();
-                else
-                    break;
+    vector<double> getCollisionTimes(vector<vector<int>>& cars) {
+         int n = cars.size();
+        vector<double> ans(n, -1.0);     // -1 means "never collides"
+        stack<int> st;                   // candidate target cars ahead, nearest on top
+
+        for (int i = n - 1; i >= 0; i--) {
+            double pos   = cars[i][0];
+            double speed = cars[i][1];
+
+            // Remove targets that car i cannot actually hit
+            while (!st.empty()) {
+                int j = st.top();
+                double posAhead   = cars[j][0];
+                double speedAhead = cars[j][1];
+
+                // Rule 1: i is not faster, so it can never catch j
+                bool cannotCatch = (speed <= speedAhead);
+
+                // Rule 2: j merges into another car before i reaches it
+                bool alreadyMerged = false;
+                if (!cannotCatch) {
+                    double timeToReach = (posAhead - pos) / (speed - speedAhead);
+                    bool jMergesLater = (ans[j] != -1);
+                    alreadyMerged = jMergesLater && timeToReach >= ans[j];
+                }
+
+                if (cannotCatch || alreadyMerged) {
+                    st.pop();            // j is useless for i and for all cars behind i
+                } else {
+                    break;               // j is a valid target
+                }
             }
-            if (!stack.empty())
-                res[i] = 1.0 * (A[stack.back()][0] - p) / (s - A[stack.back()][1]);
-            stack.push_back(i);
+
+            // Whatever is on top now is the car i collides with
+            if (!st.empty()) {
+                int j = st.top();
+                ans[i] = (cars[j][0] - pos) / (speed - cars[j][1]);
+            }
+
+            st.push(i);                  // always push, even if ans[i] == -1
         }
-        return res;
+        return ans;
     }
 };
