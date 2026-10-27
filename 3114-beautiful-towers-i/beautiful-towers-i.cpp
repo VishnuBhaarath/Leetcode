@@ -1,40 +1,58 @@
 class Solution {
-public:
-    long long maximumSumOfHeights(vector<int>& heights) {
-        stack<int> s;
-        int n=heights.size();
-        long long ans=INT_MIN;
-        for(int i=0;i<heights.size();i++){
-            int l=heights[i];
-            long long val=0;
-            for(int j=i-1;j>=0;j--){
-                if(heights[j]>l){
-                    val+=l;
-                }
-                else{
-                    val+=heights[j];
-                     l=heights[j];
-                }
-               
-            }
-            int r=heights[i];
-            for(int j=i+1;j<n;j++){
-                if(heights[j]>r){
-                    val+=r;
-                }
-                else{
-                    val+=heights[j];
-                     r=heights[j];
-                }
-               
-            }
-              val+=heights[i];
-           
-          
-            ans=max(ans,val);
 
+     vector<long long> bestSumEndingAt(const vector<int>& h) {
+        int n = h.size();
+        vector<long long> best(n);
+
+        stack<int> st;          // indices with non-decreasing heights
+        st.push(-1);            // sentinel: "nothing to the left"
+        long long total = 0;    // sum of all blocks currently on the stack
+
+        for (int i = 0; i < n; i++) {
+
+            // Taller towers on the left get clamped down to h[i],
+            // so remove the block each one was contributing
+            while (st.top() != -1 && h[st.top()] > h[i]) {
+                int j = st.top();
+                st.pop();
+                int below = st.top();
+                long long blockLength = j - below;
+                total -= blockLength * h[j];
+            }
+
+            // Now positions (below+1 .. i) all have height h[i]
+            int below = st.top();
+            long long blockLength = i - below;
+            total += blockLength * h[i];
+
+            st.push(i);
+            best[i] = total;
         }
+        return best;
+    }
+    
+public:
 
-        return ans;
+    long long maximumSumOfHeights(vector<int>& heights) {
+        int n = heights.size();
+
+        // left side: peak at i, looking at towers 0..i
+        vector<long long> left = bestSumEndingAt(heights);
+
+        // right side: reverse the array, reuse the same function, reverse back
+        vector<int> reversed(heights.rbegin(), heights.rend());
+        vector<long long> right = bestSumEndingAt(reversed);
+        reverse(right.begin(), right.end());
+
+        long long answer = 0;
+        for (int i = 0; i < n; i++) {
+            // tower i is counted in both left[i] and right[i], so subtract once
+            answer = max(answer, left[i] + right[i] - heights[i]);
+        }
+        return answer;
+        
+
+
+       
     }
 };
