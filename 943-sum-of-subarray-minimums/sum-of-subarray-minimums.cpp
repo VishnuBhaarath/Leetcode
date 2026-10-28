@@ -4,67 +4,87 @@ public:
         int n=arr.size();
         vector<int> l(n,-1);
         vector<int> r(n,-1);
-
-        stack<int> s;
+        stack<int> st;
         for(int i=0;i<arr.size();i++){
-            if(s.empty()){
-                s.push(i);
+            if(st.empty()){
+                st.push(i);
+            }
+            else if(arr[i]>arr[st.top()]){
+                int tp=st.top();
+                l[i]=tp;
+                st.push(i);
+                //st.push(i);
             }
             else{
-                if(arr[s.top()]<arr[i]){
-                    s.push(i);
-                }
-                else{
-                    while(arr[s.top()]>=arr[i]){
-                        l[s.top()]=i;
-                        s.pop();
-                        if(s.empty()){
-                            break;
-                        }
+                while(arr[i]<=arr[st.top()]){
+                    st.pop();
+                    if(st.empty()){
+                        break;
                     }
-                    s.push(i);
                 }
+                if(!st.empty()){
+                    l[i]=st.top();
+                }
+                st.push(i);
             }
         }
 
-      
-        stack<int> s1;
-        for(int i=n-1;i>=0;i--){
-            if(s1.empty()){
-                s1.push(i);
-            }
-            else{
-                if(arr[s1.top()]<=arr[i]){
-                    s1.push(i);
-                }
-                else{
-                    while(arr[s1.top()]>arr[i]){
-                        r[s1.top()]=i;
-                        s1.pop();
-                        if(s1.empty()){
-                            break;
-                        }
-                    }
-                    s1.push(i);
-                }
-            }
-        }
-        long long sum=0;
-        int mod=1e9+7;
        
+       
+        while(!st.empty()){
+            st.pop();
+        }
 
-        for(int i=0;i<l.size();i++){
-            if(l[i]!=-1){
-                long long count=(i-r[i])*(l[i]-i);
-                sum=(sum+ (count*arr[i]));
-                sum%=mod;
+        for(int i=n-1;i>=0;i--){
+            if(st.empty()){
+                st.push(i);
+            }
+            else if(arr[i]>=arr[st.top()]){
+                int tp=st.top();
+                r[i]=tp;
+                st.push(i);
+                //st.push(i);
             }
             else{
-                long long count=(i-r[i])*(n-i);
-                sum=(sum+(count*arr[i]));
-                sum%=mod;
+                while(arr[i]<arr[st.top()]){
+                    st.pop();
+                    if(st.empty()){
+                        break;
+                    }
+                }
+                if(!st.empty()){
+                    r[i]=st.top();
+                }
+                st.push(i);
             }
+
         }
+
+         long long sum=0;
+         int mod=1e9+7;
+        for(int i=0;i<r.size();i++){
+            long long int l1=0;
+            if(l[i]==-1){
+                l1=i+1;
+            }
+            else{
+                l1=(i-l[i]);
+               // l1+=1;
+            }
+            long long int r1=0;
+            if(r[i]==-1){
+                r1=(n-i);
+            }
+            else{
+                r1=r[i]-i;
+            }
+            long long val=arr[i]*(l1*r1);
+          
+            sum+=val;
+            sum%=mod;
+            
+        }
+       
 
         return sum;
     }
