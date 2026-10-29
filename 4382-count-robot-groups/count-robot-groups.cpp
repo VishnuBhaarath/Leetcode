@@ -21,12 +21,7 @@ public:
         }
         v.push_back({v1[idx][0],v1[idx][1]});
 
-        for(int i=0;i<v.size();i++){
-            cout<<v[i].first;
-            cout<<" ";
-            cout<<v[i].second;
-            cout<<"\n";
-        }
+      
 
         stack<pair<int,int>> st;
         int n=v.size();
@@ -38,13 +33,7 @@ public:
                 st.push({v[i].first,v[i].second});
             }
             else{
-                while(st.top().second>v[i].second){
-                    st.pop();
-                    if(st.empty()){
-                        st.push({v[i].first,v[i].second});
-                        break;
-                    }
-                }
+               
             }
         }
 
