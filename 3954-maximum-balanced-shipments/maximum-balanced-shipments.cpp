@@ -3,18 +3,17 @@ public:
     int maxBalancedShipments(vector<int>& weight) {
         int cnt=0;
         stack<int> s;
+        int prev=-1;
         for(int i=0;i<weight.size();i++){
-            if(s.empty()){
-                s.push(weight[i]);
+            if(prev==-1){
+              prev=weight[i];
             }
-            else if(weight[i]>=s.top()){
-                s.push(weight[i]);
+            else if(weight[i]>=prev){
+                prev=weight[i];
             }
             else{
                 cnt+=1;
-                while(!s.empty()){
-                    s.pop();
-                }
+                prev=-1;
             }
         }
         return cnt;
