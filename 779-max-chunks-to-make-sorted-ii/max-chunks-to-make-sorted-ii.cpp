@@ -26,11 +26,7 @@ public:
             }
         }
         int ans=st.size();
-        while(!st.empty()){
-            cout<<st.top();
-            cout<<"\n";
-            st.pop();
-        }
+      
 
         return ans;
         
