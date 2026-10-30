@@ -1,27 +1,38 @@
 class Solution {
 public:
-    int maxChunksToSorted(vector<int>& arr) {
-       int n=arr.size();
-        vector<pair<int, int>> v;
-        for (int i = 0; i < n; i++) {
-          v.push_back({arr[i], i});
-        }
-        sort(v.begin(), v.end());
-        vector<int> arr1(n);
-       for (int i = 0; i < n; i++) {
-        arr1[v[i].second] = i;
-       }
-       
-        int ans=-1;
-        int cnt=0;
-        for(int i=0;i<arr1.size();i++){
-            ans=max(ans,arr1[i]);
-            if(ans==i){
-                cnt+=1;
+    int maxChunksToSorted(vector<int>& nums) {
+        stack<int> st;
+        int n=nums.size();
+        for(int i=0;i<n;i++){
+            if(st.empty()){
+                st.push(nums[i]);
+            }
+            else if(nums[i]>=st.top()){
+                st.push(nums[i]);
+            }
+            else{
+                int tp=st.top();
+                st.pop();
+                if(!st.empty()){
+                    while(nums[i]<st.top()){
+                        st.pop();
+                        if(st.empty()){
+                            break;
+                        }
+                    }
+                }
+                st.push(tp);
+                
             }
         }
-        return cnt;
+        int ans=st.size();
+        while(!st.empty()){
+            cout<<st.top();
+            cout<<"\n";
+            st.pop();
+        }
 
-        return 1;
+        return ans;
+        
     }
 };
