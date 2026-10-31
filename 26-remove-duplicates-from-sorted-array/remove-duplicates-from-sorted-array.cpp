@@ -1,31 +1,22 @@
 class Solution {
 public:
     int removeDuplicates(vector<int>& nums) {
-        unordered_map<int,int> umap;
-        int i=0;
-        int j=0;
         int n=nums.size();
-        int cnt=0;
+        int i=1;
+        int j=1;
+        int cnt=1;
         while(j<n){
-            if(umap[nums[j]]==0){
-                 umap[nums[j]]+=1;
-                int temp=nums[i];
-                nums[i]=nums[j];
-                nums[j]=temp;
-                i+=1;
-                cnt+=1;
-              //  j+=1;
+            if(nums[j]==nums[j-1]){
+
             }
             else{
-               
+                nums[i]=nums[j];
+                i+=1;
+                cnt+=1;
             }
-
-           
-             j+=1;
-
-
+            j+=1;
         }
-        
+
         return cnt;
     }
 };
