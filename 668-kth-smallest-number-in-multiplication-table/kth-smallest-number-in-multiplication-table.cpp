@@ -21,14 +21,7 @@ public:
            int m1=l+(h-l)/2;
           
            int val= check(m,n,m1);
-           cout<<l;
-           cout<<" ";
-           cout<<h;
-           cout<<" ";
-           cout<<m1;
-           cout<<" ";
-           cout<<val;
-           cout<<"\n";
+          
            if(val>=k){
             ans=m1;
             h=m1-1;
