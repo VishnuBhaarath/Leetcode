@@ -18,13 +18,13 @@ public:
                      int idx2=k;
                      while(nums[idx1]==nums[j]){
                         idx1+=1;
-                        if(idx1==n){
+                        if(idx1==n || idx1>=k){
                             break;
                         }
                      }
                      while(nums[idx2]==nums[j]){
                         idx2-=1;
-                        if(idx2<0){
+                        if(idx2<0 || idx2<=j){
                             break;
                         }
 
@@ -36,7 +36,7 @@ public:
                     int idx=k;
                     while(nums[k]==nums[idx]){
                         idx-=1;
-                        if(idx<0){
+                        if(idx<0 || idx<=j){
                             break;
                         }
                         
@@ -47,7 +47,7 @@ public:
                     int idx=j;
                     while(nums[j]==nums[idx]){
                         idx+=1;
-                        if(idx==n){
+                        if(idx==n || idx>=k){
                             break;
                         }
                     }
