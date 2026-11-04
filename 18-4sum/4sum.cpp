@@ -2,41 +2,76 @@ class Solution {
 public:
     vector<vector<int>> fourSum(vector<int>& nums, int target) {
         sort(nums.begin(),nums.end());
+        vector<vector<int>> ans;
+        int i=0;
         int n=nums.size();
-        vector<vector<int>> dp;
-      
-
-        for(int i=0;i<nums.size();i++){
-            if(i>0 && nums[i]==nums[i-1]){
-                continue;
-            }
-            for(int j=i+1;j<nums.size();j++){
-                if(j>(i+1) && nums[j]==nums[j-1]){
-                    continue;
-                }
+        while(i<n){
+            int j=i+1;
+            while(j<n){
                 int k=j+1;
                 int l=n-1;
-                
                 while(k<l){
-                   long long int sum=(long long)(nums[i])+(long long)(nums[j])+(long long)(nums[k])+(long long)(nums[l]);
-                    
-                   
+                    long long sum=(long long)(nums[i])+(long long)(nums[j])+(long long)(nums[k])+(long long)(nums[l]);
                     if(sum==target){
-                        dp.push_back({nums[i],nums[j],nums[k],nums[l]});
-                        l-=1;
-                        k+=1;
-                        while(k<l && nums[k]==nums[k-1]) k+=1;
-                        while(k<l && nums[l]==nums[l+1]) l-=1;
+                        ans.push_back({nums[i],nums[j],nums[k],nums[l]});
+                        int idx1=l;
+                        int idx2=k;
+                        while(nums[l]==nums[idx1]){
+                            idx1-=1;
+                            if(idx1<0){
+                                break;
+                            }
+                        }
+                        l=idx1;
+
+                        while(nums[k]==nums[idx2]){
+                            idx2+=1;
+                            if(idx2>=n){
+                                break;
+                            }
+                        }
+                        k=idx2;
                     }
                     else if(sum>target){
-                        l-=1;
+                        int idx=l;
+                        while(nums[l]==nums[idx]){
+                            idx-=1;
+                            if(idx<0){
+                                break;
+                            }
+                        }
+                        l=idx;
                     }
-                    else if(sum<target){
-                        k+=1;
+                    else{
+                        int idx=k;
+                        while(nums[k]==nums[idx]){
+                            idx+=1;
+                            if(idx>=n){
+                                break;
+                            }
+                        }
+                        k=idx;
+                    }
+
+                }
+                int idx=j;
+                while(nums[idx]==nums[j]){
+                    idx+=1;
+                    if(idx>=n){
+                        break;
                     }
                 }
+                j=idx;
             }
+            int idx=i;
+            while(nums[idx]==nums[i]){
+                idx+=1;
+                if(idx>=n){
+                    break;
+                }
+            }
+            i=idx;
         }
-        return dp;
+        return ans;
     }
 };
