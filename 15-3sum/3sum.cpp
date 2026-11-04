@@ -11,18 +11,47 @@ public:
             map<pair<int,int>,int> umap;
             while(j<k){
                  if(nums[i]+nums[j]+nums[k]==0){
-                     if(umap[{nums[j],nums[k]}]==0){
+                    
                          ans.push_back({nums[i],nums[j],nums[k]});
-                         umap[{nums[j],nums[k]}]=1;
+                       
+                     int idx1=j;
+                     int idx2=k;
+                     while(nums[idx1]==nums[j]){
+                        idx1+=1;
+                        if(idx1==n){
+                            break;
+                        }
                      }
-                     j+=1;
-                     k-=1;
+                     while(nums[idx2]==nums[j]){
+                        idx2-=1;
+                        if(idx2<0){
+                            break;
+                        }
+
+                     }
+                     j=idx1;;
+                     k=idx2;
                  }
                  else if(nums[i]+nums[j]+nums[k]>0){
-                    k-=1;
+                    int idx=k;
+                    while(nums[k]==nums[idx]){
+                        idx-=1;
+                        if(idx<0){
+                            break;
+                        }
+                        
+                    }
+                    k=idx;
                  }
                  else{
-                    j+=1;
+                    int idx=j;
+                    while(nums[j]==nums[idx]){
+                        idx+=1;
+                        if(idx==n){
+                            break;
+                        }
+                    }
+                    j=idx;
                  }
             }
            j=i+1;
