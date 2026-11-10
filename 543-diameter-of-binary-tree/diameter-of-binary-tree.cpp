@@ -20,8 +20,7 @@ public:
          int lh=check(root->left);
          int rh=check(root->right);
           ans1=max(ans1,lh+rh);
-          cout<<ans1;
-          cout<<"\n";
+       
          return 1+max(lh,rh);
     }
     int diameterOfBinaryTree(TreeNode* root) {
