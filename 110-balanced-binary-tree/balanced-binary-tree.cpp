@@ -11,25 +11,35 @@
  */
 class Solution {
 public:
-     int ans=0;
+    int t=0;
     int height(TreeNode* root){
-         if(root==NULL){
+        if(root==NULL){
             return 0;
-         }
-         int lh=1+height(root->left);
-         int rh=1+height(root->right);
-      
-         if(abs(lh-rh)>1){
-            ans=-1;
-         }
-          
-         return max(lh,rh);
+        }   
+        cout<<"r";
+        cout<<root->val;
+        cout<<" ";
+        if(t==-1){
+            return 0;
+        }
+        int lh=1+height(root->left);
+        int rh=1+height(root->right);
+        cout<<lh;
+        cout<<" ";
+        cout<<rh;
+        if(abs(lh-rh)>1){
+            t=-1;
+        }
+        cout<<"\n";
+        return max(lh,rh);
+
     }
     bool isBalanced(TreeNode* root) {
-        height(root);
-        if(ans==-1){
+       
+         height(root);
+           if(t==-1){
             return false;
-        }
-        return true;
+         }
+         return true;
     }
 };
