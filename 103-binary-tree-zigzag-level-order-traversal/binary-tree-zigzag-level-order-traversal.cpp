@@ -19,12 +19,22 @@ public:
         vector<vector<int>> ans;
         while(!q.empty()){
              int sz=q.size();
-             vector<int> v;
-             
+             vector<int> v(sz);
+             int j=0;
+             if(t==1){
+                j=sz-1;
+             }
              while(sz>0){
                 TreeNode* tp=q.front();
                 q.pop();
-                v.push_back(tp->val);
+              //  v.push_back(tp->val);
+                v[j]=tp->val;
+                if(t==0){
+                    j+=1;
+                }
+                else{
+                    j-=1;
+                }
                 if(tp->left!=NULL){
                     q.push(tp->left);
                 }
@@ -39,9 +49,7 @@ public:
              else{
                 t=0;
              }
-             if(t==0){
-                reverse(v.begin(),v.end());
-             }
+            
              ans.push_back(v);
         }
         return ans;
