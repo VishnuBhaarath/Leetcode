@@ -34,7 +34,7 @@ public:
                 root=root->right;
              }
              else if(root->val>p->val && root->val>q->val){
-                 cout<<"in3";
+              
                 root=root->left;
              }
              check(root,p,q);
