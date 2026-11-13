@@ -12,47 +12,46 @@
 class Solution {
 public:
     vector<vector<int>> verticalTraversal(TreeNode* root) {
-        map<int,vector<pair<int,int>>> umap; 
-        vector<vector<int>> ans;
-     
+        map<int,vector<int>> umap;
         queue<pair<TreeNode*,int>> q;
-        q.push({root,0});
-              int row=0;
+        if(root!=NULL){
+            q.push({root,0});
+        }
+       
         while(!q.empty()){
             int sz=q.size();
-      
+            map<int,priority_queue<int,vector<int>,greater<int>>> umap1;
             while(sz>0){
-             pair<TreeNode*,int> p=q.front();
+                pair<TreeNode*,int> p=q.front();
+                q.pop();
+                umap1[p.second].push(p.first->val);
+                if(p.first->left!=NULL){
+                    q.push({p.first->left,p.second-1});
+                }
+                if(p.first->right!=NULL){
+                    q.push({p.first->right,p.second+1});
+                }
+                sz-=1;
+            }
+            for(auto x:umap1){
+                 priority_queue<int,vector<int>,greater<int>> pq=x.second;
+                 while(!pq.empty()){
+                     umap[x.first].push_back(pq.top());
+                     pq.pop();
+                 }
+            }
             
-             umap[p.second].push_back({row,p.first->val});
-        
-             q.pop();
-             if(p.first->left!=NULL){
-                q.push({p.first->left,p.second-1});
-             }
-             if(p.first->right!=NULL){
-                q.push({p.first->right,p.second+1});
-             }
-             sz-=1;
-             
-             }
-            row+=1;
-        }
-        cout<<"\n";
-        for(auto x:umap){
-             vector<pair<int,int>> v=x.second;
-             sort(v.begin(),v.end());
-         
-             vector<int> v1;
-             for(int j=0;j<v.size();j++){
-               
-                
-                 v1.push_back(v[j].second);
 
-             }
-        
-             ans.push_back(v1);
+
         }
+        vector<vector<int>> ans;
+        for(auto x:umap){
+            cout<<x.first;
+            cout<<"\n";
+            vector<int> v=x.second;
+            ans.push_back(v);
+        }
+        
         return ans;
     }
 };
