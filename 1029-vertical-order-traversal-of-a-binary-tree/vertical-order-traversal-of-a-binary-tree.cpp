@@ -46,8 +46,7 @@ public:
         }
         vector<vector<int>> ans;
         for(auto x:umap){
-            cout<<x.first;
-            cout<<"\n";
+          
             vector<int> v=x.second;
             ans.push_back(v);
         }
