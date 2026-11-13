@@ -12,45 +12,31 @@
 class Solution {
 public:
     vector<vector<int>> verticalTraversal(TreeNode* root) {
-        map<int,vector<int>> umap;
-        queue<pair<TreeNode*,int>> q;
-        if(root!=NULL){
-            q.push({root,0});
-        }
-       
-        while(!q.empty()){
-            int sz=q.size();
-            map<int,priority_queue<int,vector<int>,greater<int>>> umap1;
-            while(sz>0){
-                pair<TreeNode*,int> p=q.front();
-                q.pop();
-                umap1[p.second].push(p.first->val);
-                if(p.first->left!=NULL){
-                    q.push({p.first->left,p.second-1});
-                }
-                if(p.first->right!=NULL){
-                    q.push({p.first->right,p.second+1});
-                }
-                sz-=1;
-            }
-            for(auto x:umap1){
-                 priority_queue<int,vector<int>,greater<int>> pq=x.second;
-                 while(!pq.empty()){
-                     umap[x.first].push_back(pq.top());
-                     pq.pop();
-                 }
-            }
-            
+          vector<vector<int>> ans;
+        if (!root) return ans;
 
+        vector<tuple<int,int,int>> nodes;   // {col, row, val}
+        queue<tuple<TreeNode*,int,int>> q;  // {node, row, col}
+        q.push({root, 0, 0});
 
+        while (!q.empty()) {
+            auto [node, row, col] = q.front();
+            q.pop();
+            nodes.emplace_back(col, row, node->val);
+            if (node->left)  q.push({node->left,  row + 1, col - 1});
+            if (node->right) q.push({node->right, row + 1, col + 1});
         }
-        vector<vector<int>> ans;
-        for(auto x:umap){
-          
-            vector<int> v=x.second;
-            ans.push_back(v);
+
+        sort(nodes.begin(), nodes.end());   // sorts by col, then row, then val
+
+        int prevCol = INT_MIN;
+        for (auto &[col, row, val] : nodes) {
+            if (col != prevCol) {
+                ans.emplace_back();
+                prevCol = col;
+            }
+            ans.back().push_back(val);
         }
-        
         return ans;
     }
 };
