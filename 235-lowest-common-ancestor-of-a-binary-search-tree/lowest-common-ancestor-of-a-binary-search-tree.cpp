@@ -10,19 +10,38 @@
 
 class Solution {
 public:
+    TreeNode* ans=NULL;
+    void check(TreeNode* root, TreeNode* p, TreeNode* q){
+         if(root==NULL){
+            return;
+         }
+         if(ans!=NULL){
+            return;
+         }
+        
+         if(root->val==p->val || root->val==q->val){
+            ans=root;
+           
+            return;
+         }
+         else if((root->val<p->val && root->val>q->val) || (root->val>p->val && root->val<q->val)){
+         
+            ans=root;
+            return;
+         }
+         else{
+             if(root->val<p->val && root->val<q->val){
+                root=root->right;
+             }
+             else if(root->val>p->val && root->val>q->val){
+                 cout<<"in3";
+                root=root->left;
+             }
+             check(root,p,q);
+         }
+    }
     TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
-        if(root->val==p->val || root->val==q->val){
-            return root;
-        }
-        if(p->val<=root->val && q->val>=root->val){
-            return root;
-        }
-        if(p->val>=root->val && q->val<=root->val){
-            return root;
-        }
-        if(p->val<root->val){
-            return lowestCommonAncestor(root->left,p,q);
-        }
-        return lowestCommonAncestor(root->right,p,q);
+        check(root,p,q);
+        return ans;
     }
 };
