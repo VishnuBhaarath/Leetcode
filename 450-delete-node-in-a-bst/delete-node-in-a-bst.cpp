@@ -1,83 +1,113 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
 class Solution {
 public:
-    TreeNode* deleteNode(TreeNode* root, int key) {
-         TreeNode* temp=root;
-         TreeNode* temp1=NULL;
-         TreeNode* prev=NULL;
-         while(root!=NULL){
-           
-             if(root->val>key){
-                 prev=root;
-                root=root->left;
-             }
-             else if(root->val<key){
-                 prev=root;
+    TreeNode* deleteNode(TreeNode* root, int val) {
+        
+
+          TreeNode* temp1=root;
+          TreeNode* prev=root;
+          TreeNode* temp=NULL;
+          if(root==NULL){
+            return NULL;
+          }
+       
+        while(root!=NULL){
+             if(root->val<val){
+                prev=root;
                 root=root->right;
              }
-             else if(root->val==key){
-                  temp1=root;
-                  break;
+             else if(root->val>val){
+                 prev=root;
+                 root=root->left;
              }
-            
-         }
-         if(temp1==NULL){
-            return temp;
-         }
-         if(temp1->left==NULL && temp1->right==NULL){
-            if(prev==NULL){
+             else if(root->val==val){
+                temp=root;
+                break;
+
+             }
+        }
+
+        if(temp1->val==val){
+            if(root->left==NULL && root->right==NULL){
                 return NULL;
             }
-            if(prev->left==temp1){
-                prev->left=NULL;
+            else if(root->left==NULL){
+                return root->right;
             }
-            else if(prev->right==temp1){
-                prev->right=NULL;
+            else if(root->right==NULL){
+                return root->left;
             }
-         }
-         else if(temp1->right==NULL){
-            if(prev==NULL){
-                 return temp->left;
-            }
-            // FIXED: was hardcoded to prev->left
-            if(prev->left==temp1) prev->left=temp1->left;
-            else prev->right=temp1->left;
-            return temp;
-         }
-         else if(temp1->left==NULL){
-            if(prev==NULL){
-                return temp->right;
-            }
-            // FIXED: was hardcoded to prev->left
-            if(prev->left==temp1) prev->left=temp1->right;
-            else prev->right=temp1->right;
-            return temp;
-         }
+            else{
+                TreeNode * temp2=temp->left;
+                TreeNode * temp3=temp;
+                temp=temp->right;
+                TreeNode* temp4=temp;
 
-         else if(temp1->right!=NULL && temp1->left!=NULL){
-            if(prev==NULL){
-                TreeNode* temp2=temp1->left;
-                TreeNode* temp3=temp1->right;
+                while(temp->left!=NULL){
+                    temp=temp->left;
+                }
+                temp->left=temp2;
+                return temp4;
+            }
+        }
+        
+        if(temp!=NULL){
            
-            temp1=temp1->right;
-            while(temp1->left!=NULL){
-                temp1=temp1->left;
-            }
-            temp1->left=temp2;
-            return temp3;
-            }
            
-            TreeNode* temp2=temp1->left;
-            // FIXED: was hardcoded to prev->left
-            if(prev->left==temp1) prev->left=temp1->right;
-            else prev->right=temp1->right;
-            temp1=temp1->right;
-            while(temp1->left!=NULL){
-                temp1=temp1->left;
+            if(temp->left==NULL && temp->right==NULL){
+                if(prev->left==temp){
+                    prev->left=NULL;
+                }
+                else if(prev->right==temp){
+                    prev->right=NULL;
+                }
             }
-            temp1->left=temp2;
-            return temp;
-         }
+            else if(temp->left==NULL){
+                if(prev->left==temp){
+                    prev->left=temp->right;
+                }
+                else if(prev->right==temp){
+                    prev->right=temp->right;
+                }
+            }
+            else if(temp->right==NULL){
+ if(prev->left==temp){
+                    prev->left=temp->left;
+                }
+                else if(prev->right==temp){
+                    prev->right=temp->left;
+                }
+            }
+            else{
+                TreeNode * temp2=temp->left;
+                TreeNode * temp3=temp;
+                temp=temp->right;
+                TreeNode* temp4=temp;
 
-         return temp;
+                while(temp->left!=NULL){
+                    temp=temp->left;
+                }
+                temp->left=temp2;
+                if(prev->left==temp3){
+                    prev->left=temp4;
+                }
+                else if(prev->right==temp3){
+                    prev->right=temp4;
+                }
+
+
+            }
+        }
+        return temp1;
     }
 };
