@@ -11,39 +11,44 @@
  */
 class Solution {
 public:
+    void traverse(TreeNode* root, int val){
+        if(val>root->val){
+            if(root->right==NULL){
+                TreeNode* temp=new TreeNode();
+                temp->val=val;
+                temp->left=NULL;
+                temp->right=NULL;
+                root->right=temp;
+                return;
+            }
+            traverse(root->right,val);
+        }
+        else{
+            if(root->left==NULL){
+                TreeNode* temp=new TreeNode();
+                temp->val=val;
+                temp->left=NULL;
+                temp->right=NULL;
+                root->left=temp;
+                return;
+            }
+            traverse(root->left,val);
+        }
+
+    }
     TreeNode* insertIntoBST(TreeNode* root, int val) {
-        
-        TreeNode* temp1=root;
+
+        TreeNode* temp=root;
         if(root==NULL){
-            temp1=new TreeNode();
-            temp1->val=val;
-            temp1->left=NULL;
-            temp1->right=NULL;
+            TreeNode* temp=new TreeNode();
+                temp->val=val;
+                temp->left=NULL;
+                temp->right=NULL;
+                //root->left=temp;
+                return temp;
+
         }
-        while(root!=NULL){
-             if(root->val<val){
-                if(root->right==NULL){
-                    TreeNode* temp=new TreeNode();
-                    temp->val=val;
-                    temp->left=NULL;
-                    temp->right=NULL;
-                    root->right=temp;
-                    return temp1;
-                }
-                root=root->right;
-             }
-             else if(root->val>val){
-                if(root->left==NULL){
-                    TreeNode* temp=new TreeNode();
-                    temp->val=val;
-                    temp->left=NULL;
-                    temp->right=NULL;
-                    root->left=temp;
-                    return temp1;
-                }
-                 root=root->left;
-             }
-        }
-        return temp1;
+        traverse(root,val);
+        return temp;
     }
 };
