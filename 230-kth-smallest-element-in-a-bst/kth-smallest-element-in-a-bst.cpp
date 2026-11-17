@@ -11,19 +11,27 @@
  */
 class Solution {
 public:
-    vector<int> v;
-    void traversal(TreeNode* root){
+    int val1=-1;
+    int cnt=0;
+    void traverse(TreeNode* root,int k){
         if(root==NULL){
             return;
         }
-        traversal(root->left);
-        v.push_back(root->val);
-        traversal(root->right);
+        
+        traverse(root->left,k);
+        cnt+=1;
+        cout<<root->val;
+        cout<<" ";
+        cout<<cnt;
+        cout<<"\n";
+        if(cnt==k){
+            val1=root->val;
+        }
+        traverse(root->right,k);
     }
     int kthSmallest(TreeNode* root, int k) {
-        //return v[k-1];
-        traversal(root);
+        traverse(root,k);
+        return val1;
         
-        return v[k-1];
     }
 };
