@@ -20,10 +20,7 @@ public:
         
         traverse(root->left,k);
         cnt+=1;
-        cout<<root->val;
-        cout<<" ";
-        cout<<cnt;
-        cout<<"\n";
+       
         if(cnt==k){
             val1=root->val;
         }
