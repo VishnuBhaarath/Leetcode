@@ -10,6 +10,7 @@ public:
                  if(grid[i][j]=='1'){
                      if(dp[i][j]==0){
                         dp[i][j]=1;
+                        grid[i][j]='0';
                         queue<pair<int,int>> q;
                         q.push({i,j});
                         cnt+=1;
