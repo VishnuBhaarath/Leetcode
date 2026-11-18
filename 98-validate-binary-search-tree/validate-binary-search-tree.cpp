@@ -11,27 +11,26 @@
  */
 class Solution {
 public:
-    bool check(TreeNode* root,long long int l,long long int r){
+    bool checkBST(TreeNode* root,long long val1,long long val2){
         if(root==NULL){
             return true;
         }
-        
-
-        if(root->val<=l || root->val>=r){
+        if(root->val<=val1 || root->val>=val2){
             return false;
         }
-        long long int val1=r;
-        if(root->val<val1){
-            val1=root->val;
+        long long l=val2;
+        long long r=val1;
+        if(root->val<l){
+            l=root->val;
         }
-        long long int val2=l;
-        if(root->val>val2){
-            val2=root->val;
+        if(root->val>r){
+            r=root->val;
         }
-        return check(root->left,l,val1) && check(root->right,val2,r);
+
+       return checkBST(root->left,val1,l) && checkBST(root->right,r,val2);
     }
     bool isValidBST(TreeNode* root) {
-      return check(root,-2147483649,2147483649);
-        
+       
+         return checkBST(root,-2147483649,2147483649);
     }
 };
