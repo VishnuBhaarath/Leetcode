@@ -11,22 +11,23 @@ public:
                  }
             }
         }
-        unordered_map<int,int> umap;
+     //   unordered_map<int,int> umap;
+        vector<int> v1(n+1,0);
         int cnt=0;
         for(int i=1;i<=n;i++){
-             if(umap[i]==0){
+             if(v1[i]==0){
                 cnt+=1;
                  queue<int> q;
                  q.push(i);
-                 umap[i]+=1;
+                 v1[i]+=1;
                  while(!q.empty()){
                      vector<int> v=adj[q.front()];
                      q.pop();
                      for(int j=0;j<v.size();j++){
-                        if(umap[v[j]]==0){
+                        if(v1[v[j]]==0){
                             q.push(v[j]);
                         }
-                        umap[v[j]]+=1;
+                        v1[v[j]]+=1;
                      }
                  }
              }
