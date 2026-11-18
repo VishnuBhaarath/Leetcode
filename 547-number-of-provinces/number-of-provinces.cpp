@@ -21,7 +21,7 @@ public:
                  q.push(i);
                  v1[i]+=1;
                  while(!q.empty()){
-                     vector<int> v=adj[q.front()];
+                     vector<int> &v=adj[q.front()];
                      q.pop();
                      for(int j=0;j<v.size();j++){
                         if(v1[v[j]]==0){
