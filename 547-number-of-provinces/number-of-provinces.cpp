@@ -1,39 +1,36 @@
 class Solution {
 public:
-     void bfs(vector<vector<int>>& adj,vector<bool>& visited,int i){
-        visited[i]=true;
-        queue<int> q;
-        q.push(i);
-        while(!q.empty()){
-            int currentNode=q.front();
-            q.pop();
-            for(int adjNode:adj[currentNode]){
-                if(!visited[adjNode]){
-                    visited[adjNode]=true;
-                    q.push(adjNode);
-                }
-            }
-        }
-        
-    }
     int findCircleNum(vector<vector<int>>& isConnected) {
-        int ans=0;
         int n=isConnected.size();
-        vector<bool> visited(n,false);
-        vector<vector<int>> adj(n);
+        vector<vector<int>> adj(n+1);
         for(int i=0;i<n;i++){
             for(int j=0;j<n;j++){
-                if(i!=j && isConnected[i][j]==1){
-                    adj[i].push_back(j);
-                }
+                 if(i!=j){
+                    if(isConnected[i][j]==1)
+                    adj[i+1].push_back(j+1);
+                 }
             }
         }
-        for(int i=0;i<n;i++){
-            if(!visited[i]){
-                ans++;
-                bfs(adj,visited,i);
-            }
+        unordered_map<int,int> umap;
+        int cnt=0;
+        for(int i=1;i<=n;i++){
+             if(umap[i]==0){
+                cnt+=1;
+                 queue<int> q;
+                 q.push(i);
+                 umap[i]+=1;
+                 while(!q.empty()){
+                     vector<int> v=adj[q.front()];
+                     q.pop();
+                     for(int j=0;j<v.size();j++){
+                        if(umap[v[j]]==0){
+                            q.push(v[j]);
+                        }
+                        umap[v[j]]+=1;
+                     }
+                 }
+             }
         }
-        return ans;
+        return cnt;
     }
 };
