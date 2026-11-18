@@ -17,12 +17,7 @@ public:
         }
         int lh=lheight(root->left);
         int rh=rheight(root->right);
-        cout<<root->val;
-        cout<<" ";
-        cout<<lh;
-        cout<<" ";
-        cout<<rh;
-        cout<<"\n";
+       
         if(lh==rh){
            int val=pow(2,lh)-1;
            return val;
