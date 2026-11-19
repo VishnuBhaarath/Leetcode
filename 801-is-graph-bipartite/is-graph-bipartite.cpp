@@ -12,7 +12,7 @@ public:
                 while(!q.empty()){
                      int tp=q.front();
                      q.pop();
-                     vector<int> v1=graph[tp];
+                     vector<int> &v1=graph[tp];
                      int c=v[tp];
                      for(int j=0;j<v1.size();j++){
                         if(v[v1[j]]==c){
