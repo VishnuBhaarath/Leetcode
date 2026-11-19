@@ -1,61 +1,79 @@
 class Solution {
 public:
-    vector<vector<int>> updateMatrix(vector<vector<int>>& mat) {
-        vector<vector<int>> dp =mat;
-        int n=mat.size();
-        int m=mat[0].size();
+    vector<vector<int>> updateMatrix(vector<vector<int>>& grid) {
         queue<pair<int,int>> q;
-        for(int i=0;i<mat.size();i++){
-            for(int j=0;j<mat[0].size();j++){
-                if(mat[i][j]==0){
-                q.push({i,j});}
+    
+        int n=grid.size();
+        int m=grid[0].size();
+        int ans=0;
+        vector<vector<int>> dp(n,vector<int>(m,0));
+        for(int i=0;i<grid.size();i++){
+            for(int j=0;j<grid[i].size();j++){
+                 if(grid[i][j]==0){
+                   // grid[i][j]=0;
+                    q.push({i,j});
+                 }
+                 
             }
         }
-        int val=1;
         while(!q.empty()){
-           int sz=q.size();
-            int t=false;
-          
-           while(sz){
+             int sz=q.size();
+             ans+=1;
+             while(sz>0){
+                pair<int,int> p=q.front();
+                sz-=1;
+                q.pop();
+                int x=p.first;
+                int y=p.second;
+                if(x-1>=0){
+                    if(grid[x-1][y]==1){
+                        grid[x-1][y]=0;
+                       
+                        dp[x-1][y]=ans;
+                    q.push({x-1,y});
+                    }
 
-              int x=q.front().first;
-              int y=q.front().second;
-            
-              q.pop();
+                }
 
-              if(x-1>=0 && mat[x-1][y]==1){
-                  q.push({x-1,y});
-                  mat[x-1][y]=0;
-                  dp[x-1][y]=val;
-                  t=true;
-              }
-              if(x+1<n && mat[x+1][y]==1){
-                  q.push({x+1,y});
-                   mat[x+1][y]=0;
-                  dp[x+1][y]=val;
-                  t=true;
-              }
-              if(y-1>=0 && mat[x][y-1]==1){
+                 if(x+1<n){
+                    if(grid[x+1][y]==1){
+                        grid[x+1][y]=0;
+                        
+                         dp[x+1][y]=ans;
+                    q.push({x+1,y});
+                    }
+
+                }
+
+                if(y-1>=0){
+                    if(grid[x][y-1]==1){
+                        grid[x][y-1]=0;
+                       
+                        dp[x][y-1]=ans;
                     q.push({x,y-1});
-                    mat[x][y-1]=0;
-                  dp[x][y-1]=val;
-                    t=true;
-              }
-              if(y+1<m && mat[x][y+1]==1){
-                  q.push({x,y+1});
-                   mat[x][y+1]=0;
-                  dp[x][y+1]=val;
-                  t=true;
-              }
+                    }
 
-              sz-=1;
-           }
-           if(t){
-              val+=1;
-           }
+                }
+
+                if(y+1<m){
+                    if(grid[x][y+1]==1){
+                        grid[x][y+1]=0;
+                         dp[x][y+1]=ans;
+                       
+                    q.push({x,y+1});
+                    }
+
+                }
+
+
+
+
+
+             }
+             
         }
 
-
+      
         return dp;
     }
 };
