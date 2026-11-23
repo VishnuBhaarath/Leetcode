@@ -1,25 +1,60 @@
 class ProductOfNumbers {
 public:
     vector<int>v1;
+    int idx=-1;
     ProductOfNumbers() {
         
     }
     
     void add(int num) {
-        v1.push_back(num);
+        if(num!=0){
+        if(v1.size()==0){
+        v1.push_back(num);}
+        else{
+            if(v1[v1.size()-1]==0){
+                v1.push_back(num);
+            }
+            else{
+            v1.push_back(v1[v1.size()-1]*num);
+            }
+        }
+        }
+        else{
+            v1.push_back(num);
+            idx=v1.size()-1;
+        }
     }
     
     int getProduct(int k) {
-        long long val=1;
-        int n=v1.size();
-        for(int i=n-1;i>=0;i--){
-            val*=v1[i];
-            k-=1;
-            if(k==0){
-                return val;
+        
+        if(idx==-1){
+            int n=v1.size();
+            int m=n-k;
+            if(m-1>=0){
+            long long val=v1[n-1]/v1[m-1];
+            return val;
+            }
+            else{
+                return v1[n-1];
             }
         }
-        return val;
+        else{
+            int n=v1.size();
+            if(idx>=(n-k)){
+                return 0;
+            }
+            else{
+                if(idx==(n-k-1)){
+                    return v1[n-1];
+                }
+                else{
+                    int m=n-k;
+            long long val=v1[n-1]/v1[m-1];
+            return val;
+                }
+            }
+        }
+        return 0;
     }
 };
 
