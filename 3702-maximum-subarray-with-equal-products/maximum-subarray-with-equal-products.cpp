@@ -14,6 +14,9 @@ public:
                     int sz=(j-i+1);
                     ans=max(ans,sz);
                 }
+                else if(gcd1*lcm1<num){
+                    break;
+                }
             }
         }
         return ans;
